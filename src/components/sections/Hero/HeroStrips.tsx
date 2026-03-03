@@ -1,0 +1,219 @@
+'use client';
+
+import { motion, useReducedMotion } from 'framer-motion';
+import { useEffect, useRef } from 'react';
+import { useIntroAnimation } from '@/context/IntroAnimationContext';
+
+const STRIP_COUNT = 5;
+const STRIP_DURATION = 0.85;
+const STRIP_STAGGER = 0.2;
+
+// Center strip animates first, then outward
+function getStripDelay(index: number): number {
+  const center = Math.floor(STRIP_COUNT / 2);
+  return Math.abs(index - center) * STRIP_STAGGER;
+}
+
+export default function HeroStrips() {
+  const { isIntroComplete, completeIntro } = useIntroAnimation();
+  const shouldReduceMotion = useReducedMotion();
+  const hasCompleted = useRef(false);
+
+  const maxDelay = getStripDelay(0); // outer strips have max delay
+  const totalTime = (maxDelay + STRIP_DURATION) * 1000;
+
+  useEffect(() => {
+    if (hasCompleted.current) return;
+
+    if (shouldReduceMotion) {
+      completeIntro();
+      hasCompleted.current = true;
+      return;
+    }
+
+    // Lock scroll during strip animation
+    const originalOverflow = document.body.style.overflow;
+    document.body.style.overflow = 'hidden';
+
+    const timer = setTimeout(() => {
+      document.body.style.overflow = originalOverflow;
+      completeIntro();
+      hasCompleted.current = true;
+    }, totalTime + 200);
+
+    return () => {
+      clearTimeout(timer);
+      document.body.style.overflow = originalOverflow;
+    };
+  }, [completeIntro, shouldReduceMotion, totalTime]);
+
+  return (
+    <>
+      {/* Permanent gap background — base dark color always visible */}
+      <div
+        className="absolute inset-0 z-0 rounded-b-[40px] sm:rounded-b-[60px] bg-[#1c1b1a]"
+        aria-hidden="true"
+      />
+
+      {/* Subtle warm glow at bottom of gaps — always present after intro */}
+      <motion.div
+        className="absolute inset-0 z-[1] rounded-b-[40px] sm:rounded-b-[60px]"
+        style={{
+          background:
+            'linear-gradient(to top, rgba(255, 60, 0, 0.15) 0%, rgba(255, 20, 147, 0.06) 25%, transparent 55%)',
+        }}
+        initial={{ opacity: 0 }}
+        animate={{ opacity: isIntroComplete ? 1 : 0 }}
+        transition={{ duration: 1, delay: 0.5, ease: 'easeOut' }}
+        aria-hidden="true"
+      />
+
+      {/* White glow sweep — dot with trailing line moves top→bottom through strip gaps */}
+      <div
+        className="absolute inset-0 z-[2] rounded-b-[40px] sm:rounded-b-[60px] overflow-hidden pointer-events-none"
+        aria-hidden="true"
+      >
+        <motion.div
+          className="absolute inset-x-0 flex flex-col items-center"
+          style={{ height: '30%' }}
+          initial={{ top: '-30%' }}
+          animate={isIntroComplete ? { top: '130%' } : { top: '-30%' }}
+          transition={{
+            duration: 2.4,
+            delay: 0.5,
+            ease: [0.22, 1, 0.36, 1],
+          }}
+        >
+          {/* Trailing line */}
+          <div
+            className="w-px flex-1"
+            style={{
+              background:
+                'linear-gradient(to bottom, transparent 0%, rgba(255,255,255,0.15) 40%, rgba(255,255,255,0.6) 100%)',
+            }}
+          />
+          {/* Glowing dot */}
+          <div
+            className="shrink-0 rounded-full"
+            style={{
+              width: '6px',
+              height: '6px',
+              background: 'rgba(255,255,255,1)',
+              boxShadow:
+                '0 0 6px 2px rgba(255,255,255,0.9), 0 0 16px 6px rgba(255,255,255,0.5), 0 0 30px 10px rgba(255,255,255,0.2)',
+            }}
+          />
+          {/* Short leading fade below dot */}
+          <div
+            className="w-px shrink-0"
+            style={{
+              height: '12px',
+              background:
+                'linear-gradient(to bottom, rgba(255,255,255,0.4) 0%, transparent 100%)',
+            }}
+          />
+        </motion.div>
+      </div>
+
+      {/* Light overlay — clean white backdrop during intro, fades out after */}
+      <motion.div
+        className="absolute inset-0 z-0 rounded-b-[40px] sm:rounded-b-[60px]"
+        initial={{ opacity: 1 }}
+        animate={{ opacity: isIntroComplete ? 0 : 1 }}
+        transition={{ duration: 0.6, ease: 'easeOut' }}
+        style={{
+          background: '#ffffff',
+          pointerEvents: 'none',
+        }}
+        aria-hidden="true"
+      />
+
+      {/* 5 permanent vertical strips */}
+      <div
+        className="absolute inset-0 z-[10] flex rounded-b-[40px] sm:rounded-b-[60px] overflow-hidden"
+        style={{ gap: '1px' }}
+        aria-hidden="true"
+      >
+        {Array.from({ length: STRIP_COUNT }).map((_, i) => (
+          <motion.div
+            key={i}
+            className="flex-1 relative overflow-hidden"
+            initial={{ scaleY: shouldReduceMotion ? 1 : 0 }}
+            animate={{ scaleY: 1 }}
+            transition={{
+              duration: shouldReduceMotion ? 0 : STRIP_DURATION,
+              delay: shouldReduceMotion ? 0 : getStripDelay(i),
+              ease: [0.76, 0, 0.24, 1],
+            }}
+            style={{ transformOrigin: 'bottom center' }}
+          >
+            {/* Dark strip background */}
+            <div className="absolute inset-0 bg-[#0F0E0E]" />
+
+            {/* Heading text — positioned full-viewport-width, clipped by strip overflow */}
+            <div
+              className="absolute top-0 h-full pointer-events-none select-none"
+              style={{
+                width: '100vw',
+                left: `calc(-${i} * (100vw + 1px) / ${STRIP_COUNT})`,
+              }}
+            >
+              <div className="h-full">
+                <div
+                  className="text-center w-full container mx-auto px-4 sm:px-6 lg:px-8 pt-28 sm:pt-40 md:pt-48"
+                >
+                  <div
+                    className="text-[4rem] sm:text-7xl md:text-8xl lg:text-9xl font-normal tracking-[0.15em] leading-[1.0] sm:leading-[1.0] md:leading-[1.0] text-white uppercase"
+                    style={{
+                      fontFamily: 'var(--font-bebas-neue), Impact, "Arial Narrow", sans-serif',
+                    }}
+                  >
+                    Rameshwar Bhagwat
+                  </div>
+                  <div
+                    className="text-2xl sm:text-4xl md:text-5xl lg:text-6xl font-normal tracking-[0.08em] leading-[1.05] mt-2 sm:mt-3 text-white uppercase"
+                    style={{
+                      fontFamily: 'var(--font-bebas-neue), Impact, "Arial Narrow", sans-serif',
+                    }}
+                  >
+                    Full Stack &amp; AI Developer
+                  </div>
+                </div>
+              </div>
+            </div>
+          </motion.div>
+        ))}
+      </div>
+
+      {/* Heading overlay — sits above strip gaps so text isn't cut by 1px lines */}
+      <motion.div
+        className="absolute inset-0 z-[15] pointer-events-none select-none"
+        initial={{ opacity: 0 }}
+        animate={{ opacity: isIntroComplete ? 1 : 0 }}
+        transition={{ duration: 0.3, ease: 'easeOut' }}
+        aria-hidden="true"
+      >
+        <div
+          className="text-center w-full container mx-auto px-4 sm:px-6 lg:px-8 pt-28 sm:pt-40 md:pt-48"
+        >
+          <div
+            className="text-[4rem] sm:text-7xl md:text-8xl lg:text-9xl font-normal tracking-[0.15em] leading-[1.0] sm:leading-[1.0] md:leading-[1.0] text-white uppercase"
+            style={{
+              fontFamily: 'var(--font-bebas-neue), Impact, "Arial Narrow", sans-serif',
+            }}
+          >
+            Rameshwar Bhagwat
+          </div>
+          <div
+            className="text-2xl sm:text-4xl md:text-5xl lg:text-6xl font-normal tracking-[0.08em] leading-[1.05] mt-2 sm:mt-3 text-white uppercase"
+            style={{
+              fontFamily: 'var(--font-bebas-neue), Impact, "Arial Narrow", sans-serif',
+            }}
+          >
+            Full Stack &amp; AI Developer
+          </div>
+        </div>
+      </motion.div>
+    </>
+  );
+}

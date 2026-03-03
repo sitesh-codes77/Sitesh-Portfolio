@@ -1,11 +1,12 @@
 import type { Metadata } from "next";
-import { Geist, Geist_Mono } from "next/font/google";
+import { Geist, Geist_Mono, Bebas_Neue } from "next/font/google";
 import "./globals.css";
 import "../styles/theme.css";
 import "../styles/animations.css";
 import Navbar from "@/components/layout/Navbar/Navbar";
 import Footer from "@/components/layout/Footer/Footer";
 import BreadcrumbSchema from "@/components/seo/BreadcrumbSchema";
+import { IntroAnimationProvider } from "@/context/IntroAnimationContext";
 
 const geistSans = Geist({
   variable: "--font-geist-sans",
@@ -16,6 +17,14 @@ const geistSans = Geist({
 
 const geistMono = Geist_Mono({
   variable: "--font-geist-mono",
+  subsets: ["latin"],
+  display: 'swap',
+  preload: true,
+});
+
+const bebasNeue = Bebas_Neue({
+  variable: "--font-bebas-neue",
+  weight: "400",
   subsets: ["latin"],
   display: 'swap',
   preload: true,
@@ -233,14 +242,16 @@ export default function RootLayout({
         <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=5" />
       </head>
       <body
-        className={`${geistSans.variable} ${geistMono.variable} antialiased`}
+        className={`${geistSans.variable} ${geistMono.variable} ${bebasNeue.variable} antialiased`}
         style={{ overflow: 'visible' }}
       >
-        <Navbar />
-        <main className="relative z-10" style={{ overflow: 'visible' }}>
-          {children}
-        </main>
-        <Footer />
+        <IntroAnimationProvider>
+          <Navbar />
+          <main className="relative z-10" style={{ overflow: 'visible' }}>
+            {children}
+          </main>
+          <Footer />
+        </IntroAnimationProvider>
       </body>
     </html>
   );

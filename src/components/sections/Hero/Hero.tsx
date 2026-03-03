@@ -1,5 +1,6 @@
 import HeroContent from './HeroContent';
 import HeroBackground from './HeroBackground';
+import HeroStrips from './HeroStrips';
 import StructuredData from '@/components/seo/StructuredData';
 import { PERSONAL_INFO, SITE_URL, SOCIAL_LINKS } from '@/lib/constants';
 
@@ -11,7 +12,7 @@ export default function Hero() {
       
       <section 
         id="hero" 
-        className="relative min-h-screen flex items-center justify-center text-center overflow-hidden px-4 sm:px-6 pb-0 bg-[#0F0E0E] rounded-b-[40px] sm:rounded-b-[60px] mb-0"
+        className="relative min-h-screen flex items-center justify-center text-center overflow-hidden px-4 sm:px-6 pb-0 rounded-b-[40px] sm:rounded-b-[60px] mb-0"
         aria-label={`Hero section - ${PERSONAL_INFO.name} ${PERSONAL_INFO.jobTitle}`}
         itemScope
         itemType="https://schema.org/Person"
@@ -33,6 +34,9 @@ export default function Hero() {
           <meta itemProp="addressRegion" content={PERSONAL_INFO.location.state} />
           <meta itemProp="addressCountry" content={PERSONAL_INFO.location.countryCode} />
         </div>
+
+        {/* Permanent strip background with heading reveal */}
+        <HeroStrips />
 
         {/* Background Effects */}
         <HeroBackground />

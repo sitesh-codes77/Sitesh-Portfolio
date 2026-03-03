@@ -17,7 +17,7 @@ export default function HorizonGlow() {
   }), []);
 
   return (
-    <div className="absolute bottom-0 left-0 w-full h-[600px] z-[5] pointer-events-none overflow-visible">
+    <div className="absolute bottom-0 left-0 w-full h-[600px] z-[13] pointer-events-none overflow-visible">
       <motion.div
         className="relative w-full h-full"
         initial={{ opacity: 0, scale: 0.95 }}
