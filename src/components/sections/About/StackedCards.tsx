@@ -1,13 +1,14 @@
 'use client';
 
 import { useRef } from 'react';
-import { motion, useScroll, useTransform, useMotionTemplate, useSpring } from 'framer-motion';
+import { motion, useScroll, useTransform, useSpring } from 'framer-motion';
 
 interface ServiceCard {
   id: string;
   emoji: string;
   title: string;
   description: string;
+  image: string;
 }
 
 const services: ServiceCard[] = [
@@ -17,6 +18,7 @@ const services: ServiceCard[] = [
     title: 'Full Stack',
     description:
       'End-to-end web apps with React, Next.js, Node.js and TypeScript. Scalable architectures from database to pixel-perfect UI.',
+    image: '/images/Stack cards/pankaj-patel-vxgt_Zu0O00-unsplash.jpg',
   },
   {
     id: 'ai',
@@ -24,6 +26,7 @@ const services: ServiceCard[] = [
     title: 'AI Integration',
     description:
       'ML model integration into production apps. Intelligent features with OpenAI, TensorFlow, and custom pipelines for SaaS.',
+    image: '/images/Stack cards/jakub-zerdzicki-FjtWczJWRlc-unsplash.jpg',
   },
   {
     id: 'creative',
@@ -31,6 +34,7 @@ const services: ServiceCard[] = [
     title: 'Creative Dev',
     description:
       'Animated, smooth-transitioning websites leveraging Framer Motion and WebGL. Performance-focused with rich visual effects.',
+    image: '/images/Stack cards/amza-andrei-Bss5nhYnLKU-unsplash.jpg',
   },
   {
     id: 'saas',
@@ -38,6 +42,7 @@ const services: ServiceCard[] = [
     title: 'SaaS Platforms',
     description:
       'Multi-tenant SaaS products like Devory and ThinkVerse. Auth, payments, dashboards, and real-time features built for scale.',
+    image: '/images/Stack cards/jakub-zerdzicki-O3ChbcT94NM-unsplash.jpg',
   },
   {
     id: 'api',
@@ -45,6 +50,7 @@ const services: ServiceCard[] = [
     title: 'API Development',
     description:
       'RESTful and GraphQL API design with Node.js. Third-party integrations, webhooks, and microservice architecture.',
+    image: '/images/Stack cards/sebastian-willius-GKCpRs0rcNY-unsplash.jpg',
   },
 ];
 
@@ -80,8 +86,8 @@ export default function StackedCards() {
 
   // Smooth the scroll progress with a spring for buttery card movement
   const scrollYProgress = useSpring(rawProgress, {
-    stiffness: 120,
-    damping: 28,
+    stiffness: 80, // lower = smoother, slower
+    damping: 32,   // higher = less bounce
     restDelta: 0.001,
   });
 
@@ -90,7 +96,7 @@ export default function StackedCards() {
       <div
         ref={containerRef}
         className="relative"
-        style={{ height: `${services.length * 60 + 30}vh` }}
+        style={{ height: `${services.length * 45 + 30}vh` }}
       >
         <div className="sticky top-0 h-screen w-full overflow-hidden">
           {services.map((card, i) => (
@@ -155,13 +161,8 @@ function CardLayer({
     { clamp: true }
   );
 
-  const blurAmount = useTransform(
-    scrollYProgress,
-    isLast ? [0, 1] : [enterEnd, nextEnterStart, nextEnterEnd],
-    isLast ? [0, 0] : [0, 0, 5],
-    { clamp: true }
-  );
-  const filter = useMotionTemplate`blur(${blurAmount}px)`;
+  // Blur removed — all cards stay visible
+  const filter = 'none';
 
   const scale = useTransform(
     scrollYProgress,
@@ -190,11 +191,29 @@ function CardLayer({
       }}
     >
       <div
-        className="w-full h-full bg-[#1a1a1a] p-6 sm:p-7 flex flex-col justify-start"
+        className="w-full h-full relative overflow-hidden p-6 sm:p-7 flex flex-col justify-start"
         style={{
           boxShadow: '0 24px 64px rgba(0,0,0,0.65), 0 0 0 1px rgba(255,255,255,0.04)',
         }}
       >
+        {/* Solid black base — nothing behind card bleeds through */}
+        <div className="absolute inset-0 bg-[#1a1a1a]" />
+
+        {/* Background image on top of black */}
+        <div
+          className="absolute inset-0"
+          style={{
+            backgroundImage: `url('${card.image}')`,
+            backgroundSize: 'cover',
+            backgroundPosition: 'center',
+            opacity: 0.16, // reduced from 0.25
+          }}
+        />
+        {/* Dark overlay for readability */}
+        <div className="absolute inset-0 bg-black/40" />
+
+        {/* Content */}
+        <div className="relative z-10 flex flex-col justify-start h-full">
         {/* Emoji */}
         <span className="text-lg sm:text-xl mb-3 block">{card.emoji}</span>
 
@@ -204,6 +223,7 @@ function CardLayer({
           style={{
             fontFamily: 'var(--font-jakarta), "Plus Jakarta Sans", sans-serif',
             fontWeight: 800,
+            textShadow: '0 0 10px rgba(255,140,0,0.6), 0 0 20px rgba(255,95,0,0.4), 0 0 40px rgba(255,60,0,0.2)',
           }}
         >
           {card.title}
@@ -211,14 +231,16 @@ function CardLayer({
 
         {/* Description */}
         <p
-          className="text-[11px] sm:text-xs md:text-[13px] leading-[1.65] text-white/45 uppercase tracking-[0.03em]"
+          className="text-[11px] sm:text-xs md:text-[13px] leading-[1.65] text-white/80 uppercase tracking-[0.03em]"
           style={{
             fontFamily: 'var(--font-jakarta), "Plus Jakarta Sans", sans-serif',
             fontWeight: 500,
+            textShadow: '0 0 8px rgba(255,255,255,0.3), 0 1px 3px rgba(0,0,0,0.8)',
           }}
         >
           {card.description}
         </p>
+        </div>
       </div>
     </motion.div>
   );
