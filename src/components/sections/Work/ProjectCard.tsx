@@ -1,11 +1,11 @@
 'use client';
 
-import { motion } from 'framer-motion';
+import { motion, useInView } from 'framer-motion';
 import Image from 'next/image';
 import Button from '@/components/ui/Button';
 import { ExternalLink, Github } from 'lucide-react';
 import { Project } from './work.data';
-import { useState } from 'react';
+import { useState, useRef } from 'react';
 import { 
   SiNextdotjs, 
   SiReact, 
@@ -78,6 +78,19 @@ interface ProjectCardProps {
 
 export default function ProjectCard({ project, index }: ProjectCardProps) {
   const [isHovered, setIsHovered] = useState(false);
+  const ref = useRef<HTMLDivElement>(null);
+  const isInView = useInView(ref, { once: true, margin: "-80px" });
+
+  // Alternating layout: even index = image left, odd index = image right
+  const isReversed = index % 2 !== 0;
+
+  // Staggered animation delays
+  const imageDelay = 0.1;
+  const contentDelay = 0.25;
+
+  // Slide direction based on layout side
+  const imageSlideX = isReversed ? 80 : -80;
+  const contentSlideX = isReversed ? -80 : 80;
 
   // Generate Article JSON-LD Schema for each project
   const projectSchema = {
@@ -107,7 +120,8 @@ export default function ProjectCard({ project, index }: ProjectCardProps) {
 
   return (
     <article 
-      className="w-full h-full flex items-center justify-center px-3 xs:px-4 sm:px-6 md:px-8 lg:px-12 xl:px-16 py-4 xs:py-6 sm:py-8 md:py-0"
+      ref={ref}
+      className="w-full max-w-7xl mx-auto"
       itemScope
       itemType="https://schema.org/SoftwareApplication"
     >
@@ -117,7 +131,7 @@ export default function ProjectCard({ project, index }: ProjectCardProps) {
         dangerouslySetInnerHTML={{ __html: JSON.stringify(projectSchema) }}
       />
       
-      {/* SEO Microdata for each project */}
+      {/* SEO Microdata */}
       <meta itemProp="name" content={project.title} />
       <meta itemProp="description" content={`${project.tagline}. ${project.description}`} />
       <meta itemProp="author" content="Rameshwar Bhagwat" />
@@ -125,48 +139,69 @@ export default function ProjectCard({ project, index }: ProjectCardProps) {
       <meta itemProp="keywords" content={project.techStack.join(', ')} />
       {project.liveUrl && <meta itemProp="url" content={project.liveUrl} />}
       
-      <div className="w-full max-w-7xl mx-auto h-full flex items-center">
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-4 xs:gap-5 sm:gap-6 md:gap-8 lg:gap-10 xl:gap-12 w-full">
+      <div className={`grid grid-cols-1 md:grid-cols-2 gap-6 sm:gap-8 md:gap-10 lg:gap-14 xl:gap-16 items-center ${isReversed ? 'md:[direction:rtl]' : ''}`}>
+        
+        {/* Image Container */}
+        <motion.figure
+          className={`relative ${isReversed ? 'md:[direction:ltr]' : ''}`}
+          initial={{ opacity: 0, x: imageSlideX }}
+          animate={isInView ? { opacity: 1, x: 0 } : { opacity: 0, x: imageSlideX }}
+          transition={{
+            duration: 0.9,
+            delay: imageDelay,
+            ease: [0.16, 1, 0.3, 1],
+          }}
+          itemProp="image"
+        >
+          {/* Ambient glow */}
+          <div
+            className="absolute inset-0 -m-4 sm:-m-6 md:-m-8 rounded-full blur-3xl pointer-events-none opacity-15 sm:opacity-20"
+            style={{
+              background: `radial-gradient(circle, rgba(${project.color}, 0.4) 0%, transparent 70%)`,
+            }}
+          />
           
-          {/* Image Container - Left 50% */}
-          <figure
-            className="relative order-1 md:order-none"
-            onMouseEnter={() => setIsHovered(true)}
-            onMouseLeave={() => setIsHovered(false)}
-            itemProp="image"
-          >
-            {/* Ambient glow - Static, no animation */}
+          {/* Image Box */}
+          <div className="relative h-[32vh] xs:h-[36vh] sm:h-[40vh] md:h-[45vh] lg:h-[55vh] xl:h-[60vh] rounded-xl md:rounded-2xl overflow-visible">
+            {/* Center hover detection zone — only triggers in the middle area */}
             <div
-              className="absolute inset-0 -m-3 xs:-m-4 sm:-m-5 md:-m-6 lg:-m-8 rounded-full blur-2xl sm:blur-3xl pointer-events-none opacity-15 sm:opacity-20"
-              style={{
-                background: `radial-gradient(circle, rgba(${project.color}, 0.4) 0%, transparent 70%)`,
-              }}
+              className="absolute inset-[25%] z-[5] cursor-pointer"
+              onMouseEnter={() => setIsHovered(true)}
+              onMouseLeave={() => setIsHovered(false)}
             />
-            
-            {/* Fixed Image Box - Transparent */}
-            <div 
-              className="relative h-[28vh] xs:h-[32vh] sm:h-[36vh] md:h-[45vh] lg:h-[55vh] xl:h-[65vh] rounded-lg xs:rounded-xl sm:rounded-xl md:rounded-2xl overflow-hidden"
+            {/* First Image - Back layer */}
+            <motion.div
+              className="absolute inset-0 rounded-xl md:rounded-2xl overflow-hidden"
+              animate={{
+                rotate: isHovered ? -8 : 0,
+                scale: isHovered ? 0.7 : 1,
+                x: isHovered ? -40 : 0,
+                y: isHovered ? 20 : 0,
+              }}
+              transition={{
+                type: "spring",
+                stiffness: 120,
+                damping: 20,
+                mass: 0.8,
+              }}
+              style={{ transformOrigin: 'center center', willChange: 'transform' }}
             >
-              {/* First Image - Back layer */}
-              <motion.div
-                className="absolute inset-0 rounded-lg xs:rounded-xl sm:rounded-xl md:rounded-2xl overflow-hidden bg-[#171616]"
-                animate={{
-                  rotate: isHovered ? -8 : 0,
-                  scale: isHovered ? 0.7 : 1,
-                  x: isHovered ? -40 : 0,
-                  y: isHovered ? 20 : 0,
-                }}
-                transition={{
-                  type: "spring",
-                  stiffness: 120,
-                  damping: 20,
-                  mass: 0.8,
-                }}
+              {/* Solid dark ring base */}
+              <div className="absolute -inset-[3px] rounded-xl md:rounded-2xl z-0 bg-[#1a1a1a]" />
+              {/* Animated gradient border */}
+              <div className="absolute -inset-[3px] rounded-xl md:rounded-2xl animate-border-rotate z-0"
                 style={{
-                  transformOrigin: 'center center',
-                  willChange: 'transform',
+                  background: `conic-gradient(from var(--border-angle, 0deg), rgba(${project.color}, 0.15) 0%, rgba(${project.color}, 1) 12%, rgba(255,255,255,0.9) 15%, rgba(${project.color}, 1) 18%, rgba(${project.color}, 0.15) 30%)`,
                 }}
-              >
+              />
+              {/* Static border glow underneath */}
+              <div className="absolute -inset-[3px] rounded-xl md:rounded-2xl z-0"
+                style={{
+                  background: `linear-gradient(135deg, rgba(${project.color}, 0.35) 0%, rgba(${project.color}, 0.12) 50%, rgba(${project.color}, 0.35) 100%)`,
+                }}
+              />
+              {/* Inner image with gap */}
+              <div className="absolute inset-0 m-[3px] rounded-[9px] md:rounded-[13px] overflow-hidden bg-[#171616] z-[1]">
                 <Image
                   src={project.image}
                   alt={`${project.title} - Rameshwar Bhagwat Project Screenshot`}
@@ -176,37 +211,47 @@ export default function ProjectCard({ project, index }: ProjectCardProps) {
                   priority={index === 0}
                   loading={index === 0 ? 'eager' : 'lazy'}
                 />
-                
-                {/* Gradient overlay */}
                 <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-transparent to-transparent" />
-                
-                {/* Project number */}
-                <div className="absolute top-2 xs:top-3 sm:top-4 md:top-6 left-2 xs:left-3 sm:left-4 md:left-6 text-white/40 text-[10px] xs:text-xs sm:text-sm font-medium tabular-nums z-10">
-                  {String(project.id).padStart(2, '0')} / 04
+                <div className="absolute top-3 sm:top-4 md:top-6 left-3 sm:left-4 md:left-6 text-white/40 text-[10px] xs:text-xs sm:text-sm font-medium tabular-nums z-10">
+                  {String(index + 1).padStart(2, '0')} / {String(5).padStart(2, '0')}
                 </div>
-              </motion.div>
+              </div>
+            </motion.div>
 
-              {/* Second Image - Front layer */}
-              <motion.div
-                className="absolute inset-0 rounded-lg xs:rounded-xl sm:rounded-xl md:rounded-2xl overflow-hidden bg-[#171616]"
-                animate={{
-                  rotate: isHovered ? 8 : 0,
-                  scale: isHovered ? 0.7 : 1,
-                  x: isHovered ? 40 : 0,
-                  y: isHovered ? -20 : 0,
-                  opacity: isHovered ? 1 : 0,
-                }}
-                transition={{
-                  type: "spring",
-                  stiffness: 120,
-                  damping: 20,
-                  mass: 0.8,
-                }}
+            {/* Second Image - Front layer (on hover) */}
+            <motion.div
+              className="absolute inset-0 rounded-xl md:rounded-2xl overflow-hidden"
+              animate={{
+                rotate: isHovered ? 8 : 0,
+                scale: isHovered ? 0.7 : 1,
+                x: isHovered ? 40 : 0,
+                y: isHovered ? -20 : 0,
+                opacity: isHovered ? 1 : 0,
+              }}
+              transition={{
+                type: "spring",
+                stiffness: 120,
+                damping: 20,
+                mass: 0.8,
+              }}
+              style={{ transformOrigin: 'center center', willChange: 'transform' }}
+            >
+              {/* Solid dark ring base */}
+              <div className="absolute -inset-[3px] rounded-xl md:rounded-2xl z-0 bg-[#1a1a1a]" />
+              {/* Animated gradient border */}
+              <div className="absolute -inset-[3px] rounded-xl md:rounded-2xl animate-border-rotate z-0"
                 style={{
-                  transformOrigin: 'center center',
-                  willChange: 'transform',
+                  background: `conic-gradient(from var(--border-angle, 0deg), rgba(${project.color}, 0.15) 0%, rgba(${project.color}, 1) 12%, rgba(255,255,255,0.9) 15%, rgba(${project.color}, 1) 18%, rgba(${project.color}, 0.15) 30%)`,
                 }}
-              >
+              />
+              {/* Static border glow underneath */}
+              <div className="absolute -inset-[3px] rounded-xl md:rounded-2xl z-0"
+                style={{
+                  background: `linear-gradient(135deg, rgba(${project.color}, 0.35) 0%, rgba(${project.color}, 0.12) 50%, rgba(${project.color}, 0.35) 100%)`,
+                }}
+              />
+              {/* Inner image with gap */}
+              <div className="absolute inset-0 m-[3px] rounded-[9px] md:rounded-[13px] overflow-hidden bg-[#171616] z-[1]">
                 <Image
                   src={project.hoverImage}
                   alt={`${project.title} - Rameshwar Bhagwat Project Interface`}
@@ -215,95 +260,146 @@ export default function ProjectCard({ project, index }: ProjectCardProps) {
                   className="object-contain md:object-cover"
                   loading="lazy"
                 />
-                
-                {/* Gradient overlay */}
                 <div className="absolute inset-0 bg-gradient-to-t from-black/50 via-transparent to-transparent" />
-              </motion.div>
-            </div>
-          </figure>
-
-          {/* Content Container - Right 50% - No animations for better performance */}
-          <div className="flex flex-col justify-center space-y-2 xs:space-y-2.5 sm:space-y-3 md:space-y-4 lg:space-y-5 order-2">
-            {/* Title */}
-            <h3 className="text-xl xs:text-2xl sm:text-2xl md:text-3xl lg:text-4xl xl:text-5xl font-bold text-white leading-tight" itemProp="name">
-              {project.title}
-            </h3>
-
-            {/* Tagline */}
-            <p className="text-xs xs:text-sm sm:text-sm md:text-base lg:text-lg text-muted" itemProp="headline">
-              {project.tagline}
-            </p>
-
-            {/* Divider */}
-            <div className="w-8 xs:w-9 sm:w-10 md:w-12 h-[2px] bg-primary-gradient" aria-hidden="true" />
-
-            {/* Description */}
-            <p className="text-[11px] xs:text-xs sm:text-xs md:text-sm lg:text-base text-white/80 leading-relaxed" itemProp="description">
-              {project.description}
-            </p>
-
-            {/* Features */}
-            <ul className="space-y-1 xs:space-y-1.5 sm:space-y-1.5 md:space-y-2 lg:space-y-2.5" itemProp="about">
-              {project.features.map((feature, idx) => (
-                <li key={idx} className="flex items-start gap-1.5 xs:gap-2 sm:gap-2 md:gap-3">
-                  <div className="w-1 h-1 xs:w-1.5 xs:h-1.5 sm:w-1.5 sm:h-1.5 md:w-2 md:h-2 rotate-45 bg-primary-gradient mt-1 xs:mt-1.5 sm:mt-1.5 md:mt-2 flex-shrink-0" aria-hidden="true" />
-                  <p className="text-[10px] xs:text-[11px] sm:text-xs md:text-sm text-white/70 leading-relaxed">
-                    {feature}
-                  </p>
-                </li>
-              ))}
-            </ul>
-
-            {/* Tech Stack */}
-            <div className="flex flex-wrap gap-1 xs:gap-1.5 sm:gap-1.5 md:gap-2" role="list" aria-label="Technologies used">
-              {project.techStack.map((tech, idx) => {
-                const config = techConfig[tech];
-                const Icon = config?.icon || SiReact;
-                const iconColor = config?.color || '#FFFFFF';
-                
-                return (
-                  <span
-                    key={idx}
-                    className="px-1.5 xs:px-2 sm:px-2 md:px-2.5 py-0.5 xs:py-0.5 sm:py-0.5 md:py-1 text-[9px] xs:text-[10px] sm:text-[10px] md:text-xs font-medium rounded-full bg-white/5 border border-white/10 inline-flex items-center gap-1 xs:gap-1 sm:gap-1 md:gap-1.5 hover:bg-white/10 transition-colors duration-300"
-                    role="listitem"
-                    itemProp="keywords"
-                  >
-                    <Icon size={9} className="flex-shrink-0 xs:w-2.5 xs:h-2.5 sm:w-2.5 sm:h-2.5 md:w-3 md:h-3" style={{ color: iconColor }} aria-hidden="true" />
-                    <span className="text-white/70">{tech}</span>
-                  </span>
-                );
-              })}
-            </div>
-
-            {/* CTA Buttons */}
-            <nav className="flex items-center gap-2 xs:gap-2 sm:gap-2.5 md:gap-3 pt-1 xs:pt-1 sm:pt-1.5 md:pt-2 lg:pt-3" aria-label="Project links">
-              {project.liveUrl && (
-                <Button
-                  variant="primary"
-                  size="sm"
-                  onClick={() => window.open(project.liveUrl, '_blank')}
-                  rightIcon={<ExternalLink size={12} className="xs:w-3 xs:h-3 sm:w-3.5 sm:h-3.5" />}
-                  aria-label={`View ${project.title} live demo`}
-                  className="text-[10px] xs:text-[11px] sm:text-xs px-2.5 xs:px-3 sm:px-3.5 py-1 xs:py-1.5 sm:py-1.5 whitespace-nowrap"
-                >
-                  View Live
-                </Button>
-              )}
-              {project.githubUrl && (
-                <Button
-                  variant="secondary"
-                  size="sm"
-                  onClick={() => window.open(project.githubUrl, '_blank')}
-                  rightIcon={<Github size={12} className="xs:w-3 xs:h-3 sm:w-3.5 sm:h-3.5" />}
-                  aria-label={`View ${project.title} source code on GitHub`}
-                  className="text-[10px] xs:text-[11px] sm:text-xs px-2.5 xs:px-3 sm:px-3.5 py-1 xs:py-1.5 sm:py-1.5 whitespace-nowrap"
-                >
-                  Source Code
-                </Button>
-              )}
-            </nav>
+              </div>
+            </motion.div>
           </div>
-        </div>
+        </motion.figure>
+
+        {/* Content Container */}
+        <motion.div
+          className={`flex flex-col justify-center space-y-3 sm:space-y-4 md:space-y-5 ${isReversed ? 'md:[direction:ltr]' : ''}`}
+          initial={{ opacity: 0, x: contentSlideX }}
+          animate={isInView ? { opacity: 1, x: 0 } : { opacity: 0, x: contentSlideX }}
+          transition={{
+            duration: 0.9,
+            delay: contentDelay,
+            ease: [0.16, 1, 0.3, 1],
+          }}
+        >
+          {/* Title */}
+          <motion.h3
+            className="text-2xl sm:text-3xl md:text-3xl lg:text-4xl xl:text-5xl font-bold text-white leading-tight"
+            itemProp="name"
+            initial={{ opacity: 0, y: 20 }}
+            animate={isInView ? { opacity: 1, y: 0 } : { opacity: 0, y: 20 }}
+            transition={{ duration: 0.7, delay: contentDelay + 0.1, ease: [0.16, 1, 0.3, 1] }}
+          >
+            {project.title}
+          </motion.h3>
+
+          {/* Tagline */}
+          <motion.p
+            className="text-sm sm:text-base md:text-base lg:text-lg text-muted"
+            itemProp="headline"
+            initial={{ opacity: 0, y: 15 }}
+            animate={isInView ? { opacity: 1, y: 0 } : { opacity: 0, y: 15 }}
+            transition={{ duration: 0.7, delay: contentDelay + 0.18, ease: [0.16, 1, 0.3, 1] }}
+          >
+            {project.tagline}
+          </motion.p>
+
+          {/* Divider */}
+          <motion.div
+            className="w-10 md:w-12 h-[2px] bg-primary-gradient"
+            aria-hidden="true"
+            initial={{ scaleX: 0 }}
+            animate={isInView ? { scaleX: 1 } : { scaleX: 0 }}
+            transition={{ duration: 0.6, delay: contentDelay + 0.25, ease: [0.16, 1, 0.3, 1] }}
+            style={{ transformOrigin: 'left' }}
+          />
+
+          {/* Description */}
+          <motion.p
+            className="text-xs sm:text-sm md:text-sm lg:text-base text-white/80 leading-relaxed"
+            itemProp="description"
+            initial={{ opacity: 0, y: 15 }}
+            animate={isInView ? { opacity: 1, y: 0 } : { opacity: 0, y: 15 }}
+            transition={{ duration: 0.7, delay: contentDelay + 0.3, ease: [0.16, 1, 0.3, 1] }}
+          >
+            {project.description}
+          </motion.p>
+
+          {/* Features */}
+          <ul className="space-y-1.5 sm:space-y-2 md:space-y-2.5" itemProp="about">
+            {project.features.map((feature, idx) => (
+              <motion.li
+                key={idx}
+                className="flex items-start gap-2 md:gap-3"
+                initial={{ opacity: 0, x: 20 }}
+                animate={isInView ? { opacity: 1, x: 0 } : { opacity: 0, x: 20 }}
+                transition={{ duration: 0.5, delay: contentDelay + 0.35 + idx * 0.08, ease: [0.16, 1, 0.3, 1] }}
+              >
+                <div className="w-1.5 h-1.5 md:w-2 md:h-2 rotate-45 bg-primary-gradient mt-1.5 md:mt-2 flex-shrink-0" aria-hidden="true" />
+                <p className="text-[11px] sm:text-xs md:text-sm text-white/70 leading-relaxed">
+                  {feature}
+                </p>
+              </motion.li>
+            ))}
+          </ul>
+
+          {/* Tech Stack */}
+          <motion.div
+            className="flex flex-wrap gap-1.5 md:gap-2"
+            role="list"
+            aria-label="Technologies used"
+            initial={{ opacity: 0, y: 10 }}
+            animate={isInView ? { opacity: 1, y: 0 } : { opacity: 0, y: 10 }}
+            transition={{ duration: 0.6, delay: contentDelay + 0.55, ease: [0.16, 1, 0.3, 1] }}
+          >
+            {project.techStack.map((tech, idx) => {
+              const config = techConfig[tech];
+              const Icon = config?.icon || SiReact;
+              const iconColor = config?.color || '#FFFFFF';
+              
+              return (
+                <span
+                  key={idx}
+                  className="px-2 md:px-2.5 py-0.5 md:py-1 text-[10px] md:text-xs font-medium rounded-full bg-white/5 border border-white/10 inline-flex items-center gap-1 md:gap-1.5 hover:bg-white/10 transition-colors duration-300"
+                  role="listitem"
+                  itemProp="keywords"
+                >
+                  <Icon size={10} className="flex-shrink-0 md:w-3 md:h-3" style={{ color: iconColor }} aria-hidden="true" />
+                  <span className="text-white/70">{tech}</span>
+                </span>
+              );
+            })}
+          </motion.div>
+
+          {/* CTA Buttons */}
+          <motion.nav
+            className="flex items-center gap-2.5 md:gap-3 pt-1 md:pt-2 lg:pt-3"
+            aria-label="Project links"
+            initial={{ opacity: 0, y: 10 }}
+            animate={isInView ? { opacity: 1, y: 0 } : { opacity: 0, y: 10 }}
+            transition={{ duration: 0.6, delay: contentDelay + 0.65, ease: [0.16, 1, 0.3, 1] }}
+          >
+            {project.liveUrl && (
+              <Button
+                variant="primary"
+                size="sm"
+                onClick={() => window.open(project.liveUrl, '_blank')}
+                rightIcon={<ExternalLink size={13} className="sm:w-3.5 sm:h-3.5" />}
+                aria-label={`View ${project.title} live demo`}
+                className="text-[11px] sm:text-xs px-3 sm:px-3.5 py-1.5 whitespace-nowrap"
+              >
+                View Live
+              </Button>
+            )}
+            {project.githubUrl && (
+              <Button
+                variant="secondary"
+                size="sm"
+                onClick={() => window.open(project.githubUrl, '_blank')}
+                rightIcon={<Github size={13} className="sm:w-3.5 sm:h-3.5" />}
+                aria-label={`View ${project.title} source code on GitHub`}
+                className="text-[11px] sm:text-xs px-3 sm:px-3.5 py-1.5 whitespace-nowrap"
+              >
+                Source Code
+              </Button>
+            )}
+          </motion.nav>
+        </motion.div>
       </div>
     </article>
   );

@@ -92,7 +92,7 @@ function CircularProgress({
       }}
     >
       {/* Circular Progress */}
-      <div className="relative w-24 h-24 sm:w-28 sm:h-28 md:w-32 md:h-32 mb-3 sm:mb-4">
+      <div className="relative w-20 h-20 sm:w-24 sm:h-24 md:w-28 md:h-28 mb-2 sm:mb-3">
         {/* Background Circle */}
         <svg className="w-full h-full transform -rotate-90" aria-hidden="true">
           <circle
@@ -139,9 +139,12 @@ function CircularProgress({
 
 export default function StatsGrid() {
   return (
-    <div className="grid grid-cols-3 gap-4 sm:gap-6 md:gap-8 w-full">
+    <div className="grid grid-cols-3 gap-3 sm:gap-4 md:gap-5 w-full">
       {stats.map((stat, index) => (
-        <div key={stat.label}>
+        <div 
+          key={stat.label}
+          className="bg-[#141414] border border-white/[0.06] rounded-2xl sm:rounded-3xl p-3 sm:p-4 md:p-5"
+        >
           <CircularProgress
             value={stat.value}
             max={stat.max}

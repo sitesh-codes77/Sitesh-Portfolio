@@ -163,17 +163,19 @@ export default function HeroStrips() {
                   className="text-center w-full container mx-auto px-4 sm:px-6 lg:px-8 pt-28 sm:pt-40 md:pt-48"
                 >
                   <div
-                    className="text-[4rem] sm:text-7xl md:text-8xl lg:text-9xl font-normal tracking-[0.15em] leading-[1.0] sm:leading-[1.0] md:leading-[1.0] text-white uppercase"
+                    className="text-[2.8rem] sm:text-6xl md:text-7xl lg:text-8xl font-extrabold tracking-[-0.02em] leading-[0.95] sm:leading-[0.95] md:leading-[0.95] text-white uppercase whitespace-nowrap"
                     style={{
-                      fontFamily: 'var(--font-bebas-neue), Impact, "Arial Narrow", sans-serif',
+                      fontFamily: 'var(--font-jakarta), "Plus Jakarta Sans", sans-serif',
+                      fontWeight: 800,
                     }}
                   >
                     Rameshwar Bhagwat
                   </div>
                   <div
-                    className="text-2xl sm:text-4xl md:text-5xl lg:text-6xl font-normal tracking-[0.08em] leading-[1.05] mt-2 sm:mt-3 text-white uppercase"
+                    className="text-xl sm:text-2xl md:text-3xl lg:text-4xl font-extrabold tracking-[0.02em] leading-[1.05] mt-2 sm:mt-3 text-white uppercase"
                     style={{
-                      fontFamily: 'var(--font-bebas-neue), Impact, "Arial Narrow", sans-serif',
+                      fontFamily: 'var(--font-jakarta), "Plus Jakarta Sans", sans-serif',
+                      fontWeight: 800,
                     }}
                   >
                     Full Stack &amp; AI Developer
@@ -193,21 +195,32 @@ export default function HeroStrips() {
         transition={{ duration: 0.3, ease: 'easeOut' }}
         aria-hidden="true"
       >
+
+      {/* Gradient transition to About — hidden during intro so no black shadow */}
+      <motion.div
+        className="absolute bottom-0 left-0 right-0 h-24 sm:h-32 bg-gradient-to-b from-transparent to-[#0F0E0E] pointer-events-none z-[3] rounded-b-[40px] sm:rounded-b-[60px]"
+        initial={{ opacity: 0 }}
+        animate={{ opacity: isIntroComplete ? 1 : 0 }}
+        transition={{ duration: 0.8, delay: 0.3, ease: 'easeOut' }}
+        aria-hidden="true"
+      />
         <div
           className="text-center w-full container mx-auto px-4 sm:px-6 lg:px-8 pt-28 sm:pt-40 md:pt-48"
         >
           <div
-            className="text-[4rem] sm:text-7xl md:text-8xl lg:text-9xl font-normal tracking-[0.15em] leading-[1.0] sm:leading-[1.0] md:leading-[1.0] text-white uppercase"
+            className="text-[2.8rem] sm:text-6xl md:text-7xl lg:text-8xl font-extrabold tracking-[-0.02em] leading-[0.95] sm:leading-[0.95] md:leading-[0.95] text-white uppercase whitespace-nowrap"
             style={{
-              fontFamily: 'var(--font-bebas-neue), Impact, "Arial Narrow", sans-serif',
+              fontFamily: 'var(--font-jakarta), "Plus Jakarta Sans", sans-serif',
+              fontWeight: 800,
             }}
           >
             Rameshwar Bhagwat
           </div>
           <div
-            className="text-2xl sm:text-4xl md:text-5xl lg:text-6xl font-normal tracking-[0.08em] leading-[1.05] mt-2 sm:mt-3 text-white uppercase"
+            className="text-xl sm:text-2xl md:text-3xl lg:text-4xl font-extrabold tracking-[0.02em] leading-[1.05] mt-2 sm:mt-3 text-white uppercase"
             style={{
-              fontFamily: 'var(--font-bebas-neue), Impact, "Arial Narrow", sans-serif',
+              fontFamily: 'var(--font-jakarta), "Plus Jakarta Sans", sans-serif',
+              fontWeight: 800,
             }}
           >
             Full Stack &amp; AI Developer

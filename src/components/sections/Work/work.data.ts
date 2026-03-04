@@ -98,21 +98,4 @@ export const projects: Project[] = [
     githubUrl: "https://github.com/yourusername/localmart",
     color: "16, 185, 129" // Green - Growth, money, commerce, success
   },
-  {
-    id: 6,
-    title: "Agro Management System",
-    tagline: "Smart Agriculture Management System",
-    description: "Developed a mobile-based agriculture management system for a client to digitize farm operations and crop tracking. The platform enables farmers to manage inventory, monitor crop cycles, and maintain real-time data records through a scalable cloud backend.",
-    features: [
-      "Farm inventory and crop lifecycle management",
-      "Real-time data sync using Firebase backend",
-      "User authentication and role-based access for farmers and admins"
-    ],
-    techStack: ["Kotlin", "Firebase", "Firestore", "Firebase Auth", "Android SDK"],
-    image: "/images/projects/project2.svg",
-    hoverImage: "/images/projects/project2-hover.svg",
-    liveUrl: "https://play.google.com/store/apps/details?id=demo",
-    githubUrl: "https://github.com/yourusername/agromanage",
-    color: "34, 197, 94" // Vibrant Green - Nature, agriculture, growth, farming
-  }
 ];

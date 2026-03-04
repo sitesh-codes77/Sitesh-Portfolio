@@ -138,9 +138,7 @@ export default function ParticleBackground() {
       { threshold: 0 }
     );
 
-    if (canvas.parentElement) {
-      observer.observe(canvas.parentElement);
-    }
+    observer.observe(canvas);
 
     // Visibility change handler
     const handleVisibilityChange = () => {

@@ -139,22 +139,18 @@ export default function ContactForm({ onClose }: ContactFormProps) {
       <motion.button
         type="submit"
         disabled={isSubmitting || isSuccess}
-        whileHover={{ scale: isSuccess ? 1 : 1.02 }}
-        whileTap={{ scale: isSuccess ? 1 : 0.98 }}
+        whileHover={{ scale: isSuccess ? 1 : 1.03 }}
+        whileTap={{ scale: isSuccess ? 1 : 0.97 }}
+        transition={{ type: 'spring', stiffness: 400, damping: 25 }}
         className={`
-          w-auto min-w-[200px] mx-auto block mt-6 px-8 py-4 rounded-full font-semibold text-black
-          transition-all duration-300 relative overflow-hidden
+          w-auto min-w-[200px] mx-auto block mt-6 px-8 py-4 rounded-full font-semibold text-white
+          relative overflow-hidden cursor-pointer select-none
           ${
             isSuccess
               ? 'bg-green-500'
-              : 'bg-primary-gradient hover:brightness-110'
+              : 'btn-primary'
           }
         `}
-        style={{
-          boxShadow: isSuccess
-            ? '0 0 20px rgba(34, 197, 94, 0.3)'
-            : '0 0 20px rgba(255, 140, 0, 0.3)',
-        }}
       >
         {isSuccess ? (
           <span className="flex items-center justify-center gap-2">

@@ -145,10 +145,11 @@ export default function Contact() {
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
           transition={{ duration: 0.6, ease: [0.22, 1, 0.36, 1] }}
-          className="text-5xl md:text-6xl lg:text-7xl font-black tracking-tight leading-tight text-white mb-6"
+          className="text-5xl md:text-6xl lg:text-7xl font-extrabold tracking-[-0.02em] leading-tight text-white mb-6 uppercase"
+          style={{ fontFamily: 'var(--font-jakarta), "Plus Jakarta Sans", sans-serif', fontWeight: 800 }}
         >
           Let's Build Something{' '}
-          <span className="text-gradient">Extraordinary</span>
+          <span className="text-rainbow-gradient">Extraordinary</span>
         </motion.h2>
 
         <motion.p

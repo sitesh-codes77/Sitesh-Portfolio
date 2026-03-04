@@ -2,6 +2,23 @@
 @tailwind components;
 @tailwind utilities;
 
+/* Register custom property for animated gradient border */
+@property --border-angle {
+  syntax: "<angle>";
+  initial-value: 0deg;
+  inherits: false;
+}
+
+@keyframes border-rotate {
+  to {
+    --border-angle: 360deg;
+  }
+}
+
+.animate-border-rotate {
+  animation: border-rotate 4s linear infinite;
+}
+
 @layer base {
   :root {
     /* Fonts */
@@ -87,6 +104,13 @@
     background-clip: text;
   }
 
+  .text-rainbow-gradient {
+    background: linear-gradient(to right, #a855f7, #3b82f6, #f97316, #ef4444, #10b981);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+  }
+
   .glow-text {
     text-shadow: 0 0 20px rgba(255, 140, 0, 0.5);
   }
@@ -102,6 +126,54 @@
   .perspective-1000 {
     perspective: 1000px;
   }
+}
+
+/* ===== Button Styles ===== */
+.btn-primary {
+  background: linear-gradient(135deg, #FF0000 0%, #FF1493 50%, #FF8C00 100%);
+  background-size: 200% 200%;
+  box-shadow: 
+    0 2px 12px rgba(255, 20, 147, 0.2),
+    0 0 0 1px rgba(255, 255, 255, 0.06) inset;
+  transition: box-shadow 0.4s cubic-bezier(0.16, 1, 0.3, 1), 
+              background-position 0.5s cubic-bezier(0.16, 1, 0.3, 1),
+              filter 0.3s ease;
+}
+
+.btn-primary:hover {
+  background-position: 100% 100%;
+  box-shadow: 
+    0 4px 24px rgba(255, 20, 147, 0.35),
+    0 0 60px rgba(255, 140, 0, 0.12),
+    0 0 0 1px rgba(255, 255, 255, 0.12) inset;
+}
+
+.btn-primary:active {
+  filter: brightness(0.92);
+}
+
+.btn-secondary {
+  background: rgba(255, 255, 255, 0.04);
+  border: 1.5px solid rgba(255, 255, 255, 0.12);
+  backdrop-filter: blur(12px);
+  box-shadow: 
+    0 0 0 0 rgba(255, 255, 255, 0),
+    inset 0 1px 0 rgba(255, 255, 255, 0.06);
+  transition: border-color 0.4s cubic-bezier(0.16, 1, 0.3, 1),
+              background 0.4s cubic-bezier(0.16, 1, 0.3, 1),
+              box-shadow 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.btn-secondary:hover {
+  background: rgba(255, 255, 255, 0.08);
+  border-color: rgba(255, 255, 255, 0.25);
+  box-shadow: 
+    0 4px 20px rgba(255, 255, 255, 0.06),
+    inset 0 1px 0 rgba(255, 255, 255, 0.1);
+}
+
+.btn-secondary:active {
+  background: rgba(255, 255, 255, 0.06);
 }
 
 /* Aurora Mesh Gradient Background */

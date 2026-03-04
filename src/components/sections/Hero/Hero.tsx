@@ -43,9 +43,6 @@ export default function Hero() {
 
         {/* Main content */}
         <HeroContent />
-
-        {/* Gradient transition to About section */}
-        <div className="absolute bottom-0 left-0 right-0 h-24 sm:h-32 bg-gradient-to-b from-transparent to-[#0F0E0E] pointer-events-none z-[3] rounded-b-[40px] sm:rounded-b-[60px]" aria-hidden="true" />
       </section>
     </>
   );

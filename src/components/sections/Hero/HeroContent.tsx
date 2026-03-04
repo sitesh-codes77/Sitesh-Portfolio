@@ -43,10 +43,10 @@ export default function HeroContent() {
         {/* Invisible heading placeholder — reserves exact same space as the visual heading
            rendered inside HeroStrips for the strip-reveal effect. */}
         <div className="invisible px-2 sm:px-4" aria-hidden="true">
-          <div className="text-[4rem] sm:text-7xl md:text-8xl lg:text-9xl font-normal tracking-[0.15em] leading-[1.0] sm:leading-[1.0] md:leading-[1.0] uppercase" style={{ fontFamily: 'var(--font-bebas-neue), Impact, "Arial Narrow", sans-serif' }}>
+          <div className="text-[2.8rem] sm:text-6xl md:text-7xl lg:text-8xl font-extrabold tracking-[-0.02em] leading-[0.95] sm:leading-[0.95] md:leading-[0.95] uppercase whitespace-nowrap" style={{ fontFamily: 'var(--font-jakarta), "Plus Jakarta Sans", sans-serif', fontWeight: 800 }}>
             Rameshwar Bhagwat
           </div>
-          <div className="text-2xl sm:text-4xl md:text-5xl lg:text-6xl font-normal tracking-[0.08em] leading-[1.05] mt-2 sm:mt-3 uppercase" style={{ fontFamily: 'var(--font-bebas-neue), Impact, "Arial Narrow", sans-serif' }}>
+          <div className="text-xl sm:text-2xl md:text-3xl lg:text-4xl font-extrabold tracking-[0.02em] leading-[1.05] mt-2 sm:mt-3 uppercase" style={{ fontFamily: 'var(--font-jakarta), "Plus Jakarta Sans", sans-serif', fontWeight: 800 }}>
             Full Stack &amp; AI Developer
           </div>
         </div>
@@ -61,22 +61,21 @@ export default function HeroContent() {
         >
 
         {/* Description - SEO optimized */}
-        <motion.p
+        <motion.div
           variants={childVariants}
-          className="text-xs sm:text-base md:text-lg max-w-2xl mx-auto leading-relaxed px-4 sm:px-6 tracking-wide"
+          className="text-lg sm:text-2xl md:text-3xl lg:text-4xl max-w-4xl mx-auto leading-snug px-4 sm:px-6"
           style={{
-            fontFamily: 'var(--font-bebas-neue), Impact, "Arial Narrow", sans-serif',
+            fontFamily: 'var(--font-playfair), "Playfair Display", Georgia, serif',
             fontWeight: 400,
-            letterSpacing: '0.05em',
-            backgroundImage: 'linear-gradient(to right, #f97316, #ef4444, #ec4899)',
-            WebkitBackgroundClip: 'text',
-            WebkitTextFillColor: 'transparent',
-            backgroundClip: 'text',
+            letterSpacing: '0.01em',
+            color: 'rgba(255,255,255,0.85)',
           }}
         >
-          Building scalable AI-powered SaaS platforms and web applications.
-          Specialized in React, Next.js, TypeScript, and Machine Learning integration.
-        </motion.p>
+          <p>
+            Crafting <em className="italic" style={{ backgroundImage: 'linear-gradient(to right, #f97316, #ef4444, #ec4899)', WebkitBackgroundClip: 'text', WebkitTextFillColor: 'transparent', backgroundClip: 'text' }}>AI-Powered</em> Platforms that
+            Elevate <em className="italic" style={{ backgroundImage: 'linear-gradient(to right, #f97316, #ef4444, #ec4899)', WebkitBackgroundClip: 'text', WebkitTextFillColor: 'transparent', backgroundClip: 'text' }}>SaaS &amp; Web Innovators</em>
+          </p>
+        </motion.div>
 
         {/* CTA Buttons */}
         <motion.div variants={childVariants} className="flex flex-col sm:flex-row justify-center gap-2.5 sm:gap-4 mt-5 sm:mt-8 px-4 sm:px-0 max-w-md sm:max-w-none mx-auto">

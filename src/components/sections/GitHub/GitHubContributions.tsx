@@ -149,8 +149,11 @@ export default function GitHubContributions() {
             <Github size={16} className="text-white/70" />
             <span className="text-xs font-medium text-white/70 uppercase tracking-wider">Open Source</span>
           </div>
-          <h2 className="text-4xl md:text-5xl font-black text-white mb-3">
-            GitHub <span className="text-gradient">Activity</span>
+          <h2
+            className="text-4xl md:text-5xl font-extrabold text-white mb-3 uppercase tracking-[-0.02em]"
+            style={{ fontFamily: 'var(--font-jakarta), "Plus Jakarta Sans", sans-serif', fontWeight: 800 }}
+          >
+            GitHub <span className="text-rainbow-gradient">Activity</span>
           </h2>
           <p className="text-muted text-lg max-w-2xl mx-auto">
             Consistent contributions and continuous learning

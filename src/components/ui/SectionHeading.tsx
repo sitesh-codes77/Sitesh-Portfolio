@@ -22,7 +22,7 @@ const SectionHeading = React.forwardRef<HTMLDivElement, SectionHeadingProps>(
       return (
         <h2 className="text-4xl md:text-5xl lg:text-6xl font-bold text-white">
           {parts[0]}
-          <span className="text-gradient">{highlightWord}</span>
+          <span className="text-rainbow-gradient">{highlightWord}</span>
           {parts[1]}
         </h2>
       );

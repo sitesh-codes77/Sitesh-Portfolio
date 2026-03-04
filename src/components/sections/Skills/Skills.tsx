@@ -132,8 +132,11 @@ export default function Skills() {
           className="mb-10 sm:mb-12 md:mb-16 text-center"
         >
           <p className="text-primary-gradient text-xs sm:text-sm font-semibold tracking-wider uppercase mb-2 sm:mb-3">My Arsenal</p>
-          <h2 className="text-2xl sm:text-3xl md:text-4xl lg:text-5xl xl:text-6xl font-black mb-2 sm:mb-3 md:mb-4 text-white px-2">
-            Technologies <span className="text-primary-gradient">I Master</span>
+          <h2
+            className="text-2xl sm:text-3xl md:text-4xl lg:text-5xl xl:text-6xl font-extrabold mb-2 sm:mb-3 md:mb-4 text-white px-2 uppercase tracking-[-0.02em]"
+            style={{ fontFamily: 'var(--font-jakarta), "Plus Jakarta Sans", sans-serif', fontWeight: 800 }}
+          >
+            Technologies <span className="text-rainbow-gradient">I Master</span>
           </h2>
           <p className="text-muted text-sm sm:text-base md:text-lg max-w-2xl mx-auto px-4">Building modern web experiences with cutting-edge tools and frameworks</p>
         </motion.div>
