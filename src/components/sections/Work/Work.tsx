@@ -3,6 +3,7 @@
 import { motion } from 'framer-motion';
 import { projects } from './work.data';
 import ProjectCard from './ProjectCard';
+import ScrollHeading from './ScrollHeading';
 
 export default function Work() {
   return (
@@ -75,6 +76,9 @@ export default function Work() {
         </ul>
       </div>
 
+      {/* Scroll-linked heading */}
+      <ScrollHeading />
+
       {/* Header Section */}
       <div className="container mx-auto px-4 sm:px-6 mb-8 sm:mb-10 md:mb-12 lg:mb-16">
         <motion.div 
@@ -98,14 +102,6 @@ export default function Work() {
             <div className="w-2 h-2 rounded-full bg-gradient-to-r from-[#FF8C00] to-[#FF5F00] animate-pulse" />
             <span className="text-xs sm:text-sm text-white/70 font-medium">Portfolio Showcase</span>
           </motion.div>
-
-          {/* Main heading */}
-          <h2
-            className="text-2xl sm:text-3xl md:text-4xl lg:text-5xl xl:text-6xl font-extrabold text-white mb-3 sm:mb-4 md:mb-5 px-2 leading-tight uppercase tracking-[-0.02em]"
-            style={{ fontFamily: 'var(--font-jakarta), "Plus Jakarta Sans", sans-serif', fontWeight: 800 }}
-          >
-            Featured <span className="text-rainbow-gradient">Projects</span>
-          </h2>
 
           {/* Decorative line */}
           <div className="flex items-center justify-center gap-3 mb-4 sm:mb-5 md:mb-6">

@@ -126,6 +126,23 @@ export default function Contact() {
 
       {/* Subtle background atmosphere */}
       <div className="absolute inset-0 pointer-events-none" aria-hidden="true">
+        {/* Background image with black removed via screen blend */}
+        <div
+          className="absolute inset-0 flex items-center justify-center"
+        >
+          <div
+            className="w-[600px] h-[600px] md:w-[750px] md:h-[750px] lg:w-[900px] lg:h-[900px]"
+            style={{
+              backgroundImage: "url('/images/hero/ChatGPT%20Image%20Mar%204%2C%202026%2C%2006_22_50%20PM.png')",
+              backgroundSize: 'contain',
+              backgroundPosition: 'center',
+              backgroundRepeat: 'no-repeat',
+              mixBlendMode: 'screen',
+              opacity: 0.35,
+            }}
+          />
+        </div>
+
         {/* Radial orange glow */}
         <div
           className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[800px] h-[800px] rounded-full blur-3xl opacity-5"

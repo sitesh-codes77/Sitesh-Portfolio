@@ -147,8 +147,20 @@ export default function HeroStrips() {
             }}
             style={{ transformOrigin: 'bottom center' }}
           >
-            {/* Dark strip background */}
-            <div className="absolute inset-0 bg-[#0F0E0E]" />
+            {/* Background image — positioned full-viewport-width, clipped by strip overflow */}
+            <div
+              className="absolute top-0 h-full"
+              style={{
+                width: '100vw',
+                left: `calc(-${i} * (100vw + 1px) / ${STRIP_COUNT})`,
+                backgroundImage: "url('/images/hero/fqFMYPML0dnHcBSTlRpnEZd4.avif')",
+                backgroundSize: 'cover',
+                backgroundPosition: 'center',
+              }}
+            />
+
+            {/* Subtle dark overlay for content readability */}
+            <div className="absolute inset-0 bg-black/20" />
 
             {/* Heading text — positioned full-viewport-width, clipped by strip overflow */}
             <div
