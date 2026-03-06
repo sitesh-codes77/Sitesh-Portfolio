@@ -4,9 +4,9 @@ import { motion, useReducedMotion } from 'framer-motion';
 import { useEffect, useRef } from 'react';
 import { useIntroAnimation } from '@/context/IntroAnimationContext';
 
-const STRIP_COUNT = 5;
+const STRIP_COUNT = 7;
 const STRIP_DURATION = 0.85;
-const STRIP_STAGGER = 0.2;
+const STRIP_STAGGER = 0.12;
 
 // Center strip animates first, then outward
 function getStripDelay(index: number): number {
@@ -49,71 +49,11 @@ export default function HeroStrips() {
 
   return (
     <>
-      {/* Permanent gap background — base dark color always visible */}
+      {/* Base dark background — always visible behind strips */}
       <div
-        className="absolute inset-0 z-0 rounded-b-[40px] sm:rounded-b-[60px] bg-[#1c1b1a]"
+        className="absolute inset-0 z-0 rounded-b-[40px] sm:rounded-b-[60px] bg-[#0F0E0E]"
         aria-hidden="true"
       />
-
-      {/* Subtle warm glow at bottom of gaps — always present after intro */}
-      <motion.div
-        className="absolute inset-0 z-[1] rounded-b-[40px] sm:rounded-b-[60px]"
-        style={{
-          background:
-            'linear-gradient(to top, rgba(255, 60, 0, 0.15) 0%, rgba(255, 20, 147, 0.06) 25%, transparent 55%)',
-        }}
-        initial={{ opacity: 0 }}
-        animate={{ opacity: isIntroComplete ? 1 : 0 }}
-        transition={{ duration: 1, delay: 0.5, ease: 'easeOut' }}
-        aria-hidden="true"
-      />
-
-      {/* White glow sweep — dot with trailing line moves top→bottom through strip gaps */}
-      <div
-        className="absolute inset-0 z-[2] rounded-b-[40px] sm:rounded-b-[60px] overflow-hidden pointer-events-none"
-        aria-hidden="true"
-      >
-        <motion.div
-          className="absolute inset-x-0 flex flex-col items-center"
-          style={{ height: '30%' }}
-          initial={{ top: '-30%' }}
-          animate={isIntroComplete ? { top: '130%' } : { top: '-30%' }}
-          transition={{
-            duration: 2.4,
-            delay: 0.5,
-            ease: [0.22, 1, 0.36, 1],
-          }}
-        >
-          {/* Trailing line */}
-          <div
-            className="w-px flex-1"
-            style={{
-              background:
-                'linear-gradient(to bottom, transparent 0%, rgba(255,255,255,0.15) 40%, rgba(255,255,255,0.6) 100%)',
-            }}
-          />
-          {/* Glowing dot */}
-          <div
-            className="shrink-0 rounded-full"
-            style={{
-              width: '6px',
-              height: '6px',
-              background: 'rgba(255,255,255,1)',
-              boxShadow:
-                '0 0 6px 2px rgba(255,255,255,0.9), 0 0 16px 6px rgba(255,255,255,0.5), 0 0 30px 10px rgba(255,255,255,0.2)',
-            }}
-          />
-          {/* Short leading fade below dot */}
-          <div
-            className="w-px shrink-0"
-            style={{
-              height: '12px',
-              background:
-                'linear-gradient(to bottom, rgba(255,255,255,0.4) 0%, transparent 100%)',
-            }}
-          />
-        </motion.div>
-      </div>
 
       {/* Light overlay — clean white backdrop during intro, fades out after */}
       <motion.div
@@ -128,16 +68,16 @@ export default function HeroStrips() {
         aria-hidden="true"
       />
 
-      {/* 5 permanent vertical strips */}
+      {/* 7 seamless vertical strips */}
       <div
         className="absolute inset-0 z-[10] flex rounded-b-[40px] sm:rounded-b-[60px] overflow-hidden"
-        style={{ gap: '1px' }}
+        style={{ gap: '0px' }}
         aria-hidden="true"
       >
         {Array.from({ length: STRIP_COUNT }).map((_, i) => (
           <motion.div
             key={i}
-            className="flex-1 relative overflow-hidden"
+            className="flex-1 relative overflow-hidden bg-[#0F0E0E]"
             initial={{ scaleY: shouldReduceMotion ? 1 : 0 }}
             animate={{ scaleY: 1 }}
             transition={{
@@ -147,33 +87,38 @@ export default function HeroStrips() {
             }}
             style={{ transformOrigin: 'bottom center' }}
           >
-            {/* Background image — positioned full-viewport-width, clipped by strip overflow */}
-            <div
-              className="absolute top-0 h-full"
-              style={{
-                width: '100vw',
-                left: `calc(-${i} * (100vw + 1px) / ${STRIP_COUNT})`,
-                backgroundImage: "url('/images/hero/fqFMYPML0dnHcBSTlRpnEZd4.avif')",
-                backgroundSize: 'cover',
-                backgroundPosition: 'center',
-              }}
-            />
-
-            {/* Subtle dark overlay for content readability */}
-            <div className="absolute inset-0 bg-black/50" />
-
             {/* Heading text — positioned full-viewport-width, clipped by strip overflow */}
             <div
               className="absolute top-0 h-full pointer-events-none select-none"
               style={{
                 width: '100vw',
-                left: `calc(-${i} * (100vw + 1px) / ${STRIP_COUNT})`,
+                left: `calc(-${i} * 100vw / ${STRIP_COUNT})`,
               }}
             >
               <div className="h-full">
                 <div
                   className="text-center w-full container mx-auto px-4 sm:px-6 lg:px-8 pt-28 sm:pt-40 md:pt-48"
                 >
+                  {/* Available for Work badge */}
+                  <div className="flex justify-center mb-4 sm:mb-5">
+                    <div className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full border border-white/30 bg-transparent">
+                      <motion.span
+                        className="text-xs sm:text-sm font-medium"
+                        style={{
+                          background: 'linear-gradient(90deg, rgba(255,255,255,0.4) 0%, rgba(255,255,255,0.4) 40%, rgba(255,255,255,1) 50%, rgba(255,255,255,0.4) 60%, rgba(255,255,255,0.4) 100%)',
+                          backgroundSize: '200% 100%',
+                          WebkitBackgroundClip: 'text',
+                          backgroundClip: 'text',
+                          WebkitTextFillColor: 'transparent',
+                          filter: 'drop-shadow(0 0 8px rgba(255, 255, 255, 0.5))',
+                        }}
+                        animate={{ backgroundPosition: ['0% 0%', '200% 0%'] }}
+                        transition={{ duration: 3, repeat: Infinity, ease: 'linear' }}
+                      >
+                        Available for Work
+                      </motion.span>
+                    </div>
+                  </div>
                   <div
                     className="text-[2.2rem] sm:text-5xl md:text-6xl lg:text-7xl font-extrabold tracking-[-0.02em] leading-[1.1] sm:leading-[1.1] md:leading-[1.1] text-white whitespace-nowrap"
                     style={{
@@ -184,7 +129,7 @@ export default function HeroStrips() {
                     Hi, I&apos;m{' '}
                     <span
                       style={{
-                        background: 'linear-gradient(135deg, #ff8a3d 0%, #ff3c6f 50%, #c06dff 100%)',
+                        background: 'linear-gradient(135deg, #FF0000 0%, #FF1493 50%, #FF8C00 100%)',
                         WebkitBackgroundClip: 'text',
                         WebkitTextFillColor: 'transparent',
                         backgroundClip: 'text',
@@ -209,7 +154,7 @@ export default function HeroStrips() {
         ))}
       </div>
 
-      {/* Heading overlay — sits above strip gaps so text isn't cut by 1px lines */}
+      {/* Heading overlay — sits above strips so text isn't fragmented */}
       <motion.div
         className="absolute inset-0 z-[15] pointer-events-none select-none"
         initial={{ opacity: 0 }}
@@ -229,6 +174,26 @@ export default function HeroStrips() {
         <div
           className="text-center w-full container mx-auto px-4 sm:px-6 lg:px-8 pt-28 sm:pt-40 md:pt-48"
         >
+          {/* Available for Work badge */}
+          <div className="flex justify-center mb-4 sm:mb-5">
+            <div className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full border border-white/30 bg-transparent">
+              <motion.span
+                className="text-xs sm:text-sm font-medium"
+                style={{
+                  background: 'linear-gradient(90deg, rgba(255,255,255,0.4) 0%, rgba(255,255,255,0.4) 40%, rgba(255,255,255,1) 50%, rgba(255,255,255,0.4) 60%, rgba(255,255,255,0.4) 100%)',
+                  backgroundSize: '200% 100%',
+                  WebkitBackgroundClip: 'text',
+                  backgroundClip: 'text',
+                  WebkitTextFillColor: 'transparent',
+                  filter: 'drop-shadow(0 0 8px rgba(255, 255, 255, 0.5))',
+                }}
+                animate={{ backgroundPosition: ['0% 0%', '200% 0%'] }}
+                transition={{ duration: 3, repeat: Infinity, ease: 'linear' }}
+              >
+                Available for Work
+              </motion.span>
+            </div>
+          </div>
           <div
             className="text-[2.2rem] sm:text-5xl md:text-6xl lg:text-7xl font-extrabold tracking-[-0.02em] leading-[1.1] sm:leading-[1.1] md:leading-[1.1] text-white whitespace-nowrap"
             style={{
@@ -239,7 +204,7 @@ export default function HeroStrips() {
             Hi, I&apos;m{' '}
             <span
               style={{
-                background: 'linear-gradient(135deg, #ff8a3d 0%, #ff3c6f 50%, #c06dff 100%)',
+                background: 'linear-gradient(135deg, #FF0000 0%, #FF1493 50%, #FF8C00 100%)',
                 WebkitBackgroundClip: 'text',
                 WebkitTextFillColor: 'transparent',
                 backgroundClip: 'text',

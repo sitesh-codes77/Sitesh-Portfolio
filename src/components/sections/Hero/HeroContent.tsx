@@ -43,6 +43,13 @@ export default function HeroContent() {
         {/* Invisible heading placeholder — reserves exact same space as the visual heading
            rendered inside HeroStrips for the strip-reveal effect. */}
         <div className="invisible px-2 sm:px-4" aria-hidden="true">
+          {/* Badge placeholder */}
+          <div className="flex justify-center mb-4 sm:mb-5">
+            <div className="inline-flex items-center gap-2 px-4 py-1.5">
+              <span className="h-2.5 w-2.5" />
+              <span className="text-xs sm:text-sm font-medium">Available for Work</span>
+            </div>
+          </div>
           <div className="text-[2.2rem] sm:text-5xl md:text-6xl lg:text-7xl font-extrabold tracking-[-0.02em] leading-[1.1] sm:leading-[1.1] md:leading-[1.1] whitespace-nowrap" style={{ fontFamily: 'var(--font-space-grotesk), "Space Grotesk", sans-serif', fontWeight: 800 }}>
             Hi, I&apos;m Rameshwar Bhagwat
           </div>
