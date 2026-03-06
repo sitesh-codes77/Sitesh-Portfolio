@@ -45,7 +45,7 @@ export default function ParticleBackground() {
     if (!ctx) return;
 
     const isMobile = window.innerWidth < 768;
-    const particleCount = isMobile ? 20 : 40; // Reduced from 30/60 for better performance
+    const particleCount = isMobile ? 40 : 80; // Increased from 20/40 for more visual impact
 
     // Setup canvas with optimized DPR
     const setupCanvas = () => {

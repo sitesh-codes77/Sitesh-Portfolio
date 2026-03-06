@@ -120,13 +120,14 @@ export default function HeroStrips() {
                     </div>
                   </div>
                   <div
-                    className="text-[2.2rem] sm:text-5xl md:text-6xl lg:text-7xl font-extrabold tracking-[-0.02em] leading-[1.1] sm:leading-[1.1] md:leading-[1.1] text-white whitespace-nowrap"
+                    className="text-[2.8rem] sm:text-6xl md:text-7xl lg:text-8xl font-black tracking-[-0.03em] leading-[0.95] sm:leading-[0.95] md:leading-[0.95] text-white text-center"
                     style={{
-                      fontFamily: 'var(--font-space-grotesk), "Space Grotesk", sans-serif',
-                      fontWeight: 800,
+                      fontFamily: 'system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif',
+                      fontWeight: 900,
+                      letterSpacing: '-0.03em',
                     }}
                   >
-                    Hi, I&apos;m{' '}
+                    <div>Hi, I&apos;m</div>
                     <span
                       style={{
                         background: 'linear-gradient(135deg, #FF0000 0%, #FF1493 50%, #FF8C00 100%)',
@@ -139,10 +140,10 @@ export default function HeroStrips() {
                     </span>
                   </div>
                   <div
-                    className="text-lg sm:text-xl md:text-2xl lg:text-3xl font-semibold tracking-[0.02em] leading-[1.1] mt-2 sm:mt-3 text-white/80"
+                    className="text-lg sm:text-xl md:text-2xl lg:text-3xl font-bold tracking-[-0.01em] leading-[1.1] mt-2 sm:mt-3 text-white/80"
                     style={{
-                      fontFamily: 'var(--font-jakarta), "Plus Jakarta Sans", sans-serif',
-                      fontWeight: 600,
+                      fontFamily: 'system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif',
+                      fontWeight: 700,
                     }}
                   >
                     Full Stack &amp; AI Developer
@@ -195,13 +196,14 @@ export default function HeroStrips() {
             </div>
           </div>
           <div
-            className="text-[2.2rem] sm:text-5xl md:text-6xl lg:text-7xl font-extrabold tracking-[-0.02em] leading-[1.1] sm:leading-[1.1] md:leading-[1.1] text-white whitespace-nowrap"
+            className="text-[2.8rem] sm:text-6xl md:text-7xl lg:text-8xl font-black tracking-[-0.03em] leading-[0.95] sm:leading-[0.95] md:leading-[0.95] text-white text-center"
             style={{
-              fontFamily: 'var(--font-space-grotesk), "Space Grotesk", sans-serif',
-              fontWeight: 800,
+              fontFamily: 'system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif',
+              fontWeight: 900,
+              letterSpacing: '-0.03em',
             }}
           >
-            Hi, I&apos;m{' '}
+            <div>Hi, I&apos;m</div>
             <span
               style={{
                 background: 'linear-gradient(135deg, #FF0000 0%, #FF1493 50%, #FF8C00 100%)',
@@ -214,10 +216,10 @@ export default function HeroStrips() {
             </span>
           </div>
           <div
-            className="text-lg sm:text-xl md:text-2xl lg:text-3xl font-semibold tracking-[0.02em] leading-[1.1] mt-2 sm:mt-3 text-white/80"
+            className="text-lg sm:text-xl md:text-2xl lg:text-3xl font-bold tracking-[-0.01em] leading-[1.1] mt-2 sm:mt-3 text-white/80"
             style={{
-              fontFamily: 'var(--font-jakarta), "Plus Jakarta Sans", sans-serif',
-              fontWeight: 600,
+              fontFamily: 'system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif',
+              fontWeight: 700,
             }}
           >
             Full Stack &amp; AI Developer

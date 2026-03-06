@@ -50,10 +50,11 @@ export default function HeroContent() {
               <span className="text-xs sm:text-sm font-medium">Available for Work</span>
             </div>
           </div>
-          <div className="text-[2.2rem] sm:text-5xl md:text-6xl lg:text-7xl font-extrabold tracking-[-0.02em] leading-[1.1] sm:leading-[1.1] md:leading-[1.1] whitespace-nowrap" style={{ fontFamily: 'var(--font-space-grotesk), "Space Grotesk", sans-serif', fontWeight: 800 }}>
-            Hi, I&apos;m Rameshwar Bhagwat
+          <div className="text-[2.8rem] sm:text-6xl md:text-7xl lg:text-8xl font-black tracking-[-0.03em] leading-[0.95] sm:leading-[0.95] md:leading-[0.95] text-center" style={{ fontFamily: 'system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif', fontWeight: 900 }}>
+            <div>Hi, I&apos;m</div>
+            <div>Rameshwar Bhagwat</div>
           </div>
-          <div className="text-lg sm:text-xl md:text-2xl lg:text-3xl font-semibold tracking-[0.02em] leading-[1.1] mt-2 sm:mt-3" style={{ fontFamily: 'var(--font-jakarta), "Plus Jakarta Sans", sans-serif', fontWeight: 600 }}>
+          <div className="text-lg sm:text-xl md:text-2xl lg:text-3xl font-bold tracking-[-0.01em] leading-[1.1] mt-2 sm:mt-3" style={{ fontFamily: 'system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif', fontWeight: 700 }}>
             Full Stack &amp; AI Developer
           </div>
         </div>
@@ -70,7 +71,7 @@ export default function HeroContent() {
         {/* Description - SEO optimized */}
         <motion.div
           variants={childVariants}
-          className="text-base sm:text-xl md:text-2xl lg:text-3xl max-w-4xl mx-auto leading-snug px-4 sm:px-6"
+          className="text-sm sm:text-base md:text-lg lg:text-xl max-w-3xl mx-auto leading-relaxed px-4 sm:px-6"
           style={{
             fontFamily: 'var(--font-playfair), "Playfair Display", Georgia, serif',
             fontWeight: 400,
