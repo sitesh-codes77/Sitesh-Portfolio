@@ -50,11 +50,11 @@ export default function HeroContent() {
               <span className="text-xs sm:text-sm font-medium">Available for Work</span>
             </div>
           </div>
-          <div className="text-[2.8rem] sm:text-6xl md:text-7xl lg:text-8xl font-black tracking-[-0.03em] leading-[0.95] sm:leading-[0.95] md:leading-[0.95] text-center" style={{ fontFamily: 'system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif', fontWeight: 900 }}>
+          <div className="text-[2.8rem] sm:text-6xl md:text-7xl lg:text-8xl font-bold tracking-[-0.02em] leading-[1.05] sm:leading-[1.05] md:leading-[1.05] text-center" style={{ fontFamily: 'var(--font-space-grotesk), "Space Grotesk", -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif', fontWeight: 700 }}>
             <div>Hi, I&apos;m</div>
             <div>Rameshwar Bhagwat</div>
           </div>
-          <div className="text-lg sm:text-xl md:text-2xl lg:text-3xl font-bold tracking-[-0.01em] leading-[1.1] mt-2 sm:mt-3" style={{ fontFamily: 'system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif', fontWeight: 700 }}>
+          <div className="text-base sm:text-lg md:text-xl lg:text-2xl font-medium tracking-[0.02em] leading-[1.3] mt-3 sm:mt-4" style={{ fontFamily: 'var(--font-jakarta), "Plus Jakarta Sans", -apple-system, sans-serif', fontWeight: 500 }}>
             Full Stack &amp; AI Developer
           </div>
         </div>

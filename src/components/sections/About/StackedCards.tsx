@@ -86,9 +86,9 @@ export default function StackedCards() {
 
   // Smooth the scroll progress with a spring for buttery card movement
   const scrollYProgress = useSpring(rawProgress, {
-    stiffness: 80, // lower = smoother, slower
-    damping: 32,   // higher = less bounce
-    restDelta: 0.001,
+    stiffness: 50,  // reduced from 80 for smoother, more gradual movement
+    damping: 40,    // increased from 32 for less bounce, more control
+    restDelta: 0.0005, // tighter precision
   });
 
   return (
@@ -131,12 +131,12 @@ function CardLayer({
   const totalScroll = total + 0.47;
   const segmentSize = 1 / totalScroll;
   const enterStart = index * segmentSize;
-  const enterEnd = enterStart + segmentSize * 0.75; // longer travel range = smoother entrance
+  const enterEnd = enterStart + segmentSize * 0.85; // increased from 0.75 for longer, smoother travel
   const isFirst = index === 0;
   const isLast = index === total - 1;
 
   const nextEnterStart = (index + 1) * segmentSize;
-  const nextEnterEnd = nextEnterStart + segmentSize * 0.55;
+  const nextEnterEnd = nextEnterStart + segmentSize * 0.65; // increased from 0.55 for smoother transition
 
   const yOffset = useTransform(
     scrollYProgress,
@@ -156,7 +156,7 @@ function CardLayer({
 
   const opacity = useTransform(
     scrollYProgress,
-    isFirst ? [0, segmentSize * 0.12] : [enterStart, enterStart + segmentSize * 0.15],
+    isFirst ? [0, segmentSize * 0.2] : [enterStart, enterStart + segmentSize * 0.25],
     isFirst ? [0, 1] : [0, 1],
     { clamp: true }
   );
