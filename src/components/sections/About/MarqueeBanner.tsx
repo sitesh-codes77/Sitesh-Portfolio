@@ -25,180 +25,279 @@ const bottomRowItems = [
   'Problem Solver',
 ];
 
-/* Lightweight marquee row with pure CSS animation */
+/* Enhanced marquee row with smooth animations */
 function MarqueeRow({
   items,
   direction = 'left',
   duration = 40,
-  variant = 'fire',
+  variant = 'primary',
 }: {
   items: string[];
   direction?: 'left' | 'right';
   duration?: number;
-  variant?: 'fire' | 'dark';
+  variant?: 'primary' | 'secondary';
 }) {
-  // 2x duplication for seamless loop
-  const repeated = useMemo(() => [...items, ...items], [items]);
+  // 3x duplication for seamless loop
+  const repeated = useMemo(() => [...items, ...items, ...items], [items]);
 
   return (
     <div className="flex overflow-hidden whitespace-nowrap">
-      <div
+      <motion.div
         className={direction === 'left' ? 'marquee-scroll-left' : 'marquee-scroll-right'}
         style={{ '--marquee-duration': `${duration}s` } as React.CSSProperties}
+        initial={{ opacity: 0 }}
+        animate={{ opacity: 1 }}
+        transition={{ duration: 0.8, delay: 0.3 }}
       >
         {repeated.map((item, i) => (
           <span key={i} className="inline-flex items-center">
             <span
-              className="marquee-text-compact"
+              className="marquee-text-enhanced"
               style={{
-                color: variant === 'fire' ? '#fff' : 'rgba(255,255,255,0.7)',
+                color: variant === 'primary' ? '#ffffff' : 'rgba(255,255,255,0.85)',
+                textShadow: variant === 'primary'
+                  ? '0 2px 20px rgba(255,255,255,0.15)'
+                  : '0 1px 10px rgba(255,255,255,0.05)',
               }}
             >
               {item}
             </span>
             <span
-              className="text-sm sm:text-base md:text-lg px-3 sm:px-4"
+              className="marquee-separator"
               style={{
-                opacity: variant === 'fire' ? 0.5 : 0.25,
-                color: variant === 'fire' ? '#fff' : 'rgba(255,255,255,0.5)',
+                opacity: variant === 'primary' ? 0.6 : 0.3,
+                color: variant === 'primary' ? '#fff' : 'rgba(255,255,255,0.5)',
               }}
             >
               ◆
             </span>
           </span>
         ))}
-      </div>
+      </motion.div>
     </div>
   );
 }
 
 export default function MarqueeBanner() {
   const containerRef = useRef<HTMLDivElement>(null);
-  const isInView = useInView(containerRef, { once: true, amount: 0.2 });
+  const isInView = useInView(containerRef, { once: true, amount: 0.3 });
 
   return (
     <section
       ref={containerRef}
       className="relative h-screen flex items-center justify-center overflow-hidden select-none"
       style={{
-        background: '#080808',
+        background: 'linear-gradient(180deg, #080808 0%, #0a0a0a 50%, #080808 100%)',
         contain: 'layout style',
         isolation: 'isolate',
       }}
     >
-      {/* Background glow */}
+      {/* Enhanced background with multiple layers */}
+      <div className="absolute inset-0 pointer-events-none">
+        {/* Primary glow */}
+        <motion.div
+          className="absolute inset-0"
+          initial={{ opacity: 0 }}
+          animate={isInView ? { opacity: 1 } : undefined}
+          transition={{ duration: 1.5, ease: 'easeOut' }}
+          style={{
+            background:
+              'radial-gradient(ellipse 100% 60% at 50% 50%, rgba(10, 132, 255, 0.08) 0%, rgba(255, 45, 85, 0.04) 35%, transparent 70%)',
+          }}
+        />
+        {/* Secondary glow - warm */}
+        <motion.div
+          className="absolute inset-0"
+          initial={{ opacity: 0 }}
+          animate={isInView ? { opacity: 1 } : undefined}
+          transition={{ duration: 2, delay: 0.3, ease: 'easeOut' }}
+          style={{
+            background:
+              'radial-gradient(ellipse 80% 50% at 30% 50%, rgba(255, 149, 0, 0.06) 0%, transparent 50%)',
+          }}
+        />
+        {/* Accent glow - purple */}
+        <motion.div
+          className="absolute inset-0"
+          initial={{ opacity: 0 }}
+          animate={isInView ? { opacity: 1 } : undefined}
+          transition={{ duration: 2, delay: 0.5, ease: 'easeOut' }}
+          style={{
+            background:
+              'radial-gradient(ellipse 70% 50% at 70% 50%, rgba(175, 82, 222, 0.05) 0%, transparent 50%)',
+          }}
+        />
+      </div>
+
+      {/* Noise texture overlay */}
       <div
-        className="absolute inset-0 pointer-events-none"
+        className="absolute inset-0 pointer-events-none opacity-[0.015]"
         style={{
-          background:
-            'radial-gradient(ellipse 80% 50% at center, rgba(249,115,22,0.08) 0%, rgba(139,92,246,0.04) 40%, transparent 70%)',
+          backgroundImage: 'url("data:image/svg+xml,%3Csvg viewBox=\'0 0 256 256\' xmlns=\'http://www.w3.org/2000/svg\'%3E%3Cfilter id=\'noise\'%3E%3CfeTurbulence type=\'fractalNoise\' baseFrequency=\'0.9\' numOctaves=\'4\' stitchTiles=\'stitch\'/%3E%3C/filter%3E%3Crect width=\'100%25\' height=\'100%25\' filter=\'url(%23noise)\'/%3E%3C/svg%3E")',
         }}
       />
 
-      {/* Top fade */}
+      {/* Top fade - enhanced gradient */}
       <div
-        className="absolute top-0 left-0 right-0 h-40 sm:h-52 pointer-events-none z-10"
-        style={{ background: 'linear-gradient(to bottom, #0F0E0E 0%, #0F0E0E 30%, transparent 100%)' }}
+        className="absolute top-0 left-0 right-0 h-48 sm:h-60 pointer-events-none z-10"
+        style={{
+          background: 'linear-gradient(to bottom, #080808 0%, #080808 20%, rgba(8,8,8,0.8) 60%, transparent 100%)'
+        }}
       />
-      {/* Bottom fade */}
+      {/* Bottom fade - enhanced gradient */}
       <div
-        className="absolute bottom-0 left-0 right-0 h-40 sm:h-52 pointer-events-none z-10"
-        style={{ background: 'linear-gradient(to top, #0F0E0E 0%, #0F0E0E 30%, transparent 100%)' }}
+        className="absolute bottom-0 left-0 right-0 h-48 sm:h-60 pointer-events-none z-10"
+        style={{
+          background: 'linear-gradient(to top, #080808 0%, #080808 20%, rgba(8,8,8,0.8) 60%, transparent 100%)'
+        }}
       />
 
-      {/* Strips Container - centered vertically */}
-      <div className="relative w-full">
-        {/* Strip 1 — Fire gradient (top, angled right) */}
+      {/* Strips Container - properly positioned for X crossing */}
+      <div className="relative w-full h-32 sm:h-40">
+        {/* Strip 1 — Primary gradient (vibrant cyan-blue-purple) */}
         <motion.div
           className="marquee-strip absolute left-0 right-0 z-[2]"
-          style={{ top: '-2rem', rotate: -4 }}
-          initial={{ x: '100%', opacity: 0 }}
-          animate={isInView ? { x: '0%', opacity: 1 } : undefined}
-          transition={{ duration: 1, ease: [0.25, 1, 0.5, 1], delay: 0.1 }}
+          style={{ top: '50%', translateY: '-50%' }}
+          initial={{
+            x: '100vw',
+            opacity: 0,
+            rotate: -5,
+            filter: 'blur(10px)',
+          }}
+          animate={isInView ? {
+            x: '0%',
+            opacity: 1,
+            rotate: -5,
+            filter: 'blur(0px)',
+          } : undefined}
+          transition={{
+            duration: 1.2,
+            ease: [0.16, 1, 0.3, 1],
+            delay: 0.1,
+            opacity: { duration: 0.8 },
+            filter: { duration: 0.8 },
+          }}
         >
-          <div className="marquee-strip-compact marquee-strip-fire-bg">
-            <MarqueeRow items={topRowItems} direction="right" duration={45} variant="fire" />
+          <div className="marquee-strip-enhanced marquee-strip-fire-bg">
+            <MarqueeRow items={topRowItems} direction="right" duration={50} variant="primary" />
           </div>
         </motion.div>
 
-        {/* Strip 2 — Dark (bottom, angled left) */}
+        {/* Strip 2 — Secondary (dark glassmorphism) */}
         <motion.div
           className="marquee-strip absolute left-0 right-0 z-[1]"
-          style={{ top: '2rem', rotate: 4 }}
-          initial={{ x: '-100%', opacity: 0 }}
-          animate={isInView ? { x: '0%', opacity: 1 } : undefined}
-          transition={{ duration: 1, ease: [0.25, 1, 0.5, 1], delay: 0.25 }}
+          style={{ top: '50%', translateY: '-50%' }}
+          initial={{
+            x: '-100vw',
+            opacity: 0,
+            rotate: 5,
+            filter: 'blur(10px)',
+          }}
+          animate={isInView ? {
+            x: '0%',
+            opacity: 1,
+            rotate: 5,
+            filter: 'blur(0px)',
+          } : undefined}
+          transition={{
+            duration: 1.2,
+            ease: [0.16, 1, 0.3, 1],
+            delay: 0.25,
+            opacity: { duration: 0.8 },
+            filter: { duration: 0.8 },
+          }}
         >
-          <div className="marquee-strip-compact marquee-strip-dark-bg">
-            <MarqueeRow items={bottomRowItems} direction="left" duration={38} variant="dark" />
+          <div className="marquee-strip-enhanced marquee-strip-secondary">
+            <MarqueeRow items={bottomRowItems} direction="left" duration={42} variant="secondary" />
           </div>
         </motion.div>
       </div>
 
-      {/* Center intersection highlight */}
+      {/* Animated corner accents - top left */}
       <motion.div
-        className="absolute z-[3] pointer-events-none"
-        initial={{ scale: 0, opacity: 0 }}
-        animate={isInView ? { scale: 1, opacity: 1 } : undefined}
-        transition={{ duration: 0.8, ease: [0.25, 1, 0.5, 1], delay: 0.5 }}
-      >
-        <div
-          className="w-32 h-32 sm:w-40 sm:h-40 md:w-48 md:h-48 rounded-full"
-          style={{
-            background:
-              'radial-gradient(circle, rgba(249,115,22,0.15) 0%, rgba(236,72,153,0.08) 40%, transparent 70%)',
-          }}
-        />
-      </motion.div>
-
-      {/* Animated corner accents */}
-      <motion.div
-        className="absolute top-20 left-8 sm:left-16 w-16 h-16 sm:w-24 sm:h-24 pointer-events-none z-[1]"
-        initial={{ opacity: 0, scale: 0.5 }}
-        animate={isInView ? { opacity: 0.4, scale: 1 } : undefined}
-        transition={{ duration: 1.2, delay: 0.6 }}
+        className="absolute top-24 left-8 sm:left-20 w-20 h-20 sm:w-32 sm:h-32 pointer-events-none z-[1]"
+        initial={{ opacity: 0, scale: 0.3, x: -50, y: -50 }}
+        animate={isInView ? { opacity: 0.5, scale: 1, x: 0, y: 0 } : undefined}
+        transition={{ duration: 1.5, delay: 0.8, ease: [0.16, 1, 0.3, 1] }}
       >
         <div
           className="w-full h-full rounded-full"
           style={{
-            background: 'radial-gradient(circle, rgba(249,115,22,0.3), transparent 70%)',
+            background: 'radial-gradient(circle, rgba(10, 132, 255, 0.4), transparent 70%)',
+            filter: 'blur(20px)',
           }}
         />
       </motion.div>
 
+      {/* Animated corner accents - bottom right */}
       <motion.div
-        className="absolute bottom-20 right-8 sm:right-16 w-20 h-20 sm:w-28 sm:h-28 pointer-events-none z-[1]"
-        initial={{ opacity: 0, scale: 0.5 }}
+        className="absolute bottom-24 right-8 sm:right-20 w-24 h-24 sm:w-36 sm:h-36 pointer-events-none z-[1]"
+        initial={{ opacity: 0, scale: 0.3, x: 50, y: 50 }}
+        animate={isInView ? { opacity: 0.4, scale: 1, x: 0, y: 0 } : undefined}
+        transition={{ duration: 1.5, delay: 1, ease: [0.16, 1, 0.3, 1] }}
+      >
+        <div
+          className="w-full h-full rounded-full"
+          style={{
+            background: 'radial-gradient(circle, rgba(175, 82, 222, 0.35), transparent 70%)',
+            filter: 'blur(25px)',
+          }}
+        />
+      </motion.div>
+
+      {/* Additional accent - top right */}
+      <motion.div
+        className="absolute top-32 right-16 sm:right-32 w-16 h-16 sm:w-24 sm:h-24 pointer-events-none z-[1]"
+        initial={{ opacity: 0, scale: 0 }}
         animate={isInView ? { opacity: 0.3, scale: 1 } : undefined}
-        transition={{ duration: 1.2, delay: 0.8 }}
+        transition={{ duration: 1.2, delay: 1.2, ease: [0.16, 1, 0.3, 1] }}
       >
         <div
           className="w-full h-full rounded-full"
           style={{
-            background: 'radial-gradient(circle, rgba(139,92,246,0.25), transparent 70%)',
+            background: 'radial-gradient(circle, rgba(255, 149, 0, 0.35), transparent 70%)',
+            filter: 'blur(15px)',
           }}
         />
       </motion.div>
 
-      {/* Scroll hint - bottom */}
+      {/* Scroll hint - enhanced iOS style */}
       <motion.div
-        className="absolute bottom-10 sm:bottom-14 left-1/2 -translate-x-1/2 z-[15] flex flex-col items-center gap-3"
-        initial={{ opacity: 0, y: 20 }}
+        className="absolute bottom-12 sm:bottom-16 left-1/2 -translate-x-1/2 z-[15] flex flex-col items-center gap-4"
+        initial={{ opacity: 0, y: 30 }}
         animate={isInView ? { opacity: 1, y: 0 } : undefined}
-        transition={{ duration: 0.8, delay: 1 }}
+        transition={{ duration: 1, delay: 1.3, ease: [0.16, 1, 0.3, 1] }}
       >
-        <span
-          className="text-[10px] sm:text-[11px] uppercase tracking-[0.3em] text-white/20"
-          style={{ fontFamily: 'var(--font-jakarta)' }}
+        <motion.span
+          className="text-[10px] sm:text-[11px] uppercase tracking-[0.35em] font-medium"
+          style={{
+            fontFamily: 'var(--font-jakarta)',
+            background: 'linear-gradient(90deg, rgba(255,255,255,0.25), rgba(255,255,255,0.15))',
+            WebkitBackgroundClip: 'text',
+            WebkitTextFillColor: 'transparent',
+            backgroundClip: 'text',
+          }}
+          animate={{ opacity: [0.5, 0.8, 0.5] }}
+          transition={{ duration: 2.5, repeat: Infinity, ease: 'easeInOut' }}
         >
           Continue
-        </span>
+        </motion.span>
         <motion.div
-          className="w-5 h-8 sm:w-6 sm:h-10 rounded-full border border-white/10 flex justify-center pt-2"
-          animate={{ y: [0, 4, 0] }}
-          transition={{ duration: 1.5, repeat: Infinity, ease: 'easeInOut' }}
+          className="w-6 h-10 sm:w-7 sm:h-12 rounded-full flex justify-center pt-2.5"
+          style={{
+            background: 'rgba(255,255,255,0.03)',
+            border: '1px solid rgba(255,255,255,0.08)',
+            backdropFilter: 'blur(10px)',
+          }}
         >
-          <div className="w-1 h-2 rounded-full bg-gradient-to-b from-orange-500/60 to-transparent" />
+          <motion.div
+            className="w-1 h-2.5 rounded-full"
+            style={{
+              background: 'linear-gradient(to bottom, rgba(10, 132, 255, 0.8), rgba(175, 82, 222, 0.4), transparent)',
+            }}
+            animate={{ y: [0, 8, 0], opacity: [1, 0.4, 1] }}
+            transition={{ duration: 1.8, repeat: Infinity, ease: 'easeInOut' }}
+          />
         </motion.div>
       </motion.div>
     </section>

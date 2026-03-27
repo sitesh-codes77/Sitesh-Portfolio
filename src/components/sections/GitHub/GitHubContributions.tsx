@@ -139,10 +139,10 @@ export default function GitHubContributions() {
       <div className="relative z-10 max-w-5xl mx-auto">
         {/* Section Header */}
         <motion.div
-          initial={{ opacity: 0, y: 20 }}
+          initial={{ opacity: 0, y: 15 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
-          transition={{ duration: 0.6 }}
+          transition={{ duration: 0.5, ease: [0.25, 0.46, 0.45, 0.94] }}
           className="text-center mb-12"
         >
           <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-white/[0.04] border border-white/[0.08] mb-4 backdrop-blur-sm">
@@ -162,10 +162,10 @@ export default function GitHubContributions() {
 
         {/* Stats Cards - Clean iOS Glassmorphism */}
         <motion.div
-          initial={{ opacity: 0, y: 20 }}
+          initial={{ opacity: 0, y: 15 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
-          transition={{ duration: 0.6, delay: 0.1 }}
+          transition={{ duration: 0.5, ease: [0.25, 0.46, 0.45, 0.94] }}
           className="grid grid-cols-1 sm:grid-cols-3 gap-4 mb-8"
         >
           {/* Total Contributions */}
@@ -252,10 +252,10 @@ export default function GitHubContributions() {
 
         {/* Contribution Heatmap Card - Clean iOS Glassmorphism */}
         <motion.div
-          initial={{ opacity: 0, y: 20 }}
+          initial={{ opacity: 0, y: 15 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
-          transition={{ duration: 0.6, delay: 0.2 }}
+          transition={{ duration: 0.5, delay: 0.1, ease: [0.25, 0.46, 0.45, 0.94] }}
           className="relative rounded-[20px] backdrop-blur-xl border border-white/[0.08] overflow-hidden"
           style={{
             background: 'linear-gradient(180deg, rgba(255, 255, 255, 0.03) 0%, rgba(255, 255, 255, 0.01) 100%)',
@@ -267,10 +267,10 @@ export default function GitHubContributions() {
           <div className="relative z-10 p-6">
             {/* Heatmap Header */}
             <motion.div
-              initial={{ opacity: 0, y: -10 }}
-              whileInView={{ opacity: 1, y: 0 }}
+              initial={{ opacity: 0 }}
+              whileInView={{ opacity: 1 }}
               viewport={{ once: true }}
-              transition={{ duration: 0.4, delay: 0.2 }}
+              transition={{ duration: 0.4 }}
               className="flex items-center justify-between mb-6 flex-wrap gap-4 pb-5 border-b border-white/[0.06]"
             >
               <div className="flex items-center gap-3">
@@ -327,38 +327,23 @@ export default function GitHubContributions() {
                     ))}
                   </div>
 
-                  {/* Contribution grid */}
-                  <div className="flex gap-[3px]">
+                  {/* Contribution grid - CSS animations for performance */}
+                  <div className="flex gap-[3px] contribution-grid">
                     {stats.weeks.map((week, weekIndex) => (
                       <div key={weekIndex} className="flex flex-col gap-[3px]">
                         {week.contributionDays.map((day, dayIndex) => (
-                          <motion.div
+                          <div
                             key={day.date}
-                            initial={{ opacity: 0, scale: 0.3 }}
-                            whileInView={{ opacity: 1, scale: 1 }}
-                            viewport={{ once: true }}
-                            transition={{
-                              duration: 0.4,
-                              delay: weekIndex * 0.006 + dayIndex * 0.003,
-                              ease: [0.22, 1, 0.36, 1],
-                            }}
-                            whileHover={{
-                              scale: 1.6,
-                              zIndex: 50,
-                              transition: { type: 'spring', stiffness: 400, damping: 20 }
-                            }}
-                            className="w-[12px] h-[12px] rounded-[3px] cursor-pointer relative group border border-white/[0.04]"
+                            className="contribution-cell w-[12px] h-[12px] rounded-[3px] cursor-pointer relative group border border-white/[0.04] hover:scale-150 hover:z-50 transition-transform duration-150"
                             style={{
                               backgroundColor: day.color,
+                              animationDelay: `${weekIndex * 6 + dayIndex * 3}ms`,
                             }}
                             title={`${day.contributionCount} contributions on ${day.date}`}
                           >
-                            {/* iOS-style Tooltip */}
-                            <motion.div
-                              initial={{ opacity: 0, y: 6, scale: 0.95 }}
-                              whileHover={{ opacity: 1, y: 0, scale: 1 }}
-                              transition={{ duration: 0.15, ease: 'easeOut' }}
-                              className="absolute bottom-full left-1/2 -translate-x-1/2 mb-2.5 px-3 py-2 rounded-[10px] text-[10px] text-white whitespace-nowrap opacity-0 group-hover:opacity-100 transition-opacity pointer-events-none z-50 backdrop-blur-xl border border-white/[0.1]"
+                            {/* iOS-style Tooltip - CSS only for performance */}
+                            <div
+                              className="absolute bottom-full left-1/2 -translate-x-1/2 mb-2.5 px-3 py-2 rounded-[10px] text-[10px] text-white whitespace-nowrap opacity-0 group-hover:opacity-100 scale-95 group-hover:scale-100 transition-all duration-150 pointer-events-none z-50 backdrop-blur-xl border border-white/[0.1]"
                               style={{
                                 background: 'linear-gradient(180deg, rgba(40, 40, 44, 0.95) 0%, rgba(28, 28, 32, 0.95) 100%)',
                               }}
@@ -371,8 +356,8 @@ export default function GitHubContributions() {
                                 className="absolute -bottom-1 left-1/2 -translate-x-1/2 w-2 h-2 rotate-45 border-r border-b border-white/[0.1]"
                                 style={{ background: 'rgba(28, 28, 32, 0.95)' }}
                               />
-                            </motion.div>
-                          </motion.div>
+                            </div>
+                          </div>
                         ))}
                       </div>
                     ))}
@@ -381,22 +366,36 @@ export default function GitHubContributions() {
               </div>
             </div>
 
-            {/* Footer with GitHub Profile Button - Clean iOS Style */}
+            {/* Footer with GitHub Profile Button - Smooth iOS Style Animation */}
             <motion.div
-              initial={{ opacity: 0, y: 10 }}
+              initial={{ opacity: 0, y: 20 }}
               whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true }}
-              transition={{ duration: 0.5, delay: 0.3 }}
+              viewport={{ once: true, margin: '-50px' }}
+              transition={{
+                duration: 0.5,
+                delay: 0.2,
+                ease: [0.25, 0.46, 0.45, 0.94],
+              }}
               className="mt-6 pt-6 border-t border-white/[0.06] flex justify-center"
             >
               <motion.a
                 href={`https://github.com/${GITHUB_USERNAME}`}
                 target="_blank"
                 rel="noopener noreferrer"
-                whileHover={{ y: -3 }}
-                whileTap={{ scale: 0.97 }}
-                transition={{ type: 'spring', stiffness: 400, damping: 25 }}
-                className="group relative inline-flex items-center gap-2.5 px-5 py-2.5 rounded-[12px] backdrop-blur-xl border border-white/[0.08] hover:border-white/[0.12] transition-all duration-200"
+                initial={{ scale: 1 }}
+                whileHover={{
+                  y: -4,
+                  scale: 1.02,
+                  boxShadow: '0 8px 30px rgba(48, 209, 88, 0.15), 0 4px 15px rgba(0, 0, 0, 0.2)',
+                }}
+                whileTap={{ scale: 0.97, y: 0 }}
+                transition={{
+                  type: 'spring',
+                  stiffness: 400,
+                  damping: 20,
+                  mass: 0.8,
+                }}
+                className="group relative inline-flex items-center gap-2.5 px-5 py-2.5 rounded-[12px] backdrop-blur-xl border border-white/[0.08] hover:border-[#30D158]/30 transition-colors duration-300"
                 style={{
                   background: 'linear-gradient(180deg, rgba(255, 255, 255, 0.06) 0%, rgba(255, 255, 255, 0.02) 100%)',
                 }}
@@ -404,13 +403,33 @@ export default function GitHubContributions() {
                 {/* Subtle top highlight */}
                 <div className="absolute inset-x-0 top-0 h-px bg-gradient-to-r from-transparent via-white/15 to-transparent rounded-t-[12px]" />
 
-                <Github size={16} className="text-white/60 group-hover:text-[#30D158] transition-colors duration-200" />
+                {/* Hover glow effect */}
+                <motion.div
+                  className="absolute inset-0 rounded-[12px] opacity-0 group-hover:opacity-100 transition-opacity duration-300"
+                  style={{
+                    background: 'linear-gradient(180deg, rgba(48, 209, 88, 0.08) 0%, rgba(48, 209, 88, 0.02) 100%)',
+                  }}
+                />
 
-                <span className="text-[13px] font-semibold text-white/70 group-hover:text-white/90 transition-colors duration-200">
+                <motion.div
+                  className="relative z-10"
+                  whileHover={{ rotate: [0, -10, 10, 0] }}
+                  transition={{ duration: 0.5 }}
+                >
+                  <Github size={16} className="text-white/60 group-hover:text-[#30D158] transition-colors duration-200" />
+                </motion.div>
+
+                <span className="relative z-10 text-[13px] font-semibold text-white/70 group-hover:text-white/90 transition-colors duration-200">
                   View GitHub Profile
                 </span>
 
-                <ArrowUpRight size={14} className="text-white/40 group-hover:text-[#30D158] group-hover:translate-x-0.5 group-hover:-translate-y-0.5 transition-all duration-200" />
+                <motion.div
+                  className="relative z-10"
+                  animate={{ x: [0, 2, 0], y: [0, -2, 0] }}
+                  transition={{ repeat: Infinity, duration: 2, ease: 'easeInOut' }}
+                >
+                  <ArrowUpRight size={14} className="text-white/40 group-hover:text-[#30D158] transition-colors duration-200" />
+                </motion.div>
               </motion.a>
             </motion.div>
           </div>

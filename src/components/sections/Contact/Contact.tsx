@@ -124,11 +124,12 @@ export default function Contact() {
       {/* Particle Background - Removed for performance */}
       {/* <CustomParticleBackground color="100, 255, 150" particleCount={35} /> */}
 
-      {/* Subtle background atmosphere */}
+      {/* Subtle background atmosphere - Optimized for performance */}
       <div className="absolute inset-0 pointer-events-none" aria-hidden="true">
-        {/* Background image with black removed via screen blend */}
+        {/* Background image with black removed via screen blend - GPU optimized */}
         <div
-          className="absolute inset-0 flex items-center justify-center"
+          className="absolute inset-0 flex items-center justify-center will-change-transform"
+          style={{ transform: 'translateZ(0)' }}
         >
           <div
             className="w-[600px] h-[600px] md:w-[750px] md:h-[750px] lg:w-[900px] lg:h-[900px]"
@@ -139,6 +140,7 @@ export default function Contact() {
               backgroundRepeat: 'no-repeat',
               mixBlendMode: 'screen',
               opacity: 0.35,
+              transform: 'translateZ(0)',
             }}
           />
         </div>
@@ -158,10 +160,10 @@ export default function Contact() {
       <div className="relative z-10 max-w-4xl mx-auto text-center">
         {/* Cinematic Headline */}
         <motion.h2
-          initial={{ opacity: 0, y: 30 }}
+          initial={{ opacity: 0, y: 20 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
-          transition={{ duration: 0.6, ease: [0.22, 1, 0.36, 1] }}
+          transition={{ duration: 0.5, ease: [0.25, 0.46, 0.45, 0.94] }}
           className="text-5xl md:text-6xl lg:text-7xl font-extrabold tracking-[-0.02em] leading-tight text-white mb-6 uppercase"
           style={{ fontFamily: 'var(--font-jakarta), "Plus Jakarta Sans", sans-serif', fontWeight: 800 }}
         >
@@ -170,10 +172,10 @@ export default function Contact() {
         </motion.h2>
 
         <motion.p
-          initial={{ opacity: 0, y: 30 }}
+          initial={{ opacity: 0, y: 20 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
-          transition={{ duration: 0.6, ease: [0.22, 1, 0.36, 1], delay: 0.2 }}
+          transition={{ duration: 0.5, ease: [0.25, 0.46, 0.45, 0.94], delay: 0.1 }}
           className="text-lg md:text-xl text-muted max-w-2xl mx-auto mb-12"
         >
           Whether you're launching a startup or scaling an enterprise, I'm here to turn your vision into reality
@@ -181,10 +183,10 @@ export default function Contact() {
 
         {/* Get in Touch Button */}
         <motion.button
-          initial={{ opacity: 0, scale: 0.9 }}
+          initial={{ opacity: 0, scale: 0.95 }}
           whileInView={{ opacity: 1, scale: 1 }}
           viewport={{ once: true }}
-          transition={{ duration: 0.6, ease: [0.22, 1, 0.36, 1], delay: 0.4 }}
+          transition={{ duration: 0.5, ease: [0.25, 0.46, 0.45, 0.94], delay: 0.2 }}
           whileHover={{ scale: 1.05 }}
           whileTap={{ scale: 0.95 }}
           onClick={() => setIsFormOpen(true)}
@@ -194,7 +196,7 @@ export default function Contact() {
           {/* White glow effect */}
           <div className="absolute inset-0 rounded-full bg-white/20 blur-xl opacity-0 group-hover:opacity-100 transition-opacity duration-300" aria-hidden="true" />
           
-          {/* Shimmer effect */}
+          {/* Shimmer effect - GPU optimized */}
           <>
             {/* Main shimmer stripe */}
             <motion.div
@@ -203,9 +205,10 @@ export default function Contact() {
                 width: '80%',
                 background: 'linear-gradient(90deg, transparent 0%, rgba(255, 255, 255, 0.15) 30%, rgba(255, 255, 255, 0.25) 50%, rgba(255, 255, 255, 0.15) 70%, transparent 100%)',
                 filter: 'blur(12px)',
+                transform: 'translateX(-100%)',
               }}
               animate={{
-                left: ['-80%', '180%'],
+                transform: ['translateX(-100%)', 'translateX(200%)'],
               }}
               transition={{
                 duration: 3,
@@ -222,9 +225,10 @@ export default function Contact() {
                 width: '100%',
                 background: 'linear-gradient(90deg, transparent 0%, rgba(255, 255, 255, 0.05) 40%, rgba(255, 255, 255, 0.08) 50%, rgba(255, 255, 255, 0.05) 60%, transparent 100%)',
                 filter: 'blur(20px)',
+                transform: 'translateX(-100%)',
               }}
               animate={{
-                left: ['-100%', '200%'],
+                transform: ['translateX(-100%)', 'translateX(200%)'],
               }}
               transition={{
                 duration: 3,
@@ -257,10 +261,10 @@ export default function Contact() {
 
         {/* Availability Text */}
         <motion.div
-          initial={{ opacity: 0 }}
-          whileInView={{ opacity: 1 }}
+          initial={{ opacity: 0, y: 15 }}
+          whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
-          transition={{ duration: 0.6, delay: 0.6 }}
+          transition={{ duration: 0.5, delay: 0.3, ease: [0.25, 0.46, 0.45, 0.94] }}
           className="mt-12 max-w-2xl mx-auto space-y-3"
         >
           <p className="text-lg md:text-xl font-medium text-white">

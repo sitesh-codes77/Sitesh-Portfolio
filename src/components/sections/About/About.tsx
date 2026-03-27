@@ -7,7 +7,7 @@ import ProfileCard from './ProfileCard';
 import StatsGrid from './StatsGrid';
 import TimelineStrip from './TimelineStrip';
 import MarqueeBanner from './MarqueeBanner';
-import StackedCards from './StackedCards';
+import ExpertiseShowcase from './ExpertiseShowcase';
 import InfoCards from './InfoCards';
 import GlowCard, { GlowCardGroup } from '@/components/ui/GlowCard';
 import { PERSONAL_INFO } from '@/lib/constants';
@@ -192,8 +192,8 @@ export default function About() {
           </GlowCardGroup>
       </Container>
 
-      {/* Stacked Cards — outside Container so sticky works full-width */}
-      <StackedCards />
+      {/* Expertise Showcase — Split Screen Interactive */}
+      <ExpertiseShowcase />
 
       {/* Marquee Banner — above timeline */}
       <MarqueeBanner />

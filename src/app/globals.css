@@ -131,6 +131,16 @@
   .perspective-1000 {
     perspective: 1000px;
   }
+
+  /* Hide scrollbar utility */
+  .scrollbar-hide {
+    -ms-overflow-style: none;
+    scrollbar-width: none;
+  }
+
+  .scrollbar-hide::-webkit-scrollbar {
+    display: none;
+  }
 }
 
 /* ===== Marquee Animations (GPU-composited, no paint) ===== */
@@ -321,6 +331,132 @@
   background: linear-gradient(90deg, #0a0a0a, #141414, #1a1a1a, #0a0a0a);
   color: rgba(255, 255, 255, 0.7);
   box-shadow: 0 0 30px rgba(0, 0, 0, 0.5), inset 0 1px 0 rgba(255, 255, 255, 0.06), inset 0 -1px 0 rgba(255, 255, 255, 0.03);
+}
+
+/* ===== Enhanced Marquee Strip Styles ===== */
+
+/* Enhanced strip container - increased height */
+.marquee-strip-enhanced {
+  position: relative;
+  margin: 0 -10rem;
+  padding: 0.875rem 0;
+  color: #fff;
+  border-radius: 2px;
+}
+
+@media (min-width: 640px) {
+  .marquee-strip-enhanced {
+    margin: 0 -14rem;
+    padding: 1rem 0;
+  }
+}
+
+@media (min-width: 768px) {
+  .marquee-strip-enhanced {
+    margin: 0 -18rem;
+    padding: 1.15rem 0;
+  }
+}
+
+@media (min-width: 1024px) {
+  .marquee-strip-enhanced {
+    margin: 0 -22rem;
+    padding: 1.35rem 0;
+  }
+}
+
+/* Primary strip - vibrant cyan-blue-purple gradient with glow */
+.marquee-strip-primary {
+  background: linear-gradient(
+    90deg,
+    #0A84FF 0%,
+    #5E5CE6 25%,
+    #BF5AF2 50%,
+    #FF375F 75%,
+    #0A84FF 100%
+  );
+  background-size: 200% 100%;
+  box-shadow:
+    0 0 60px rgba(10, 132, 255, 0.35),
+    0 4px 30px rgba(94, 92, 230, 0.25),
+    0 0 100px rgba(191, 90, 242, 0.15),
+    inset 0 1px 0 rgba(255, 255, 255, 0.15),
+    inset 0 -1px 0 rgba(0, 0, 0, 0.1);
+}
+
+/* Secondary strip - dark glassmorphism with subtle glow */
+.marquee-strip-secondary {
+  background: linear-gradient(
+    90deg,
+    rgba(20, 20, 22, 0.95) 0%,
+    rgba(28, 28, 30, 0.98) 25%,
+    rgba(35, 35, 38, 0.95) 50%,
+    rgba(28, 28, 30, 0.98) 75%,
+    rgba(20, 20, 22, 0.95) 100%
+  );
+  backdrop-filter: blur(20px);
+  -webkit-backdrop-filter: blur(20px);
+  box-shadow:
+    0 0 40px rgba(0, 0, 0, 0.6),
+    0 4px 25px rgba(0, 0, 0, 0.4),
+    inset 0 1px 0 rgba(255, 255, 255, 0.08),
+    inset 0 -1px 0 rgba(255, 255, 255, 0.03);
+  border-top: 1px solid rgba(255, 255, 255, 0.06);
+  border-bottom: 1px solid rgba(255, 255, 255, 0.03);
+}
+
+/* Enhanced marquee text - larger and bolder */
+.marquee-text-enhanced {
+  font-family: var(--font-jakarta), "Plus Jakarta Sans", sans-serif;
+  font-weight: 800;
+  font-size: clamp(1rem, 3vw, 2rem);
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  padding: 0 0.75rem;
+  white-space: nowrap;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+@media (min-width: 640px) {
+  .marquee-text-enhanced {
+    padding: 0 1.25rem;
+    font-size: clamp(1.125rem, 3vw, 2.25rem);
+  }
+}
+
+@media (min-width: 768px) {
+  .marquee-text-enhanced {
+    padding: 0 1.5rem;
+  }
+}
+
+@media (min-width: 1024px) {
+  .marquee-text-enhanced {
+    padding: 0 2rem;
+  }
+}
+
+/* Marquee separator diamond */
+.marquee-separator {
+  display: inline-block;
+  font-size: 0.75rem;
+  padding: 0 0.75rem;
+  transition: opacity 0.3s ease;
+}
+
+@media (min-width: 640px) {
+  .marquee-separator {
+    font-size: 0.875rem;
+    padding: 0 1rem;
+  }
+}
+
+@media (min-width: 768px) {
+  .marquee-separator {
+    font-size: 1rem;
+    padding: 0 1.25rem;
+  }
 }
 
 /* Scroll indicator pulse — CSS only */
@@ -558,4 +694,31 @@
     height: 420px;
     filter: blur(80px);
   }
+}
+
+/* GitHub Contribution Grid - Performance optimized animations */
+@keyframes contribution-cell-appear {
+  from {
+    opacity: 0;
+    transform: scale(0.3);
+  }
+  to {
+    opacity: 1;
+    transform: scale(1);
+  }
+}
+
+.contribution-grid {
+  will-change: auto;
+}
+
+.contribution-cell {
+  animation: contribution-cell-appear 0.4s cubic-bezier(0.22, 1, 0.36, 1) forwards;
+  animation-play-state: paused;
+}
+
+/* Animate cells when grid is in view */
+.contribution-grid:hover .contribution-cell,
+.contribution-cell {
+  animation-play-state: running;
 }
