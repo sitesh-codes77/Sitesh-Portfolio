@@ -228,8 +228,6 @@ function GeodesicEdges({
   vertices: THREE.Vector3[];
   edges: [number, number][]
 }) {
-  const materialRef = useRef<THREE.ShaderMaterial>(null);
-
   const geometry = useMemo(() => {
     const positions: number[] = [];
     const progress: number[] = [];
@@ -277,8 +275,6 @@ function GeodesicEdges({
 // ─── Geodesic Nodes Component ────────────────────────────────────────────────
 
 function GeodesicNodes({ vertices }: { vertices: THREE.Vector3[] }) {
-  const materialRef = useRef<THREE.ShaderMaterial>(null);
-
   const geometry = useMemo(() => {
     const positions = new Float32Array(vertices.length * 3);
     const sizes = new Float32Array(vertices.length);
@@ -333,8 +329,6 @@ function LatitudeRing({
   positions: Float32Array;
   ringIndex: number
 }) {
-  const materialRef = useRef<THREE.ShaderMaterial>(null);
-
   const geometry = useMemo(() => {
     const geo = new THREE.BufferGeometry();
     geo.setAttribute('position', new THREE.Float32BufferAttribute(positions, 3));
@@ -491,16 +485,19 @@ function GeodesicNetwork() {
 
 export default function NeuralSphere() {
   return (
-    <div className="w-full h-full" style={{ minHeight: '320px' }}>
+    <div className="w-full h-full" style={{ minHeight: '320px', contain: 'strict' }}>
       <Canvas
         camera={{ position: [0, 0, 7], fov: 40 }}
         gl={{
           antialias: true,
           alpha: true,
           powerPreference: 'high-performance',
+          stencil: false,
+          depth: true,
         }}
         dpr={[1, 1.5]}
         style={{ background: 'transparent' }}
+        performance={{ min: 0.5 }}
       >
         <GeodesicNetwork />
       </Canvas>

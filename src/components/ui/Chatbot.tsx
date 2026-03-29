@@ -267,7 +267,7 @@ export default function Chatbot() {
             </div>
 
             {/* Messages - iOS Style */}
-            <div className="flex-1 overflow-y-auto p-4 space-y-3" style={{ scrollbarWidth: 'none' }}>
+            <div className="flex-1 overflow-y-auto p-4 space-y-3" data-lenis-prevent style={{ scrollbarWidth: 'none' }}>
               {messages.map((message) => (
                 <motion.div
                   key={message.id}

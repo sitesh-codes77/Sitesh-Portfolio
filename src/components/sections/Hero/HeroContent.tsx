@@ -1,7 +1,7 @@
 'use client';
 
 import { motion } from 'framer-motion';
-import { useCallback } from 'react';
+import { useCallback, useMemo, memo } from 'react';
 import Button from '@/components/ui/Button';
 import { useIntroAnimation } from '@/context/IntroAnimationContext';
 
@@ -27,9 +27,12 @@ const fadeUpItem = {
   },
 };
 
-// ─── Letter-by-letter reveal ─────────────────────────────────────────────────
+// ─── Custom easing for GPU-optimized transforms ─────────────────────────────
+const customEase = [0.22, 1, 0.36, 1] as const;
 
-function AnimatedLetters({
+// ─── Letter-by-letter reveal (memoized for performance) ─────────────────────
+
+const AnimatedLetters = memo(function AnimatedLetters({
   text,
   baseDelay = 0,
   isActive,
@@ -44,30 +47,40 @@ function AnimatedLetters({
   style?: React.CSSProperties;
   letterStyle?: React.CSSProperties;
 }) {
+  // Memoize letter styles to prevent recalculation
+  const letters = useMemo(() => text.split(''), [text]);
+  
+  // Base letter style with GPU acceleration hint
+  const baseLetterStyle = useMemo(() => ({
+    display: 'inline-block',
+    willChange: isActive ? 'auto' : 'transform, opacity',
+    ...letterStyle,
+  }), [letterStyle, isActive]);
+
   return (
     <span className={className} style={style}>
-      {text.split('').map((char, i) => (
+      {letters.map((char, i) => (
         <motion.span
           key={i}
-          initial={{ opacity: 0, y: 40, filter: 'blur(12px)' }}
+          initial={{ opacity: 0, y: 40 }}
           animate={
             isActive
-              ? { opacity: 1, y: 0, filter: 'blur(0px)' }
-              : { opacity: 0, y: 40, filter: 'blur(12px)' }
+              ? { opacity: 1, y: 0 }
+              : { opacity: 0, y: 40 }
           }
           transition={{
-            duration: 0.6,
-            delay: baseDelay + i * 0.035,
-            ease: [0.22, 1, 0.36, 1],
+            duration: 0.5,
+            delay: baseDelay + i * 0.03,
+            ease: customEase,
           }}
-          style={{ display: 'inline-block', ...letterStyle }}
+          style={baseLetterStyle}
         >
           {char === ' ' ? '\u00A0' : char}
         </motion.span>
       ))}
     </span>
   );
-}
+});
 
 // ─── Main Component ──────────────────────────────────────────────────────────
 

@@ -1,6 +1,6 @@
 'use client';
 
-import { useState } from 'react';
+import { useState, memo, useCallback } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import {
   Layers,
@@ -15,10 +15,11 @@ import {
   MessageSquare,
   ArrowRight,
   Briefcase,
-  Star
+  Star,
+  LucideIcon
 } from 'lucide-react';
 
-// Tech Stack Icons (using Lucide + custom SVGs)
+// Tech Stack Icons (using Lucide + custom SVGs) - moved outside component
 const TechIcons: Record<string, React.ReactNode> = {
   React: (
     <svg viewBox="0 0 24 24" className="w-[18px] h-[18px]" fill="currentColor">
@@ -137,16 +138,18 @@ const TechIcons: Record<string, React.ReactNode> = {
 };
 
 // Expertise Data
+interface TechStackItem {
+  name: string;
+  color: string;
+}
+
 interface ExpertiseItem {
   id: string;
-  icon: React.ReactNode;
+  icon: LucideIcon;
   title: string;
   subtitle: string;
   description: string;
-  techStack: {
-    name: string;
-    color: string;
-  }[];
+  techStack: TechStackItem[];
   highlights: string[];
   stats: {
     projects: string;
@@ -157,7 +160,7 @@ interface ExpertiseItem {
 const expertiseData: ExpertiseItem[] = [
   {
     id: 'fullstack',
-    icon: <Layers className="w-6 h-6" />,
+    icon: Layers,
     title: 'Full Stack Development',
     subtitle: 'End-to-End Solutions',
     description: 'Building complete web applications from database architecture to pixel-perfect user interfaces. I specialize in creating scalable, maintainable codebases that power modern digital experiences.',
@@ -179,7 +182,7 @@ const expertiseData: ExpertiseItem[] = [
   },
   {
     id: 'ai',
-    icon: <Cpu className="w-6 h-6" />,
+    icon: Cpu,
     title: 'AI Integration',
     subtitle: 'Intelligent Solutions',
     description: 'Integrating cutting-edge AI and machine learning capabilities into production applications. From conversational AI to custom ML pipelines, I bring intelligence to your products.',
@@ -199,7 +202,7 @@ const expertiseData: ExpertiseItem[] = [
   },
   {
     id: 'creative',
-    icon: <Sparkles className="w-6 h-6" />,
+    icon: Sparkles,
     title: 'Creative Development',
     subtitle: 'Visual Excellence',
     description: 'Crafting immersive, animated websites that captivate users. I blend creative design with technical precision to deliver memorable digital experiences.',
@@ -219,7 +222,7 @@ const expertiseData: ExpertiseItem[] = [
   },
   {
     id: 'saas',
-    icon: <Cloud className="w-6 h-6" />,
+    icon: Cloud,
     title: 'SaaS Platforms',
     subtitle: 'Scalable Products',
     description: 'Building multi-tenant SaaS products with robust authentication, payment processing, and analytics. Designed for scale from day one.',
@@ -239,7 +242,7 @@ const expertiseData: ExpertiseItem[] = [
   },
   {
     id: 'api',
-    icon: <Code2 className="w-6 h-6" />,
+    icon: Code2,
     title: 'API Development',
     subtitle: 'Backend Architecture',
     description: 'Designing RESTful and GraphQL APIs with clean architecture principles. Building robust backends that power web and mobile applications.',
@@ -259,16 +262,150 @@ const expertiseData: ExpertiseItem[] = [
   },
 ];
 
+// Animation variants - defined outside component for stability
+const containerVariants = {
+  hidden: { opacity: 0 },
+  visible: {
+    opacity: 1,
+    transition: {
+      staggerChildren: 0.06,
+      delayChildren: 0.08,
+    },
+  },
+  exit: {
+    opacity: 0,
+    transition: {
+      duration: 0.15,
+    },
+  },
+};
+
+const itemVariants = {
+  hidden: { opacity: 0, y: 15 },
+  visible: {
+    opacity: 1,
+    y: 0,
+    transition: {
+      type: 'spring' as const,
+      stiffness: 400,
+      damping: 30,
+    },
+  },
+  exit: {
+    opacity: 0,
+    y: -8,
+    transition: { duration: 0.15 },
+  },
+};
+
+const scaleVariants = {
+  hidden: { opacity: 0, scale: 0.85 },
+  visible: {
+    opacity: 1,
+    scale: 1,
+    transition: {
+      type: 'spring' as const,
+      stiffness: 500,
+      damping: 25,
+    },
+  },
+  exit: {
+    opacity: 0,
+    scale: 0.9,
+    transition: { duration: 0.12 },
+  },
+};
+
+// Spring configs
+const springConfig = {
+  type: 'spring' as const,
+  stiffness: 400,
+  damping: 30,
+};
+
+const fastSpring = {
+  type: 'spring' as const,
+  stiffness: 500,
+  damping: 35,
+};
+
+// Additional variants for PreviewContent
+const dividerVariants = {
+  hidden: { scaleX: 0, opacity: 0 },
+  visible: {
+    scaleX: 1,
+    opacity: 1,
+    transition: {
+      type: 'spring' as const,
+      stiffness: 300,
+      damping: 30,
+    },
+  },
+};
+
+const techStackItemVariants = {
+  hidden: { opacity: 0, y: 10, scale: 0.9 },
+  visible: (index: number) => ({
+    opacity: 1,
+    y: 0,
+    scale: 1,
+    transition: {
+      delay: 0.35 + index * 0.04,
+      type: 'spring' as const,
+      stiffness: 500,
+      damping: 25,
+    },
+  }),
+};
+
+const highlightItemVariants = {
+  hidden: { opacity: 0, x: -10 },
+  visible: (index: number) => ({
+    opacity: 1,
+    x: 0,
+    transition: {
+      delay: 0.45 + index * 0.06,
+      type: 'spring' as const,
+      stiffness: 400,
+      damping: 25,
+    },
+  }),
+};
+
+const footerVariants = {
+  hidden: { opacity: 0, y: 15 },
+  visible: {
+    opacity: 1,
+    y: 0,
+    transition: {
+      delay: 0.6,
+      type: 'spring' as const,
+      stiffness: 300,
+      damping: 25,
+    },
+  },
+};
+
 export default function ExpertiseShowcase() {
   const [activeIndex, setActiveIndex] = useState(0);
   const activeItem = expertiseData[activeIndex];
 
+  const handleTabClick = useCallback((index: number) => {
+    setActiveIndex(index);
+  }, []);
+
   return (
     <div className="relative bg-[#0F0E0E] py-16 sm:py-20 md:py-24 overflow-hidden">
-      {/* Background Effects */}
-      <div className="absolute inset-0 pointer-events-none">
-        <div className="absolute top-1/4 right-1/4 w-[500px] h-[500px] bg-[#FF8C00]/[0.02] rounded-full blur-3xl" />
-        <div className="absolute bottom-1/4 left-1/4 w-[400px] h-[400px] bg-[#FF1493]/[0.02] rounded-full blur-3xl" />
+      {/* Background Effects - simplified */}
+      <div className="absolute inset-0 pointer-events-none" aria-hidden="true">
+        <div 
+          className="absolute top-1/4 right-1/4 w-[500px] h-[500px] rounded-full blur-3xl"
+          style={{ background: 'rgba(255, 140, 0, 0.02)' }}
+        />
+        <div 
+          className="absolute bottom-1/4 left-1/4 w-[400px] h-[400px] rounded-full blur-3xl"
+          style={{ background: 'rgba(255, 20, 147, 0.02)' }}
+        />
       </div>
 
       <div className="relative z-10 max-w-7xl mx-auto px-4 sm:px-6">
@@ -304,10 +441,7 @@ export default function ExpertiseShowcase() {
           className="grid grid-cols-1 lg:grid-cols-[300px_1fr] xl:grid-cols-[320px_1fr] gap-6 lg:gap-8"
         >
           {/* Left Side - Tab Navigation */}
-          <div
-            className="relative p-4 lg:p-5 lg:sticky lg:top-24 flex flex-col"
-          >
-
+          <div className="relative p-4 lg:p-5 lg:sticky lg:top-24 flex flex-col">
             {/* Mobile: Horizontal scroll / Desktop: Vertical */}
             <div className="flex lg:flex-col gap-2 lg:gap-4 overflow-x-auto lg:overflow-visible pb-2 lg:pb-0 scrollbar-hide">
               {expertiseData.map((item, index) => (
@@ -315,7 +449,7 @@ export default function ExpertiseShowcase() {
                   key={item.id}
                   item={item}
                   isActive={activeIndex === index}
-                  onClick={() => setActiveIndex(index)}
+                  onClick={handleTabClick}
                   index={index}
                 />
               ))}
@@ -339,6 +473,7 @@ export default function ExpertiseShowcase() {
             className="relative rounded-[24px] backdrop-blur-xl border border-white/[0.06] overflow-hidden"
             style={{
               background: 'linear-gradient(180deg, rgba(255, 255, 255, 0.025) 0%, rgba(255, 255, 255, 0.01) 100%)',
+              contain: 'layout style',
             }}
           >
             {/* Top highlight */}
@@ -350,6 +485,7 @@ export default function ExpertiseShowcase() {
               style={{
                 background: 'radial-gradient(circle at 80% 20%, rgba(255, 140, 0, 0.04) 0%, transparent 50%)',
               }}
+              aria-hidden="true"
             />
 
             {/* Content */}
@@ -365,8 +501,8 @@ export default function ExpertiseShowcase() {
   );
 }
 
-// Tab Item Component with iOS-style transitions
-function TabItem({
+// Tab Item Component - memoized with optimized animations
+const TabItem = memo(function TabItem({
   item,
   isActive,
   onClick,
@@ -374,21 +510,26 @@ function TabItem({
 }: {
   item: ExpertiseItem;
   isActive: boolean;
-  onClick: () => void;
+  onClick: (index: number) => void;
   index: number;
 }) {
+  const handleClick = useCallback(() => {
+    onClick(index);
+  }, [onClick, index]);
+
+  const Icon = item.icon;
+
   return (
     <motion.button
-      onClick={onClick}
+      onClick={handleClick}
       initial={{ opacity: 0, x: -20 }}
       whileInView={{ opacity: 1, x: 0 }}
       viewport={{ once: true }}
       transition={{ duration: 0.5, delay: index * 0.06, ease: [0.25, 0.46, 0.45, 0.94] }}
-      whileHover={{ scale: 1.02, x: isActive ? 0 : 3 }}
-      whileTap={{ scale: 0.98 }}
       className="relative flex items-center gap-3 lg:gap-4 p-3 lg:p-4 rounded-[14px] min-w-[180px] lg:min-w-0 w-full text-left overflow-hidden"
+      style={{ contain: 'layout style' }}
     >
-      {/* Animated Background - iOS morphing effect */}
+      {/* Animated Background - simplified */}
       <motion.div
         className="absolute inset-0 rounded-[14px]"
         initial={false}
@@ -398,30 +539,11 @@ function TabItem({
             : 'rgba(255, 255, 255, 0)',
           borderColor: isActive ? 'rgba(10, 132, 255, 0.3)' : 'rgba(255, 255, 255, 0.06)',
         }}
-        transition={{
-          type: 'spring',
-          stiffness: 500,
-          damping: 35,
-          mass: 0.8,
-        }}
-        style={{
-          border: '1px solid',
-        }}
+        transition={fastSpring}
+        style={{ border: '1px solid' }}
       />
 
-      {/* Hover glow effect */}
-      <motion.div
-        className="absolute inset-0 rounded-[14px] opacity-0 hover:opacity-100"
-        initial={false}
-        whileHover={{
-          background: isActive
-            ? 'transparent'
-            : 'rgba(255, 255, 255, 0.03)',
-        }}
-        transition={{ duration: 0.2 }}
-      />
-
-      {/* Active indicator line with smooth slide */}
+      {/* Active indicator line */}
       <motion.div
         className="absolute left-0 top-1/2 w-[3px] rounded-r-full"
         initial={false}
@@ -429,21 +551,15 @@ function TabItem({
           height: isActive ? 32 : 0,
           y: '-50%',
           opacity: isActive ? 1 : 0,
-          scaleY: isActive ? 1 : 0.5,
         }}
-        transition={{
-          type: 'spring',
-          stiffness: 500,
-          damping: 30,
-          mass: 0.6,
-        }}
+        transition={fastSpring}
         style={{
           background: 'linear-gradient(180deg, #FF8C00 0%, #FF1493 100%)',
           boxShadow: isActive ? '0 0 12px rgba(255, 140, 0, 0.4)' : 'none',
         }}
       />
 
-      {/* Icon Box with smooth transitions */}
+      {/* Icon Box */}
       <motion.div
         className="relative z-10 flex-shrink-0 w-10 h-10 lg:w-11 lg:h-11 rounded-[12px] flex items-center justify-center"
         initial={false}
@@ -451,75 +567,43 @@ function TabItem({
           background: isActive
             ? 'linear-gradient(135deg, rgba(255, 140, 0, 0.18) 0%, rgba(255, 20, 147, 0.12) 100%)'
             : 'rgba(255, 255, 255, 0.04)',
-          borderColor: isActive
-            ? 'rgba(255, 140, 0, 0.3)'
-            : 'rgba(255, 255, 255, 0.08)',
+          borderColor: isActive ? 'rgba(255, 140, 0, 0.3)' : 'rgba(255, 255, 255, 0.08)',
           scale: isActive ? 1.05 : 1,
         }}
-        transition={{
-          type: 'spring',
-          stiffness: 400,
-          damping: 25,
-          mass: 0.8,
-        }}
-        style={{
-          border: '1px solid',
-        }}
+        transition={springConfig}
+        style={{ border: '1px solid' }}
       >
-        <motion.div
-          initial={false}
-          animate={{
-            color: isActive ? '#FF8C00' : 'rgba(255, 255, 255, 0.6)',
-            scale: isActive ? 1.1 : 1,
-          }}
-          transition={{
-            type: 'spring',
-            stiffness: 400,
-            damping: 20,
-          }}
-        >
-          {item.icon}
-        </motion.div>
+        <Icon 
+          className="w-5 h-5 lg:w-6 lg:h-6 transition-colors duration-200"
+          style={{ color: isActive ? '#FF8C00' : 'rgba(255, 255, 255, 0.6)' }}
+        />
       </motion.div>
 
-      {/* Text with smooth color transitions */}
+      {/* Text */}
       <div className="relative z-10 flex-1 min-w-0">
-        <motion.h3
-          className="text-[13px] lg:text-[14px] font-semibold truncate"
-          initial={false}
-          animate={{
-            color: isActive ? '#ffffff' : 'rgba(255, 255, 255, 0.8)',
-          }}
-          transition={{ duration: 0.25, ease: 'easeOut' }}
+        <h3
+          className="text-[13px] lg:text-[14px] font-semibold truncate transition-colors duration-200"
+          style={{ color: isActive ? '#ffffff' : 'rgba(255, 255, 255, 0.8)' }}
         >
           {item.title}
-        </motion.h3>
-        <motion.p
-          className="text-[10px] lg:text-[11px] truncate"
-          initial={false}
-          animate={{
-            color: isActive ? 'rgba(255, 255, 255, 0.55)' : 'rgba(255, 255, 255, 0.35)',
-          }}
-          transition={{ duration: 0.25, ease: 'easeOut' }}
+        </h3>
+        <p
+          className="text-[10px] lg:text-[11px] truncate transition-colors duration-200"
+          style={{ color: isActive ? 'rgba(255, 255, 255, 0.55)' : 'rgba(255, 255, 255, 0.35)' }}
         >
           {item.subtitle}
-        </motion.p>
+        </p>
       </div>
 
-      {/* Chevron with smooth animation */}
+      {/* Chevron */}
       <motion.div
         className="relative z-10 flex-shrink-0 hidden lg:block"
         initial={false}
         animate={{
           x: isActive ? 4 : 0,
           opacity: isActive ? 1 : 0.3,
-          scale: isActive ? 1.1 : 1,
         }}
-        transition={{
-          type: 'spring',
-          stiffness: 400,
-          damping: 25,
-        }}
+        transition={springConfig}
       >
         <ChevronRight
           className="w-4 h-4"
@@ -528,81 +612,11 @@ function TabItem({
       </motion.div>
     </motion.button>
   );
-}
+});
 
-// Preview Content Component with enhanced iOS animations
-function PreviewContent({ item }: { item: ExpertiseItem }) {
-  // Animation variants for staggered children
-  const containerVariants = {
-    hidden: { opacity: 0 },
-    visible: {
-      opacity: 1,
-      transition: {
-        staggerChildren: 0.08,
-        delayChildren: 0.1,
-      },
-    },
-    exit: {
-      opacity: 0,
-      transition: {
-        staggerChildren: 0.03,
-        staggerDirection: -1,
-      },
-    },
-  };
-
-  const itemVariants = {
-    hidden: { opacity: 0, y: 20, filter: 'blur(4px)' },
-    visible: {
-      opacity: 1,
-      y: 0,
-      filter: 'blur(0px)',
-      transition: {
-        type: 'spring' as const,
-        stiffness: 400,
-        damping: 30,
-        mass: 0.8,
-      },
-    },
-    exit: {
-      opacity: 0,
-      y: -10,
-      filter: 'blur(4px)',
-      transition: { duration: 0.2 },
-    },
-  };
-
-  const scaleVariants = {
-    hidden: { opacity: 0, scale: 0.8, filter: 'blur(4px)' },
-    visible: {
-      opacity: 1,
-      scale: 1,
-      filter: 'blur(0px)',
-      transition: {
-        type: 'spring' as const,
-        stiffness: 500,
-        damping: 25,
-      },
-    },
-    exit: {
-      opacity: 0,
-      scale: 0.9,
-      transition: { duration: 0.15 },
-    },
-  };
-
-  const slideVariants = {
-    hidden: { opacity: 0, x: -20 },
-    visible: {
-      opacity: 1,
-      x: 0,
-      transition: {
-        type: 'spring' as const,
-        stiffness: 400,
-        damping: 25,
-      },
-    },
-  };
+// Preview Content Component - memoized with optimized animations
+const PreviewContent = memo(function PreviewContent({ item }: { item: ExpertiseItem }) {
+  const Icon = item.icon;
 
   return (
     <motion.div
@@ -610,29 +624,21 @@ function PreviewContent({ item }: { item: ExpertiseItem }) {
       initial="hidden"
       animate="visible"
       exit="exit"
+      style={{ contain: 'layout style' }}
     >
       {/* Header */}
       <div className="flex items-start gap-4 mb-5">
-        {/* Large Icon with bounce effect */}
+        {/* Large Icon - simplified animation */}
         <motion.div
           variants={scaleVariants}
-          whileHover={{ scale: 1.08, rotate: 3 }}
-          whileTap={{ scale: 0.95 }}
-          className="flex-shrink-0 w-12 h-12 sm:w-14 sm:h-14 rounded-[14px] flex items-center justify-center text-[#FF8C00] cursor-pointer"
+          className="flex-shrink-0 w-12 h-12 sm:w-14 sm:h-14 rounded-[14px] flex items-center justify-center text-[#FF8C00]"
           style={{
             background: 'linear-gradient(135deg, rgba(255, 140, 0, 0.15) 0%, rgba(255, 20, 147, 0.1) 100%)',
             border: '1px solid rgba(255, 140, 0, 0.25)',
             boxShadow: '0 4px 20px rgba(255, 140, 0, 0.15)',
           }}
         >
-          <motion.div
-            className="w-6 h-6 sm:w-7 sm:h-7"
-            initial={{ rotate: -10 }}
-            animate={{ rotate: 0 }}
-            transition={{ type: 'spring', stiffness: 300, damping: 15, delay: 0.2 }}
-          >
-            {item.icon}
-          </motion.div>
+          <Icon className="w-6 h-6 sm:w-7 sm:h-7" />
         </motion.div>
 
         <div className="flex-1">
@@ -657,33 +663,29 @@ function PreviewContent({ item }: { item: ExpertiseItem }) {
           </motion.p>
         </div>
 
-        {/* Stats Badges with pop-in effect */}
+        {/* Stats Badges - simplified */}
         <motion.div
           variants={scaleVariants}
           className="hidden sm:flex items-center gap-2"
         >
-          <motion.div
-            whileHover={{ scale: 1.05, y: -2 }}
-            whileTap={{ scale: 0.98 }}
-            className="flex items-center gap-1.5 px-2.5 py-1.5 rounded-[8px] bg-white/[0.04] border border-white/[0.08] cursor-default"
+          <div
+            className="flex items-center gap-1.5 px-2.5 py-1.5 rounded-[8px] bg-white/[0.04] border border-white/[0.08] cursor-default hover:scale-105 hover:-translate-y-0.5 transition-transform duration-200"
             style={{ boxShadow: '0 2px 8px rgba(10, 132, 255, 0.1)' }}
           >
             <Briefcase className="w-3.5 h-3.5 text-[#0A84FF]" />
             <span className="text-[11px] font-semibold text-white">{item.stats.projects}</span>
-          </motion.div>
-          <motion.div
-            whileHover={{ scale: 1.05, y: -2 }}
-            whileTap={{ scale: 0.98 }}
-            className="flex items-center gap-1.5 px-2.5 py-1.5 rounded-[8px] bg-white/[0.04] border border-white/[0.08] cursor-default"
+          </div>
+          <div
+            className="flex items-center gap-1.5 px-2.5 py-1.5 rounded-[8px] bg-white/[0.04] border border-white/[0.08] cursor-default hover:scale-105 hover:-translate-y-0.5 transition-transform duration-200"
             style={{ boxShadow: '0 2px 8px rgba(255, 214, 10, 0.1)' }}
           >
             <Star className="w-3.5 h-3.5 text-[#FFD60A]" />
             <span className="text-[11px] font-semibold text-white">{item.stats.experience}</span>
-          </motion.div>
+          </div>
         </motion.div>
       </div>
 
-      {/* Description with smooth fade */}
+      {/* Description */}
       <motion.p
         variants={itemVariants}
         className="text-[13px] sm:text-[14px] leading-[1.7] text-white/60 mb-6 max-w-2xl"
@@ -693,62 +695,27 @@ function PreviewContent({ item }: { item: ExpertiseItem }) {
 
       {/* Animated Divider */}
       <motion.div
-        variants={{
-          hidden: { scaleX: 0, opacity: 0 },
-          visible: {
-            scaleX: 1,
-            opacity: 1,
-            transition: {
-              type: 'spring' as const,
-              stiffness: 300,
-              damping: 30,
-            },
-          },
-        }}
+        variants={dividerVariants}
         className="h-px bg-gradient-to-r from-white/[0.06] via-white/[0.1] to-white/[0.06] mb-6 origin-left"
       />
 
       {/* Tech Stack */}
       <motion.div variants={itemVariants} className="mb-6">
-        <motion.p
-          initial={{ opacity: 0, x: -10 }}
-          animate={{ opacity: 1, x: 0 }}
-          transition={{ delay: 0.3 }}
-          className="text-[10px] uppercase tracking-[0.1em] text-white/40 font-medium mb-3"
-        >
+        <p className="text-[10px] uppercase tracking-[0.1em] text-white/40 font-medium mb-3">
           Tech Stack
-        </motion.p>
+        </p>
         <div className="flex flex-wrap gap-2.5">
           {item.techStack.map((tech, index) => (
             <motion.div
               key={tech.name}
-              initial={{ opacity: 0, y: 15, scale: 0.85 }}
-              animate={{ opacity: 1, y: 0, scale: 1 }}
-              transition={{
-                delay: 0.35 + index * 0.05,
-                type: 'spring',
-                stiffness: 500,
-                damping: 25,
-              }}
-              whileHover={{
-                y: -3,
-                scale: 1.05,
-                boxShadow: `0 6px 20px ${tech.color}20`,
-              }}
-              whileTap={{ scale: 0.95 }}
-              className="flex items-center gap-1.5 px-3 py-2 rounded-[8px] border border-white/[0.08] hover:border-white/[0.15] transition-colors duration-200 cursor-default"
-              style={{
-                background: 'rgba(255, 255, 255, 0.04)',
-              }}
+              variants={techStackItemVariants}
+              custom={index}
+              className="flex items-center gap-1.5 px-3 py-2 rounded-[8px] border border-white/[0.08] hover:border-white/[0.15] hover:-translate-y-0.5 hover:scale-105 transition-all duration-200 cursor-default"
+              style={{ background: 'rgba(255, 255, 255, 0.04)' }}
             >
-              <motion.div
-                className="text-white/70"
-                style={{ color: tech.color }}
-                whileHover={{ rotate: [0, -10, 10, 0] }}
-                transition={{ duration: 0.4 }}
-              >
+              <span style={{ color: tech.color }}>
                 {TechIcons[tech.name] || <Code2 className="w-4 h-4" />}
-              </motion.div>
+              </span>
               <span className="text-[12px] font-medium text-white/80">{tech.name}</span>
             </motion.div>
           ))}
@@ -757,40 +724,26 @@ function PreviewContent({ item }: { item: ExpertiseItem }) {
 
       {/* Key Highlights */}
       <motion.div variants={itemVariants} className="mb-6">
-        <motion.p
-          initial={{ opacity: 0, x: -10 }}
-          animate={{ opacity: 1, x: 0 }}
-          transition={{ delay: 0.5 }}
-          className="text-[10px] uppercase tracking-[0.1em] text-white/40 font-medium mb-3"
-        >
+        <p className="text-[10px] uppercase tracking-[0.1em] text-white/40 font-medium mb-3">
           Key Highlights
-        </motion.p>
+        </p>
         <div className="grid grid-cols-1 sm:grid-cols-2 gap-2.5">
           {item.highlights.map((highlight, index) => (
             <motion.div
               key={index}
-              initial={{ opacity: 0, x: -15, filter: 'blur(4px)' }}
-              animate={{ opacity: 1, x: 0, filter: 'blur(0px)' }}
-              transition={{
-                delay: 0.55 + index * 0.08,
-                type: 'spring',
-                stiffness: 400,
-                damping: 25,
-              }}
-              whileHover={{ x: 4 }}
-              className="flex items-start gap-2.5 group cursor-default"
+              variants={highlightItemVariants}
+              custom={index}
+              className="flex items-start gap-2.5 group cursor-default hover:translate-x-1 transition-transform duration-200"
             >
-              <motion.div
-                className="flex-shrink-0 w-5 h-5 rounded-[5px] flex items-center justify-center mt-0.5"
+              <div
+                className="flex-shrink-0 w-5 h-5 rounded-[5px] flex items-center justify-center mt-0.5 group-hover:scale-110 transition-transform duration-200"
                 style={{
                   background: 'rgba(48, 209, 88, 0.1)',
                   border: '1px solid rgba(48, 209, 88, 0.2)',
                 }}
-                whileHover={{ scale: 1.15, rotate: 5 }}
-                transition={{ type: 'spring', stiffness: 400 }}
               >
                 <Check className="w-3 h-3 text-[#30D158]" />
-              </motion.div>
+              </div>
               <span className="text-[12px] text-white/60 leading-relaxed group-hover:text-white/80 transition-colors duration-200">
                 {highlight}
               </span>
@@ -799,40 +752,30 @@ function PreviewContent({ item }: { item: ExpertiseItem }) {
         </div>
       </motion.div>
 
-      {/* Footer CTA with enhanced animations */}
+      {/* Footer CTA - simplified */}
       <motion.div
-        initial={{ opacity: 0, y: 20 }}
-        animate={{ opacity: 1, y: 0 }}
-        transition={{ delay: 0.8, type: 'spring', stiffness: 300, damping: 25 }}
+        variants={footerVariants}
         className="pt-5 border-t border-white/[0.06]"
       >
         <div className="flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4">
-          <motion.div
-            className="flex items-center gap-3"
-            whileHover={{ x: 3 }}
-            transition={{ type: 'spring', stiffness: 400 }}
-          >
-            <motion.div
-              className="w-10 h-10 rounded-[10px] flex items-center justify-center"
+          <div className="flex items-center gap-3 hover:translate-x-0.5 transition-transform duration-200">
+            <div
+              className="w-10 h-10 rounded-[10px] flex items-center justify-center hover:scale-110 transition-transform duration-200"
               style={{
                 background: 'rgba(10, 132, 255, 0.1)',
                 border: '1px solid rgba(10, 132, 255, 0.2)',
               }}
-              whileHover={{ scale: 1.1, rotate: -5 }}
-              whileTap={{ scale: 0.95 }}
             >
               <MessageSquare className="w-5 h-5 text-[#0A84FF]" />
-            </motion.div>
+            </div>
             <div>
               <p className="text-[13px] font-medium text-white">Interested in this service?</p>
               <p className="text-[11px] text-white/40">Let&apos;s discuss your project requirements</p>
             </div>
-          </motion.div>
-          <motion.a
+          </div>
+          <a
             href="#contact"
-            whileHover={{ scale: 1.03, x: 4 }}
-            whileTap={{ scale: 0.97 }}
-            className="group flex items-center gap-2 px-4 py-2.5 rounded-[10px] border border-white/[0.08] hover:border-[#FF8C00]/40 transition-all duration-300"
+            className="group flex items-center gap-2 px-4 py-2.5 rounded-[10px] border border-white/[0.08] hover:border-[#FF8C00]/40 hover:scale-[1.03] hover:translate-x-1 active:scale-[0.97] transition-all duration-300"
             style={{
               background: 'linear-gradient(135deg, rgba(255, 140, 0, 0.12) 0%, rgba(255, 20, 147, 0.06) 100%)',
               boxShadow: '0 2px 12px rgba(255, 140, 0, 0.1)',
@@ -841,15 +784,10 @@ function PreviewContent({ item }: { item: ExpertiseItem }) {
             <span className="text-[12px] font-semibold text-white/80 group-hover:text-white transition-colors duration-200">
               Get in Touch
             </span>
-            <motion.div
-              animate={{ x: [0, 3, 0] }}
-              transition={{ repeat: Infinity, duration: 1.5, ease: 'easeInOut' }}
-            >
-              <ArrowRight className="w-3.5 h-3.5 text-[#FF8C00]" />
-            </motion.div>
-          </motion.a>
+            <ArrowRight className="w-3.5 h-3.5 text-[#FF8C00] group-hover:translate-x-0.5 transition-transform duration-200" />
+          </a>
         </div>
       </motion.div>
     </motion.div>
   );
-}
+});

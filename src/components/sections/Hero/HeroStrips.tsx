@@ -17,35 +17,45 @@ function getStripDelay(index: number): number {
 // Gentle start, smooth flow, no jerk at bottom
 const STRIP_EASING = 'cubic-bezier(0.4, 0, 0.2, 1)';
 
+// Pre-computed keyframes CSS (static, only injected once)
+const KEYFRAMES_CSS = `
+  @keyframes stripReveal {
+    0% { transform: scaleY(0) translateZ(0); }
+    100% { transform: scaleY(1) translateZ(0); }
+  }
+`;
+
 export default function HeroStrips() {
   const { isIntroComplete, completeIntro } = useIntroAnimation();
   const shouldReduceMotion = useReducedMotion();
   const hasCompleted = useRef(false);
+  const hasInjectedCSS = useRef(false);
 
   const maxDelay = getStripDelay(0);
   const totalTime = (maxDelay + STRIP_DURATION) * 1000;
 
-  // Generate CSS keyframes + per-strip animation styles (runs on GPU compositor thread)
+  // Generate per-strip animation styles
   const stripStyles = useMemo(() => {
-    const keyframes = `
-      @keyframes stripReveal {
-        0% {
-          transform: scaleY(0) translateZ(0);
-        }
-        100% {
-          transform: scaleY(1) translateZ(0);
-        }
-      }
-    `;
-
-    const strips = Array.from({ length: STRIP_COUNT }, (_, i) => ({
+    return Array.from({ length: STRIP_COUNT }, (_, i) => ({
       animation: shouldReduceMotion
         ? 'none'
         : `stripReveal ${STRIP_DURATION}s ${STRIP_EASING} ${getStripDelay(i)}s both`,
     }));
-
-    return { keyframes, strips };
   }, [shouldReduceMotion]);
+
+  // Inject CSS keyframes only once
+  useEffect(() => {
+    if (hasInjectedCSS.current) return;
+    
+    const styleId = 'hero-strips-keyframes';
+    if (!document.getElementById(styleId)) {
+      const style = document.createElement('style');
+      style.id = styleId;
+      style.textContent = KEYFRAMES_CSS;
+      document.head.appendChild(style);
+    }
+    hasInjectedCSS.current = true;
+  }, []);
 
   useEffect(() => {
     if (hasCompleted.current) return;
@@ -74,9 +84,6 @@ export default function HeroStrips() {
 
   return (
     <>
-      {/* Inject CSS keyframes for GPU-composited strip animation */}
-      <style dangerouslySetInnerHTML={{ __html: stripStyles.keyframes }} />
-
       {/* Base dark background — always visible behind strips */}
       <div
         className="absolute inset-0 z-0 rounded-b-[40px] sm:rounded-b-[60px] bg-[#0F0E0E]"
@@ -99,10 +106,10 @@ export default function HeroStrips() {
       {/* 11 seamless vertical strips — pure CSS animation on GPU compositor */}
       <div
         className="absolute inset-0 z-[10] flex rounded-b-[40px] sm:rounded-b-[60px] overflow-hidden"
-        style={{ gap: 0 }}
+        style={{ gap: 0, contain: 'strict' }}
         aria-hidden="true"
       >
-        {stripStyles.strips.map((stripStyle, i) => (
+        {stripStyles.map((stripStyle, i) => (
           <div
             key={i}
             style={{

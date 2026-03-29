@@ -9,6 +9,7 @@ import BreadcrumbSchema from "@/components/seo/BreadcrumbSchema";
 import { IntroAnimationProvider } from "@/context/IntroAnimationContext";
 import Chatbot from "@/components/ui/Chatbot";
 import CommandPalette from "@/components/ui/CommandPalette";
+import SmoothScrollWrapper from "@/components/layout/SmoothScrollWrapper";
 
 const geistSans = Geist({
   variable: "--font-geist-sans",
@@ -264,13 +265,15 @@ export default function RootLayout({
         style={{ overflow: 'visible' }}
       >
         <IntroAnimationProvider>
-          <Navbar />
-          <main className="relative z-10" style={{ overflow: 'visible' }}>
-            {children}
-          </main>
-          <Footer />
-          <Chatbot />
-          <CommandPalette />
+          <SmoothScrollWrapper>
+            <Navbar />
+            <main className="relative z-10" style={{ overflow: 'visible' }}>
+              {children}
+            </main>
+            <Footer />
+            <Chatbot />
+            <CommandPalette />
+          </SmoothScrollWrapper>
         </IntroAnimationProvider>
       </body>
     </html>

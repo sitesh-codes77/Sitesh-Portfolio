@@ -1,8 +1,9 @@
 'use client';
 
 import { motion } from 'framer-motion';
+import { memo } from 'react';
 
-export default function AboutHeader() {
+const AboutHeader = memo(function AboutHeader() {
   return (
     <motion.div
       className="text-center mb-12 md:mb-16"
@@ -40,4 +41,6 @@ export default function AboutHeader() {
       </p>
     </motion.div>
   );
-}
+});
+
+export default AboutHeader;

@@ -1,10 +1,19 @@
 'use client';
 
-import { motion, useScroll, useTransform, useSpring, useInView } from 'framer-motion';
-import { useRef } from 'react';
-import { Code2, Briefcase, GraduationCap, Rocket, Award } from 'lucide-react';
+import { motion, useScroll, useTransform, useMotionValueEvent } from 'framer-motion';
+import { useRef, useState, memo } from 'react';
+import { Code2, Briefcase, GraduationCap, Rocket, Award, LucideIcon } from 'lucide-react';
 
-const milestones = [
+// Static data moved outside component
+interface Milestone {
+  year: string;
+  title: string;
+  description: string;
+  icon: LucideIcon;
+  isCurrent?: boolean;
+}
+
+const milestones: Milestone[] = [
   {
     year: '2022',
     title: 'The Curiosity Phase',
@@ -38,26 +47,37 @@ const milestones = [
   },
 ];
 
-function TimelineItem({
+// Memoized Timeline Item with simplified animations
+const TimelineItem = memo(function TimelineItem({
   milestone,
   index,
-  total,
 }: {
-  milestone: (typeof milestones)[0];
+  milestone: Milestone;
   index: number;
-  total: number;
 }) {
   const ref = useRef<HTMLDivElement>(null);
-  const isInView = useInView(ref, { once: true, margin: '-80px' });
+  const [isVisible, setIsVisible] = useState(false);
   const isLeft = index % 2 === 0;
+  const Icon = milestone.icon;
+
+  // Use Intersection Observer for better performance than useInView
+  useMotionValueEvent(
+    useScroll({ target: ref, offset: ['start 85%', 'start 85%'] }).scrollYProgress,
+    'change',
+    (latest) => {
+      if (latest > 0 && !isVisible) setIsVisible(true);
+    }
+  );
 
   return (
-    <motion.div
+    <div
       ref={ref}
       className="relative"
-      initial={{ opacity: 0, y: 30 }}
-      animate={isInView ? { opacity: 1, y: 0 } : {}}
-      transition={{ duration: 0.6, delay: index * 0.1, ease: [0.16, 1, 0.3, 1] }}
+      style={{
+        opacity: isVisible ? 1 : 0,
+        transform: isVisible ? 'translateY(0)' : 'translateY(20px)',
+        transition: `opacity 0.5s ease-out ${index * 0.08}s, transform 0.5s ease-out ${index * 0.08}s`,
+      }}
     >
       {/* Desktop layout */}
       <div className="hidden lg:grid lg:grid-cols-[1fr_auto_1fr] lg:gap-8 lg:items-center">
@@ -66,16 +86,12 @@ function TimelineItem({
           {isLeft && (
             <div className="group cursor-default">
               {/* Year badge */}
-              <motion.div
-                className="inline-flex items-center gap-2 mb-2"
-                whileHover={{ x: -5 }}
-                transition={{ duration: 0.2 }}
-              >
+              <div className="inline-flex items-center gap-2 mb-2 group-hover:-translate-x-1 transition-transform duration-200">
                 <span className="text-xs font-bold tracking-wider text-[#FF8C00]">
                   {milestone.year}
                 </span>
                 <div className="w-8 h-[1px] bg-gradient-to-l from-[#FF8C00] to-transparent" />
-              </motion.div>
+              </div>
 
               {/* Title with icon */}
               <div className="flex items-center justify-end gap-3 mb-2">
@@ -86,7 +102,7 @@ function TimelineItem({
                   {milestone.title}
                 </h4>
                 <div className="w-9 h-9 rounded-lg bg-[#FF8C00]/10 border border-[#FF8C00]/20 flex items-center justify-center group-hover:bg-[#FF8C00]/20 group-hover:border-[#FF8C00]/40 transition-all duration-300">
-                  <milestone.icon size={18} className="text-[#FF8C00]" strokeWidth={1.5} />
+                  <Icon size={18} className="text-[#FF8C00]" strokeWidth={1.5} />
                 </div>
               </div>
 
@@ -100,31 +116,22 @@ function TimelineItem({
 
         {/* Center - Timeline marker */}
         <div className="relative flex justify-center">
-          <motion.div
+          <div
             className="w-3 h-3 rounded-full bg-[#FF8C00] relative z-10"
-            initial={{ scale: 0 }}
-            animate={isInView ? { scale: 1 } : { scale: 0 }}
-            transition={{ duration: 0.4, delay: 0.2 }}
             style={{
+              transform: isVisible ? 'scale(1)' : 'scale(0)',
+              transition: 'transform 0.3s ease-out 0.15s',
               boxShadow: '0 0 20px rgba(255, 140, 0, 0.5), 0 0 40px rgba(255, 140, 0, 0.2)',
             }}
           >
-            {/* Current pulse */}
+            {/* Current pulse - CSS animation instead of Framer Motion */}
             {milestone.isCurrent && (
               <>
-                <motion.span
-                  className="absolute inset-0 rounded-full bg-[#FF8C00]"
-                  animate={{ scale: [1, 2.5], opacity: [0.5, 0] }}
-                  transition={{ duration: 1.5, repeat: Infinity }}
-                />
-                <motion.span
-                  className="absolute inset-0 rounded-full bg-[#FF8C00]"
-                  animate={{ scale: [1, 2], opacity: [0.3, 0] }}
-                  transition={{ duration: 1.5, repeat: Infinity, delay: 0.3 }}
-                />
+                <span className="absolute inset-0 rounded-full bg-[#FF8C00] timeline-pulse-1" />
+                <span className="absolute inset-0 rounded-full bg-[#FF8C00] timeline-pulse-2" />
               </>
             )}
-          </motion.div>
+          </div>
         </div>
 
         {/* Right content */}
@@ -132,21 +139,17 @@ function TimelineItem({
           {!isLeft && (
             <div className="group cursor-default">
               {/* Year badge */}
-              <motion.div
-                className="inline-flex items-center gap-2 mb-2"
-                whileHover={{ x: 5 }}
-                transition={{ duration: 0.2 }}
-              >
+              <div className="inline-flex items-center gap-2 mb-2 group-hover:translate-x-1 transition-transform duration-200">
                 <div className="w-8 h-[1px] bg-gradient-to-r from-[#FF8C00] to-transparent" />
                 <span className="text-xs font-bold tracking-wider text-[#FF8C00]">
                   {milestone.year}
                 </span>
-              </motion.div>
+              </div>
 
               {/* Title with icon */}
               <div className="flex items-center gap-3 mb-2">
                 <div className="w-9 h-9 rounded-lg bg-[#FF8C00]/10 border border-[#FF8C00]/20 flex items-center justify-center group-hover:bg-[#FF8C00]/20 group-hover:border-[#FF8C00]/40 transition-all duration-300">
-                  <milestone.icon size={18} className="text-[#FF8C00]" strokeWidth={1.5} />
+                  <Icon size={18} className="text-[#FF8C00]" strokeWidth={1.5} />
                 </div>
                 <h4
                   className="text-lg font-bold text-white group-hover:text-[#FF8C00] transition-colors duration-300"
@@ -169,23 +172,18 @@ function TimelineItem({
       <div className="lg:hidden flex gap-4">
         {/* Timeline marker */}
         <div className="relative flex flex-col items-center">
-          <motion.div
+          <div
             className="w-2.5 h-2.5 rounded-full bg-[#FF8C00] relative z-10 flex-shrink-0"
-            initial={{ scale: 0 }}
-            animate={isInView ? { scale: 1 } : { scale: 0 }}
-            transition={{ duration: 0.3 }}
             style={{
+              transform: isVisible ? 'scale(1)' : 'scale(0)',
+              transition: 'transform 0.25s ease-out',
               boxShadow: '0 0 15px rgba(255, 140, 0, 0.5)',
             }}
           >
             {milestone.isCurrent && (
-              <motion.span
-                className="absolute inset-0 rounded-full bg-[#FF8C00]"
-                animate={{ scale: [1, 2.5], opacity: [0.5, 0] }}
-                transition={{ duration: 1.5, repeat: Infinity }}
-              />
+              <span className="absolute inset-0 rounded-full bg-[#FF8C00] timeline-pulse-1" />
             )}
-          </motion.div>
+          </div>
         </div>
 
         {/* Content */}
@@ -198,7 +196,7 @@ function TimelineItem({
           {/* Title with icon */}
           <div className="flex items-center gap-2.5 mt-1 mb-1.5">
             <div className="w-7 h-7 rounded-md bg-[#FF8C00]/10 border border-[#FF8C00]/20 flex items-center justify-center">
-              <milestone.icon size={14} className="text-[#FF8C00]" strokeWidth={1.5} />
+              <Icon size={14} className="text-[#FF8C00]" strokeWidth={1.5} />
             </div>
             <h4
               className="text-base font-bold text-white"
@@ -214,9 +212,9 @@ function TimelineItem({
           </p>
         </div>
       </div>
-    </motion.div>
+    </div>
   );
-}
+});
 
 export default function TimelineStrip() {
   const containerRef = useRef<HTMLDivElement>(null);
@@ -227,23 +225,23 @@ export default function TimelineStrip() {
     offset: ['start 70%', 'end 50%'],
   });
 
-  const smoothProgress = useSpring(scrollYProgress, {
-    stiffness: 80,
-    damping: 25,
-    restDelta: 0.001,
-  });
-
-  const lineHeight = useTransform(smoothProgress, [0, 1], ['0%', '100%']);
-  const dotY = useTransform(smoothProgress, [0, 1], ['0%', '100%']);
+  // Direct transform without spring - follows scroll exactly
+  const lineHeight = useTransform(scrollYProgress, [0, 1], ['0%', '100%']);
+  const dotY = useTransform(scrollYProgress, [0, 1], ['0%', '100%']);
 
   return (
-    <section id="my-journey" ref={containerRef} className="relative py-16 sm:py-20">
+    <section
+      id="my-journey"
+      ref={containerRef}
+      className="relative py-16 sm:py-20"
+      style={{ contain: 'layout style' }}
+    >
       {/* Section Title */}
       <motion.div
         initial={{ opacity: 0, y: 20 }}
         whileInView={{ opacity: 1, y: 0 }}
         viewport={{ once: true }}
-        transition={{ duration: 0.7 }}
+        transition={{ duration: 0.5 }}
         className="text-center mb-10 sm:mb-12 px-4"
       >
         <p className="text-[10px] sm:text-xs font-semibold uppercase tracking-[0.25em] text-white/25 mb-3">
@@ -269,24 +267,26 @@ export default function TimelineStrip() {
 
       {/* Timeline Container */}
       <div className="relative max-w-4xl mx-auto px-6" ref={timelineRef}>
-        {/* Desktop: Centered line */}
+        {/* Desktop: Centered line (static background) */}
         <div className="hidden lg:block absolute left-1/2 -translate-x-1/2 top-0 bottom-0 w-[2px] bg-white/[0.06]" />
 
-        {/* Desktop: Animated progress line */}
+        {/* Desktop: Animated progress line - direct scroll binding */}
         <div className="hidden lg:block absolute left-1/2 -translate-x-1/2 top-0 bottom-0 pointer-events-none">
           <motion.div
-            className="w-[2px] bg-[#FF8C00] origin-top"
+            className="w-[2px] origin-top will-change-transform"
             style={{
               height: lineHeight,
+              background: '#FF8C00',
               boxShadow: '0 0 10px rgba(255, 140, 0, 0.4)',
             }}
           />
-          {/* Moving dot */}
+          {/* Moving dot - follows scroll directly */}
           <motion.div
-            className="absolute left-1/2 -translate-x-1/2 w-4 h-4 rounded-full bg-[#FF8C00]"
+            className="absolute left-1/2 -translate-x-1/2 w-4 h-4 rounded-full will-change-transform"
             style={{
               top: dotY,
               marginTop: '-8px',
+              background: '#FF8C00',
               boxShadow: '0 0 20px rgba(255, 140, 0, 0.8), 0 0 40px rgba(255, 140, 0, 0.4)',
             }}
           >
@@ -294,24 +294,26 @@ export default function TimelineStrip() {
           </motion.div>
         </div>
 
-        {/* Mobile: Left-aligned line */}
+        {/* Mobile: Left-aligned line (static background) */}
         <div className="lg:hidden absolute left-[17px] top-0 bottom-0 w-[2px] bg-white/[0.06]" />
 
         {/* Mobile: Animated progress line */}
         <div className="lg:hidden absolute left-[17px] top-0 bottom-0 pointer-events-none">
           <motion.div
-            className="w-[2px] bg-[#FF8C00] origin-top"
+            className="w-[2px] origin-top will-change-transform"
             style={{
               height: lineHeight,
+              background: '#FF8C00',
               boxShadow: '0 0 8px rgba(255, 140, 0, 0.4)',
             }}
           />
           {/* Moving dot */}
           <motion.div
-            className="absolute left-1/2 -translate-x-1/2 w-3 h-3 rounded-full bg-[#FF8C00]"
+            className="absolute left-1/2 -translate-x-1/2 w-3 h-3 rounded-full will-change-transform"
             style={{
               top: dotY,
               marginTop: '-6px',
+              background: '#FF8C00',
               boxShadow: '0 0 15px rgba(255, 140, 0, 0.8)',
             }}
           >
@@ -326,7 +328,6 @@ export default function TimelineStrip() {
               key={milestone.year}
               milestone={milestone}
               index={index}
-              total={milestones.length}
             />
           ))}
         </div>
@@ -337,7 +338,7 @@ export default function TimelineStrip() {
           initial={{ opacity: 0 }}
           whileInView={{ opacity: 1 }}
           viewport={{ once: true }}
-          transition={{ delay: 0.5 }}
+          transition={{ delay: 0.3, duration: 0.4 }}
         >
           <div className="hidden lg:flex flex-col items-center gap-2">
             <div className="w-6 h-6 rounded-full border-2 border-[#FF8C00]/30 flex items-center justify-center">
@@ -349,6 +350,26 @@ export default function TimelineStrip() {
           </div>
         </motion.div>
       </div>
+
+      {/* CSS for pulse animations */}
+      <style jsx>{`
+        .timeline-pulse-1 {
+          animation: timeline-pulse 1.5s ease-out infinite;
+        }
+        .timeline-pulse-2 {
+          animation: timeline-pulse 1.5s ease-out infinite 0.3s;
+        }
+        @keyframes timeline-pulse {
+          0% {
+            transform: scale(1);
+            opacity: 0.5;
+          }
+          100% {
+            transform: scale(2.5);
+            opacity: 0;
+          }
+        }
+      `}</style>
     </section>
   );
 }

@@ -18,20 +18,32 @@ const socialIcons: Record<string, typeof Github> = {
 export default function ContactCard({ onClose }: ContactCardProps) {
   return (
     <div
-      className="relative rounded-[24px] backdrop-blur-xl border border-white/[0.12] overflow-hidden"
+      className="relative rounded-[24px] overflow-hidden"
       style={{
-        background: 'rgba(22, 22, 24, 0.9)',
-        boxShadow: '0 25px 50px -12px rgba(0, 0, 0, 0.5), 0 8px 32px rgba(0, 0, 0, 0.3), inset 0 1px 0 rgba(255, 255, 255, 0.05)',
+        background: 'rgba(30, 30, 35, 0.45)',
+        backdropFilter: 'blur(24px) saturate(150%)',
+        WebkitBackdropFilter: 'blur(24px) saturate(150%)',
+        border: '1px solid rgba(255, 255, 255, 0.15)',
+        boxShadow: '0 25px 50px -12px rgba(0, 0, 0, 0.4), 0 8px 32px rgba(0, 0, 0, 0.2), inset 0 1px 0 rgba(255, 255, 255, 0.1)',
       }}
     >
+      {/* Glassmorphism gradient overlay */}
+      <div 
+        className="absolute inset-0 pointer-events-none"
+        style={{
+          background: 'linear-gradient(135deg, rgba(255, 255, 255, 0.08) 0%, transparent 40%, rgba(255, 255, 255, 0.02) 100%)',
+        }}
+        aria-hidden="true"
+      />
+
       {/* Close Button */}
       {onClose && (
         <button
           onClick={onClose}
-          className="absolute top-3 right-3 w-7 h-7 rounded-full bg-white/[0.06] hover:bg-white/[0.1] border border-white/[0.08] flex items-center justify-center transition-colors z-20"
+          className="absolute top-3 right-3 w-7 h-7 rounded-full bg-white/[0.1] hover:bg-white/[0.2] border border-white/[0.15] flex items-center justify-center transition-colors z-20 backdrop-blur-sm"
           aria-label="Close"
         >
-          <X size={14} className="text-white/50" />
+          <X size={14} className="text-white/70" />
         </button>
       )}
 

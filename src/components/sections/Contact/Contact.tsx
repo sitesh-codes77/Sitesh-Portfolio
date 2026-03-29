@@ -266,14 +266,12 @@ export default function Contact() {
             exit={{ opacity: 0 }}
             transition={{ duration: 0.2 }}
           >
-            {/* Backdrop - iOS Style */}
+            {/* Backdrop - Very light tint, background visible */}
             <div
               onClick={() => setIsFormOpen(false)}
               className="fixed inset-0 z-50"
               style={{
-                background: 'rgba(0, 0, 0, 0.5)',
-                backdropFilter: 'blur(8px)',
-                WebkitBackdropFilter: 'blur(8px)',
+                background: 'rgba(0, 0, 0, 0.25)',
               }}
               aria-label="Close contact form"
             />

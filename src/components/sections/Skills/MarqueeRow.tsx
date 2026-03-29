@@ -1,8 +1,7 @@
 'use client';
 
 import { Skill } from './skills.data';
-import { useState, useEffect, useRef, useCallback } from 'react';
-import { motion, AnimatePresence } from 'framer-motion';
+import { useState, useEffect, useRef, memo, useMemo } from 'react';
 
 interface MarqueeRowProps {
   skills: Skill[];
@@ -18,174 +17,121 @@ interface SkillCardProps {
   isHovered: boolean;
 }
 
-function SkillCard({ skill, index, onHover, isHovered }: SkillCardProps) {
-  const cardRef = useRef<HTMLDivElement>(null);
-  const [mousePosition, setMousePosition] = useState({ x: 0, y: 0 });
-  const [isInside, setIsInside] = useState(false);
+// CSS for pulse animation - injected once
+const pulseStyles = `
+@keyframes skill-pulse-1 {
+  0% { transform: scale(0.8); opacity: 0; }
+  50% { opacity: 0.5; }
+  100% { transform: scale(1.8); opacity: 0; }
+}
+@keyframes skill-pulse-2 {
+  0% { transform: scale(0.8); opacity: 0.5; }
+  50% { opacity: 0.3; }
+  100% { transform: scale(1.5); opacity: 0; }
+}
+`;
 
-  const handleMouseMove = useCallback((e: React.MouseEvent<HTMLDivElement>) => {
-    if (!cardRef.current) return;
-    const rect = cardRef.current.getBoundingClientRect();
-    const x = (e.clientX - rect.left - rect.width / 2) / rect.width;
-    const y = (e.clientY - rect.top - rect.height / 2) / rect.height;
-    setMousePosition({ x, y });
-  }, []);
+// Inject styles once
+if (typeof document !== 'undefined') {
+  const styleId = 'skill-pulse-styles';
+  if (!document.getElementById(styleId)) {
+    const style = document.createElement('style');
+    style.id = styleId;
+    style.textContent = pulseStyles;
+    document.head.appendChild(style);
+  }
+}
 
-  const handleMouseEnter = () => {
-    setIsInside(true);
-    onHover(index);
-  };
+const SkillCard = memo(function SkillCard({ skill, index, onHover, isHovered }: SkillCardProps) {
+  const Icon = skill.icon;
+  
+  // Memoize styles to avoid recreation
+  const glowStyle = useMemo(() => ({
+    filter: isHovered
+      ? `drop-shadow(0 0 4px ${skill.color}90) drop-shadow(0 0 10px ${skill.color}50)`
+      : 'none',
+    transition: 'filter 0.3s ease',
+  }), [isHovered, skill.color]);
 
-  const handleMouseLeave = () => {
-    setIsInside(false);
-    setMousePosition({ x: 0, y: 0 });
-    onHover(null);
-  };
+  const nameStyle = useMemo(() => ({
+    color: isHovered ? skill.color : 'rgba(255,255,255,0.6)',
+    textShadow: isHovered ? `0 0 20px ${skill.color}80` : 'none',
+    transition: 'color 0.3s ease, text-shadow 0.3s ease',
+  }), [isHovered, skill.color]);
 
-  // Magnetic offset based on mouse position
-  const magneticX = isInside ? mousePosition.x * 8 : 0;
-  const magneticY = isInside ? mousePosition.y * 8 : 0;
+  const shadowStyle = useMemo(() => ({
+    background: `radial-gradient(ellipse, ${skill.color}60 0%, transparent 70%)`,
+    opacity: isHovered ? 0.4 : 0,
+    transform: isHovered ? 'translateX(-50%) scale(1)' : 'translateX(-50%) scale(0.5)',
+    transition: 'opacity 0.3s ease, transform 0.3s ease',
+  }), [isHovered, skill.color]);
+
+  const pulseRingStyle1 = useMemo(() => ({
+    border: `2px solid ${skill.color}`,
+    animation: isHovered ? 'skill-pulse-1 1s ease-out infinite' : 'none',
+    opacity: isHovered ? 1 : 0,
+  }), [isHovered, skill.color]);
+
+  const pulseRingStyle2 = useMemo(() => ({
+    border: `1px solid ${skill.color}`,
+    animation: isHovered ? 'skill-pulse-2 1s ease-out infinite 0.3s' : 'none',
+    opacity: isHovered ? 1 : 0,
+  }), [isHovered, skill.color]);
 
   return (
-    <motion.div
-      ref={cardRef}
-      onMouseMove={handleMouseMove}
-      onMouseEnter={handleMouseEnter}
-      onMouseLeave={handleMouseLeave}
+    <div
+      onMouseEnter={() => onHover(index)}
+      onMouseLeave={() => onHover(null)}
       className="flex-shrink-0 relative cursor-pointer"
-      style={{ width: '80px', minWidth: '80px' }}
-      animate={{
-        x: magneticX,
-        y: magneticY,
+      style={{ 
+        width: '80px', 
+        minWidth: '80px',
+        contain: 'layout style',
       }}
-      transition={{ type: 'spring', stiffness: 150, damping: 15, mass: 0.1 }}
     >
       {/* Main card container */}
-      <motion.div
+      <div
         className="relative flex flex-col items-center justify-center gap-2 p-3"
-        animate={{
-          y: isHovered ? -12 : 0,
-          scale: isHovered ? 1.1 : 1,
+        style={{
+          transform: isHovered ? 'translateY(-12px) scale(1.1)' : 'translateY(0) scale(1)',
+          transition: 'transform 0.25s cubic-bezier(0.34, 1.56, 0.64, 1)',
         }}
-        transition={{ type: 'spring', stiffness: 300, damping: 20 }}
       >
-        {/* Icon container with direct glow */}
-        <motion.div
-          className="relative"
-          animate={{
-            filter: isHovered
-              ? `drop-shadow(0 0 4px ${skill.color}90) drop-shadow(0 0 10px ${skill.color}50)`
-              : 'drop-shadow(0 0 1px rgba(255,255,255,0.1))',
-          }}
-          transition={{ duration: 0.3 }}
-        >
-          {/* Pulsing ring on hover */}
-          <AnimatePresence>
-            {isHovered && (
-              <motion.div
-                key="pulse-rings"
-                initial={{ opacity: 0 }}
-                animate={{ opacity: 1 }}
-                exit={{ opacity: 0 }}
-                transition={{ duration: 0.2 }}
-              >
-                <motion.div
-                  className="absolute inset-0 rounded-full"
-                  initial={{ scale: 0.8, opacity: 0 }}
-                  animate={{ scale: 1.8, opacity: 0 }}
-                  transition={{ duration: 1, repeat: Infinity }}
-                  style={{ border: `2px solid ${skill.color}` }}
-                />
-                <motion.div
-                  className="absolute inset-0 rounded-full"
-                  initial={{ scale: 0.8, opacity: 0.5 }}
-                  animate={{ scale: 1.5, opacity: 0 }}
-                  transition={{ duration: 1, repeat: Infinity, delay: 0.3 }}
-                  style={{ border: `1px solid ${skill.color}` }}
-                />
-              </motion.div>
-            )}
-          </AnimatePresence>
+        {/* Icon container with glow */}
+        <div className="relative" style={glowStyle}>
+          {/* Pulsing rings - CSS animation */}
+          <div
+            className="absolute inset-0 rounded-full pointer-events-none"
+            style={pulseRingStyle1}
+          />
+          <div
+            className="absolute inset-0 rounded-full pointer-events-none"
+            style={pulseRingStyle2}
+          />
 
-          <skill.icon
-            className="text-4xl sm:text-5xl transition-all duration-300"
+          <Icon
+            className="text-4xl sm:text-5xl"
             style={{ color: skill.color }}
           />
-        </motion.div>
+        </div>
 
         {/* Skill name */}
-        <motion.span
+        <span
           className="text-[10px] sm:text-xs font-semibold whitespace-nowrap text-center"
-          animate={{
-            color: isHovered ? skill.color : 'rgba(255,255,255,0.6)',
-            textShadow: isHovered ? `0 0 20px ${skill.color}80` : 'none',
-          }}
-          transition={{ duration: 0.3 }}
+          style={nameStyle}
         >
           {skill.name}
-        </motion.span>
-
-        {/* Floating particles on hover */}
-        <AnimatePresence>
-          {isHovered && (
-            <motion.div
-              key="particles"
-              initial={{ opacity: 0 }}
-              animate={{ opacity: 1 }}
-              exit={{ opacity: 0 }}
-              transition={{ duration: 0.2 }}
-            >
-              {[...Array(4)].map((_, i) => (
-                <motion.div
-                  key={i}
-                  className="absolute w-1 h-1 rounded-full"
-                  initial={{
-                    opacity: 0,
-                    x: 0,
-                    y: 0,
-                    scale: 0,
-                  }}
-                  animate={{
-                    opacity: [0, 1, 0],
-                    x: [0, (i % 2 === 0 ? 1 : -1) * (20 + Math.random() * 15)],
-                    y: [0, -30 - Math.random() * 20],
-                    scale: [0, 1, 0.5],
-                  }}
-                  transition={{
-                    duration: 1.2,
-                    delay: i * 0.15,
-                    repeat: Infinity,
-                    repeatDelay: 0.3,
-                  }}
-                  style={{
-                    background: skill.color,
-                    boxShadow: `0 0 6px ${skill.color}`,
-                    left: '50%',
-                    bottom: '50%',
-                  }}
-                />
-              ))}
-            </motion.div>
-          )}
-        </AnimatePresence>
-      </motion.div>
+        </span>
+      </div>
 
       {/* Shadow beneath */}
-      <motion.div
-        className="absolute -bottom-2 left-1/2 -translate-x-1/2 w-12 h-2 rounded-full pointer-events-none"
-        animate={{
-          opacity: isHovered ? 0.4 : 0,
-          scale: isHovered ? 1 : 0.5,
-        }}
-        transition={{ duration: 0.3 }}
-        style={{
-          background: `radial-gradient(ellipse, ${skill.color}60 0%, transparent 70%)`,
-          filter: 'blur(4px)',
-        }}
+      <div
+        className="absolute -bottom-2 left-1/2 w-12 h-2 rounded-full pointer-events-none blur-sm"
+        style={shadowStyle}
       />
-    </motion.div>
+    </div>
   );
-}
+});
 
 export default function MarqueeRow({ skills, reverse = false }: MarqueeRowProps) {
   const [hoveredIndex, setHoveredIndex] = useState<number | null>(null);
@@ -195,6 +141,9 @@ export default function MarqueeRow({ skills, reverse = false }: MarqueeRowProps)
   const offsetRef = useRef(0);
   const lastTimeRef = useRef<number>(0);
   const isPausedRef = useRef(false);
+
+  // Memoize doubled skills array
+  const displaySkills = useMemo(() => [...skills, ...skills], [skills]);
 
   // Initialize offset based on direction
   useEffect(() => {
@@ -256,11 +205,21 @@ export default function MarqueeRow({ skills, reverse = false }: MarqueeRowProps)
     };
   }, [reverse, skills.length]);
 
-  // Double the array for seamless display
-  const displaySkills = [...skills, ...skills];
+  // Memoize edge gradient styles
+  const leftGradientStyle = useMemo(() => ({
+    background: 'linear-gradient(to right, #0F0E0E 0%, #0F0E0E 20%, transparent 100%)',
+  }), []);
+
+  const rightGradientStyle = useMemo(() => ({
+    background: 'linear-gradient(to left, #0F0E0E 0%, #0F0E0E 20%, transparent 100%)',
+  }), []);
 
   return (
-    <div className="relative overflow-hidden py-6 sm:py-8 md:py-10" ref={containerRef}>
+    <div 
+      className="relative overflow-hidden py-6 sm:py-8 md:py-10" 
+      ref={containerRef}
+      style={{ contain: 'layout style paint' }}
+    >
       {/* Marquee container */}
       <div
         ref={marqueeRef}
@@ -284,15 +243,11 @@ export default function MarqueeRow({ skills, reverse = false }: MarqueeRowProps)
       {/* Edge fade masks */}
       <div
         className="absolute top-0 bottom-0 left-0 w-20 sm:w-28 md:w-40 pointer-events-none z-20"
-        style={{
-          background: 'linear-gradient(to right, #0F0E0E 0%, #0F0E0E 20%, transparent 100%)',
-        }}
+        style={leftGradientStyle}
       />
       <div
         className="absolute top-0 bottom-0 right-0 w-20 sm:w-28 md:w-40 pointer-events-none z-20"
-        style={{
-          background: 'linear-gradient(to left, #0F0E0E 0%, #0F0E0E 20%, transparent 100%)',
-        }}
+        style={rightGradientStyle}
       />
     </div>
   );

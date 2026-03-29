@@ -1,27 +1,45 @@
 'use client';
 
 import { motion, useInView } from 'framer-motion';
-import { useEffect, useRef, useState, useMemo } from 'react';
-import { Briefcase, CheckCircle2, Users, TrendingUp } from 'lucide-react';
+import { useEffect, useRef, useState, useMemo, memo } from 'react';
+import { Briefcase, CheckCircle2, TrendingUp, LucideIcon } from 'lucide-react';
 import GlowCard from '@/components/ui/GlowCard';
 
-const stats = [
+interface StatItem {
+  value: number;
+  label: string;
+  suffix: string;
+  max: number;
+  icon: LucideIcon;
+  color: string;
+}
+
+const stats: StatItem[] = [
   { value: 6, label: 'Projects Built', suffix: '+', max: 10, icon: CheckCircle2, color: '#FF6B35' },
   { value: 3, label: 'Years Experience', suffix: '+', max: 5, icon: Briefcase, color: '#3B82F6' },
   { value: 20, label: 'Technologies', suffix: '+', max: 30, icon: TrendingUp, color: '#10B981' },
 ];
 
-function AnimatedNumber({ value, suffix = '', isInView }: { value: number; suffix?: string; isInView: boolean }) {
+const AnimatedNumber = memo(function AnimatedNumber({ 
+  value, 
+  suffix = '', 
+  isInView 
+}: { 
+  value: number; 
+  suffix?: string; 
+  isInView: boolean;
+}) {
   const [displayValue, setDisplayValue] = useState(0);
+  const rafRef = useRef<number | null>(null);
 
   useEffect(() => {
     if (!isInView) return;
     
-    let startTime: number;
+    let startTime: number | null = null;
     const duration = 1500;
     
     const animate = (currentTime: number) => {
-      if (!startTime) startTime = currentTime;
+      if (startTime === null) startTime = currentTime;
       const elapsed = currentTime - startTime;
       const progress = Math.min(elapsed / duration, 1);
       
@@ -30,17 +48,33 @@ function AnimatedNumber({ value, suffix = '', isInView }: { value: number; suffi
       setDisplayValue(Math.floor(easeOutQuart * value));
       
       if (progress < 1) {
-        requestAnimationFrame(animate);
+        rafRef.current = requestAnimationFrame(animate);
       }
     };
     
-    requestAnimationFrame(animate);
+    rafRef.current = requestAnimationFrame(animate);
+    
+    return () => {
+      if (rafRef.current !== null) {
+        cancelAnimationFrame(rafRef.current);
+      }
+    };
   }, [isInView, value]);
 
   return <span>{displayValue}{suffix}</span>;
+});
+
+interface CircularProgressProps {
+  value: number;
+  max: number;
+  color: string;
+  icon: LucideIcon;
+  label: string;
+  suffix: string;
+  index: number;
 }
 
-function CircularProgress({ 
+const CircularProgress = memo(function CircularProgress({ 
   value, 
   max, 
   color, 
@@ -48,25 +82,17 @@ function CircularProgress({
   label, 
   suffix,
   index 
-}: { 
-  value: number; 
-  max: number; 
-  color: string; 
-  icon: any; 
-  label: string; 
-  suffix: string;
-  index: number;
-}) {
+}: CircularProgressProps) {
   const ref = useRef<HTMLDivElement>(null);
   const isInView = useInView(ref, { once: true, margin: '-100px' });
   const [startAnimation, setStartAnimation] = useState(false);
   
   // Memoize calculations
-  const { percentage, circumference, offset } = useMemo(() => {
-    const pct = (value / max) * 100;
+  const { circumference, offset } = useMemo(() => {
+    const percentage = (value / max) * 100;
     const circ = 2 * Math.PI * 45;
-    const off = circ - (pct / 100) * circ;
-    return { percentage: pct, circumference: circ, offset: off };
+    const off = circ - (percentage / 100) * circ;
+    return { circumference: circ, offset: off };
   }, [value, max]);
 
   // Trigger ring animation after card animation
@@ -74,7 +100,7 @@ function CircularProgress({
     if (isInView) {
       const timer = setTimeout(() => {
         setStartAnimation(true);
-      }, 600 + (index * 100)); // Start ring animation after cards are visible
+      }, 600 + (index * 100));
       return () => clearTimeout(timer);
     }
   }, [isInView, index]);
@@ -88,7 +114,7 @@ function CircularProgress({
       viewport={{ once: true, margin: '-100px' }}
       transition={{
         duration: 0.6,
-        delay: index * 0.1, // Cards appear with header, staggered slightly
+        delay: index * 0.1,
         ease: [0.16, 1, 0.3, 1],
       }}
     >
@@ -136,7 +162,7 @@ function CircularProgress({
       <p className="text-xs sm:text-sm font-semibold text-center text-primary-gradient">{label}</p>
     </motion.div>
   );
-}
+});
 
 export default function StatsGrid() {
   return (

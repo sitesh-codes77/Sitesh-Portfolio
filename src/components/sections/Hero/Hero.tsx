@@ -163,8 +163,11 @@ export default function Hero() {
         <HeroStrips />
         <HeroBackground />
 
-        {/* ── Single centering wrapper for BOTH sphere + content ── */}
-        <div className="absolute inset-0 z-[15] flex items-center justify-center">
+        {/* ── Single centering wrapper for sphere ── */}
+        <div 
+          className="absolute inset-0 z-[15] flex items-center justify-center"
+          style={{ contain: 'layout style' }}
+        >
           {/* Sphere — behind content, same center point */}
           <motion.div
             className="absolute pointer-events-none"
@@ -172,6 +175,7 @@ export default function Hero() {
             animate={isIntroComplete ? { opacity: 1 } : { opacity: 0 }}
             transition={{ duration: 1.6, delay: 0.3, ease: [0.22, 1, 0.36, 1] }}
             aria-hidden="true"
+            style={{ willChange: isIntroComplete ? 'auto' : 'opacity' }}
           >
             <div className="w-[280px] h-[280px] sm:w-[340px] sm:h-[340px] md:w-[400px] md:h-[400px] lg:w-[460px] lg:h-[460px] xl:w-[520px] xl:h-[520px]">
               <NeuralSphere />

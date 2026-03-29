@@ -1,23 +1,33 @@
 'use client';
 
-import { useState } from 'react';
+import { useState, useCallback, memo } from 'react';
 import { motion } from 'framer-motion';
 import Image from 'next/image';
 import { Copy, Check } from 'lucide-react';
 import { useVisitorTracking } from '@/hooks/useVisitorTracking';
 import GlowCard from '@/components/ui/GlowCard';
 
-export default function InfoCards() {
+const EMAIL = 'rameshwarbhagwat019@gmail.com';
+const EMAIL_NAME = 'rameshwarbhagwat019';
+
+// Grid background style (static, no need to recreate)
+const gridBackgroundStyle = {
+  backgroundImage: `
+    linear-gradient(rgba(255, 255, 255, 0.4) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(255, 255, 255, 0.4) 1px, transparent 1px)
+  `,
+  backgroundSize: '24px 24px',
+};
+
+const InfoCards = memo(function InfoCards() {
   const [copied, setCopied] = useState(false);
   const { stats, isLoading } = useVisitorTracking();
-  const email = 'rameshwarbhagwat019@gmail.com';
-  const emailName = 'rameshwarbhagwat019';
 
-  const handleCopyEmail = () => {
-    navigator.clipboard.writeText(email);
+  const handleCopyEmail = useCallback(() => {
+    navigator.clipboard.writeText(EMAIL);
     setCopied(true);
     setTimeout(() => setCopied(false), 2000);
-  };
+  }, []);
 
   return (
     <div className="grid grid-cols-1 sm:grid-cols-2 gap-3 sm:gap-4 md:gap-5 w-full">
@@ -37,13 +47,7 @@ export default function InfoCards() {
           {/* Grid Background */}
           <div
             className="absolute inset-0 opacity-[0.06]"
-            style={{
-              backgroundImage: `
-                linear-gradient(rgba(255, 255, 255, 0.4) 1px, transparent 1px),
-                linear-gradient(90deg, rgba(255, 255, 255, 0.4) 1px, transparent 1px)
-              `,
-              backgroundSize: '24px 24px',
-            }}
+            style={gridBackgroundStyle}
           />
 
           {/* Content */}
@@ -88,9 +92,9 @@ export default function InfoCards() {
         >
           {/* macOS-style dots */}
           <div className="absolute top-2 sm:top-2.5 left-2 sm:left-2.5 flex gap-1.5 sm:gap-2">
-            <div className="w-2 sm:w-2.5 h-2 sm:h-2.5 rounded-full bg-[#FF5F57] hover:brightness-110 transition-all cursor-pointer"></div>
-            <div className="w-2 sm:w-2.5 h-2 sm:h-2.5 rounded-full bg-[#FFBD2E] hover:brightness-110 transition-all cursor-pointer"></div>
-            <div className="w-2 sm:w-2.5 h-2 sm:h-2.5 rounded-full bg-[#28CA42] hover:brightness-110 transition-all cursor-pointer"></div>
+            <div className="w-2 sm:w-2.5 h-2 sm:h-2.5 rounded-full bg-[#FF5F57]" />
+            <div className="w-2 sm:w-2.5 h-2 sm:h-2.5 rounded-full bg-[#FFBD2E]" />
+            <div className="w-2 sm:w-2.5 h-2 sm:h-2.5 rounded-full bg-[#28CA42]" />
           </div>
 
           {/* Logo */}
@@ -119,12 +123,14 @@ export default function InfoCards() {
 
           {/* Email Box */}
           <div className="flex justify-center">
-            <div
+            <button
+              type="button"
               onClick={handleCopyEmail}
               className="flex items-center justify-between gap-2 sm:gap-2.5 px-3 sm:px-4 py-1.5 sm:py-2 rounded-full bg-white/[0.04] border border-white/[0.08] hover:bg-white/[0.08] hover:border-white/[0.15] transition-all duration-300 cursor-pointer group w-fit"
+              aria-label="Copy email address"
             >
               <span className="text-[9px] sm:text-[10px] font-medium text-white/70 group-hover:text-white/90 transition-colors">
-                {emailName}
+                {EMAIL_NAME}
               </span>
               <div className="flex items-center gap-1.5 sm:gap-2">
                 {copied ? (
@@ -140,10 +146,12 @@ export default function InfoCards() {
                   <Copy size={10} className="sm:w-3 sm:h-3 text-white/50 group-hover:text-white/70 transition-colors" />
                 )}
               </div>
-            </div>
+            </button>
           </div>
         </motion.div>
       </GlowCard>
     </div>
   );
-}
+});
+
+export default InfoCards;

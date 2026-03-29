@@ -2,7 +2,7 @@
 
 import Image from 'next/image';
 import { motion } from 'framer-motion';
-import { Mail, Linkedin, Github, Twitter, MapPin, Sparkles } from 'lucide-react';
+import { Mail, Linkedin, Github, Twitter, MapPin, Sparkles, LucideIcon } from 'lucide-react';
 import { PERSONAL_INFO, SOCIAL_LINKS } from '@/lib/constants';
 import {
   SiReact, SiNextdotjs, SiTypescript, SiNodedotjs,
@@ -10,8 +10,16 @@ import {
 } from 'react-icons/si';
 import { Layers } from 'lucide-react';
 import GlowCard from '@/components/ui/GlowCard';
+import { memo, useMemo } from 'react';
+import type { IconType } from 'react-icons';
 
-const expertise = [
+interface ExpertiseItem {
+  name: string;
+  icon: IconType | LucideIcon;
+  color: string;
+}
+
+const expertise: ExpertiseItem[] = [
   { name: 'React', icon: SiReact, color: '#61DAFB' },
   { name: 'Next.js', icon: SiNextdotjs, color: '#FFFFFF' },
   { name: 'TypeScript', icon: SiTypescript, color: '#3178C6' },
@@ -23,14 +31,38 @@ const expertise = [
   { name: 'System Design', icon: Layers, color: '#8B5CF6' },
 ];
 
-const socialLinks = [
-  { name: 'Email', icon: Mail, href: `mailto:${PERSONAL_INFO.email}`, label: 'Email Rameshwar Bhagwat' },
-  { name: 'LinkedIn', icon: Linkedin, href: SOCIAL_LINKS.find(l => l.name === 'LinkedIn')?.url || '#', label: 'LinkedIn Profile' },
-  { name: 'GitHub', icon: Github, href: SOCIAL_LINKS.find(l => l.name === 'GitHub')?.url || '#', label: 'GitHub Profile' },
-  { name: 'Twitter', icon: Twitter, href: SOCIAL_LINKS.find(l => l.name === 'Twitter')?.url || '#', label: 'Twitter Profile' },
+// Pre-compute social links to avoid lookup on each render
+const linkedInUrl = SOCIAL_LINKS.find(l => l.name === 'LinkedIn')?.url || '#';
+const gitHubUrl = SOCIAL_LINKS.find(l => l.name === 'GitHub')?.url || '#';
+const twitterUrl = SOCIAL_LINKS.find(l => l.name === 'Twitter')?.url || '#';
+
+interface SocialLinkItem {
+  name: string;
+  icon: LucideIcon;
+  href: string;
+  label: string;
+  isExternal: boolean;
+}
+
+const socialLinks: SocialLinkItem[] = [
+  { name: 'Email', icon: Mail, href: `mailto:${PERSONAL_INFO.email}`, label: 'Email Rameshwar Bhagwat', isExternal: false },
+  { name: 'LinkedIn', icon: Linkedin, href: linkedInUrl, label: 'LinkedIn Profile', isExternal: true },
+  { name: 'GitHub', icon: Github, href: gitHubUrl, label: 'GitHub Profile', isExternal: true },
+  { name: 'Twitter', icon: Twitter, href: twitterUrl, label: 'Twitter Profile', isExternal: true },
 ];
 
-export default function ProfileCard() {
+const ProfileCard = memo(function ProfileCard() {
+  // Memoize location string
+  const locationString = useMemo(() => 
+    `${PERSONAL_INFO.location.city}, ${PERSONAL_INFO.location.state}, ${PERSONAL_INFO.location.country}`,
+    []
+  );
+
+  const profileAlt = useMemo(() => 
+    `${PERSONAL_INFO.name} - ${PERSONAL_INFO.jobTitle}`,
+    []
+  );
+
   return (
     <GlowCard
       className="bg-[#141414] border border-white/[0.06] rounded-2xl sm:rounded-3xl w-full h-full"
@@ -64,7 +96,7 @@ export default function ProfileCard() {
           <div className="absolute inset-[3px] rounded-full overflow-hidden">
             <Image
               src="/images/profile/profile.jpeg"
-              alt={`${PERSONAL_INFO.name} - ${PERSONAL_INFO.jobTitle}`}
+              alt={profileAlt}
               width={256}
               height={256}
               className="w-full h-full object-cover"
@@ -94,17 +126,17 @@ export default function ProfileCard() {
         {/* Location */}
         <div className="flex items-center gap-1.5 text-white/35 mb-5 sm:mb-6">
           <MapPin size={11} />
-          <span className="text-[11px] sm:text-xs">{PERSONAL_INFO.location.city}, {PERSONAL_INFO.location.state}, {PERSONAL_INFO.location.country}</span>
+          <span className="text-[11px] sm:text-xs">{locationString}</span>
         </div>
 
         {/* Social Links */}
         <div className="flex items-center gap-2 mb-6 sm:mb-8">
-          {socialLinks.map(({ name, icon: Icon, href, label }) => (
+          {socialLinks.map(({ name, icon: Icon, href, label, isExternal }) => (
             <a
               key={name}
               href={href}
-              target={name === 'Email' ? undefined : '_blank'}
-              rel={name === 'Email' ? undefined : 'noopener noreferrer'}
+              target={isExternal ? '_blank' : undefined}
+              rel={isExternal ? 'noopener noreferrer' : undefined}
               className="w-9 h-9 sm:w-10 sm:h-10 rounded-full bg-white/[0.04] hover:bg-white/[0.1] border border-white/[0.06] hover:border-white/[0.15] transition-all duration-300 flex items-center justify-center group"
               aria-label={label}
             >
@@ -123,18 +155,23 @@ export default function ProfileCard() {
           Core Expertise
         </h4>
         <div className="flex flex-wrap gap-1.5 sm:gap-2 justify-center">
-          {expertise.map((skill) => (
-            <div
-              key={skill.name}
-              className="flex items-center gap-1.5 px-2.5 sm:px-3 py-1.5 sm:py-2 rounded-full bg-white/[0.03] border border-white/[0.06] hover:bg-white/[0.08] hover:border-white/[0.12] transition-all duration-300"
-            >
-              <skill.icon size={12} className="sm:w-3.5 sm:h-3.5 flex-shrink-0" style={{ color: skill.color }} />
-              <span className="text-[10px] sm:text-xs text-white/55 font-medium">{skill.name}</span>
-            </div>
-          ))}
+          {expertise.map((skill) => {
+            const IconComponent = skill.icon;
+            return (
+              <div
+                key={skill.name}
+                className="flex items-center gap-1.5 px-2.5 sm:px-3 py-1.5 sm:py-2 rounded-full bg-white/[0.03] border border-white/[0.06] hover:bg-white/[0.08] hover:border-white/[0.12] transition-all duration-300"
+              >
+                <IconComponent size={12} className="sm:w-3.5 sm:h-3.5 flex-shrink-0" style={{ color: skill.color }} />
+                <span className="text-[10px] sm:text-xs text-white/55 font-medium">{skill.name}</span>
+              </div>
+            );
+          })}
         </div>
       </div>
       </motion.div>
     </GlowCard>
   );
-}
+});
+
+export default ProfileCard;

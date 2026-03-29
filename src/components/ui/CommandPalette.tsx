@@ -505,6 +505,7 @@ export default function CommandPalette() {
                 <div
                   ref={listRef}
                   className="max-h-[360px] overflow-y-auto py-2"
+                  data-lenis-prevent
                   style={{
                     scrollbarWidth: 'none',
                     WebkitOverflowScrolling: 'touch',
