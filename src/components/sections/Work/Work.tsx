@@ -87,17 +87,16 @@ export default function Work() {
       <meta itemProp="name" content="Featured Projects - Rameshwar Bhagwat Portfolio" />
       <meta
         itemProp="description"
-        content="Showcase of full-stack web development projects including AI SaaS platforms, e-commerce marketplaces, healthcare portals, and fintech dashboards built with React, Next.js, TypeScript, and modern technologies."
+         content="Showcase of full-stack and AI-focused web development projects including WebCraft and Safecoast, built with React, Next.js, TypeScript, and modern scalable architecture."
       />
       <meta itemProp="author" content="Rameshwar Bhagwat" />
 
       {/* Hidden SEO Content */}
       <div className="sr-only">
-        <h2>Featured Projects Portfolio - Full Stack Web Development</h2>
+        <h2>Featured Projects Portfolio - Full Stack & AI Web Development</h2>
         <p>
-          Explore a curated collection of production-ready web applications built by Rameshwar
-          Bhagwat, showcasing expertise in full-stack development, modern JavaScript frameworks,
-          and scalable architecture.
+          Explore a curated collection of production-ready applications built by Rameshwar
+          Bhagwat, highlighting modern full stack engineering and AI-focused product development.
         </p>
         <h3>Project Highlights</h3>
         <ul>
@@ -233,8 +232,11 @@ export default function Work() {
                 Explore {remainingCount} More Project{remainingCount > 1 ? 's' : ''}
               </span>
 
-              {/* Animated arrow - CSS animation */}
-              <div className="flex flex-col items-center see-more-arrow">
+              {/* Animated arrow */}
+              <div
+                className="flex flex-col items-center"
+                style={{ animation: 'bounce-arrow 1.5s ease-in-out infinite' }}
+              >
                 <svg
                   className="w-5 h-5 sm:w-6 sm:h-6"
                   fill="none"
@@ -294,9 +296,6 @@ export default function Work() {
 
       {/* CSS animation for arrow */}
       <style jsx>{`
-        .see-more-arrow {
-          animation: bounce-arrow 1.5s ease-in-out infinite;
-        }
         @keyframes bounce-arrow {
           0%, 100% { transform: translateY(0); }
           50% { transform: translateY(8px); }

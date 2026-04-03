@@ -25,7 +25,7 @@ export default function Hero() {
         id="hero"
         className="relative overflow-hidden pb-0 rounded-b-[40px] sm:rounded-b-[60px] mb-0"
         style={{ height: '100vh' }}
-        aria-label={`${PERSONAL_INFO.name} - Full Stack Developer, AI Engineer, Web Developer Portfolio`}
+        aria-label={`${PERSONAL_INFO.name} - Full Stack & AI Developer Portfolio`}
         itemScope
         itemType="https://schema.org/Person"
       >
@@ -33,8 +33,8 @@ export default function Hero() {
         <meta itemProp="name" content={PERSONAL_INFO.name} />
         <meta itemProp="givenName" content="Rameshwar" />
         <meta itemProp="familyName" content="Bhagwat" />
-        <meta itemProp="jobTitle" content="Full Stack Developer & AI Engineer" />
-        <meta itemProp="description" content={`${PERSONAL_INFO.name} is a Full Stack Developer and AI Engineer specializing in React, Next.js, TypeScript, Node.js, Python, and AI/ML technologies. Expert in building scalable web applications, SaaS platforms, and AI-powered solutions.`} />
+        <meta itemProp="jobTitle" content="Full Stack & AI Developer" />
+        <meta itemProp="description" content={`${PERSONAL_INFO.name} is a Full Stack & AI Developer specializing in React, Next.js, TypeScript, Node.js, Python, and AI-powered product engineering. Featured projects include WebCraft and Safecoast.`} />
         <meta itemProp="url" content={SITE_URL} />
         <meta itemProp="email" content={PERSONAL_INFO.email} />
         <meta itemProp="telephone" content={PERSONAL_INFO.phone} />
@@ -56,11 +56,11 @@ export default function Hero() {
 
         {/* ─── Hidden SEO Content for Search Engines ─── */}
         <div className="sr-only">
-          <h1>Rameshwar Bhagwat - Full Stack Developer & AI Engineer</h1>
+          <h1>Rameshwar Bhagwat - Full Stack & AI Developer</h1>
 
           <h2>About Rameshwar Bhagwat</h2>
           <p>
-            Rameshwar Bhagwat is a highly skilled Full Stack Developer and AI Engineer based in {PERSONAL_INFO.location.city}, {PERSONAL_INFO.location.state}, {PERSONAL_INFO.location.country}.
+            Rameshwar Bhagwat is a highly skilled Full Stack & AI Developer based in {PERSONAL_INFO.location.city}, {PERSONAL_INFO.location.state}, {PERSONAL_INFO.location.country}.
             With expertise in modern web technologies, Rameshwar Bhagwat specializes in building scalable, high-performance web applications and AI-powered platforms.
           </p>
 
@@ -74,7 +74,13 @@ export default function Hero() {
             <li>Database Technologies: MongoDB, PostgreSQL, MySQL, Redis, Prisma ORM</li>
             <li>AI & Machine Learning: TensorFlow, OpenAI, LangChain, AI Integration, ML APIs</li>
             <li>Cloud & DevOps: AWS, Google Cloud, Docker, Kubernetes, CI/CD, Vercel</li>
-            <li>SaaS Development: Stripe Integration, Payment Systems, Multi-tenant Architecture</li>
+            <li>SaaS and AI Product Development: scalable architecture, performance optimization, and intelligent features</li>
+          </ul>
+
+          <h2>Featured Projects by Rameshwar Bhagwat</h2>
+          <ul>
+            <li>WebCraft - Modern website solution designed for business growth and technical SEO readiness</li>
+            <li>Safecoast - Coastal hazard intelligence platform focused on monitoring and risk awareness</li>
           </ul>
 
           <h2>Rameshwar Bhagwat - Services</h2>
@@ -107,10 +113,10 @@ export default function Hero() {
 
           <h3>Keywords</h3>
           <p>{SEO_KEYWORDS.join(', ')}, Rameshwar Bhagwat Portfolio, Rameshwar Bhagwat Developer, Rameshwar Bhagwat Full Stack,
-          Rameshwar Bhagwat AI Engineer, Rameshwar Bhagwat React Developer, Rameshwar Bhagwat Next.js Expert,
+          Rameshwar Bhagwat AI Developer, Rameshwar Bhagwat React Developer, Rameshwar Bhagwat Next.js Expert,
           Hire Rameshwar Bhagwat, Rameshwar Bhagwat Web Developer, Rameshwar Bhagwat Software Engineer,
           Best Full Stack Developer India, Top React Developer Maharashtra, AI Developer Yeola,
-          Rameshwar Bhagwat TypeScript, Rameshwar Bhagwat Node.js, Rameshwar Bhagwat Python Developer</p>
+          Rameshwar Bhagwat TypeScript, Rameshwar Bhagwat Node.js, Rameshwar Bhagwat Python Developer, WebCraft, Safecoast</p>
         </div>
 
         {/* ─── WebSite Schema for Search Appearance ─── */}
@@ -120,14 +126,14 @@ export default function Hero() {
             __html: JSON.stringify({
               "@context": "https://schema.org",
               "@type": "WebSite",
-              "name": "Rameshwar Bhagwat - Full Stack Developer Portfolio",
+              "name": "Rameshwar Bhagwat - Full Stack & AI Developer Portfolio",
               "alternateName": ["Rameshwar Bhagwat", "Rameshwar Bhagwat Developer", "Rameshwar Bhagwat Portfolio"],
               "url": SITE_URL,
-              "description": "Official portfolio of Rameshwar Bhagwat, a Full Stack Developer and AI Engineer specializing in React, Next.js, TypeScript, and AI-powered web applications.",
+              "description": "Official portfolio of Rameshwar Bhagwat, a Full Stack & AI Developer specializing in React, Next.js, TypeScript, and AI-powered web applications.",
               "author": {
                 "@type": "Person",
                 "name": "Rameshwar Bhagwat",
-                "jobTitle": "Full Stack Developer & AI Engineer",
+                "jobTitle": "Full Stack & AI Developer",
                 "url": SITE_URL
               },
               "potentialAction": {
@@ -146,12 +152,12 @@ export default function Hero() {
             __html: JSON.stringify({
               "@context": "https://schema.org",
               "@type": "ProfessionalService",
-              "name": "Rameshwar Bhagwat - Full Stack Development Services",
+              "name": "Rameshwar Bhagwat - Full Stack & AI Development Services",
               "description": "Professional Full Stack Development, AI Engineering, and Web Development services by Rameshwar Bhagwat",
               "provider": {
                 "@type": "Person",
                 "name": "Rameshwar Bhagwat",
-                "jobTitle": "Full Stack Developer & AI Engineer"
+                "jobTitle": "Full Stack & AI Developer"
               },
               "serviceType": ["Full Stack Development", "AI Engineering", "Web Development", "SaaS Development", "React Development", "Next.js Development"],
               "areaServed": "Worldwide",

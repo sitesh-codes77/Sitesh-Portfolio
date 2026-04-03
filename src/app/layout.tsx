@@ -63,22 +63,25 @@ export const metadata: Metadata = {
     default: "Rameshwar Bhagwat | Full Stack & AI Developer",
     template: "%s | Rameshwar Bhagwat"
   },
-  description: "Rameshwar Bhagwat is a Full Stack and AI Developer building scalable SaaS platforms like Devory and ThinkVerse. Specializing in React, Next.js, TypeScript, and machine learning systems. Explore Rameshwar Bhagwat's portfolio of innovative AI-powered applications and modern web development projects.",
+  description: "Rameshwar Bhagwat is a Full Stack & AI Developer from India building high-performance AI-powered web applications with React, Next.js, TypeScript, and Node.js. Explore Rameshwar Bhagwat projects including WebCraft and Safecoast.",
   keywords: [
     "Rameshwar Bhagwat",
     "Rameshwar Bhagwat portfolio",
     "Rameshwar Bhagwat developer",
+    "Rameshwar Bhagwat AI Developer",
+    "Rameshwar Bhagwat Full Stack Developer",
     "Full Stack Developer Rameshwar Bhagwat",
     "AI Developer Rameshwar Bhagwat",
     "Rameshwar Bhagwat projects",
+    "Rameshwar Bhagwat WebCraft",
+    "Rameshwar Bhagwat Safecoast",
     "Full Stack Developer",
     "AI Developer",
     "Next.js Developer",
     "React Developer",
     "TypeScript Developer",
-    "SaaS Developer",
-    "Devory",
-    "ThinkVerse",
+    "WebCraft",
+    "Safecoast",
     "Machine Learning Projects",
     "Web Development Portfolio",
     "AI-Powered Applications"
@@ -93,6 +96,13 @@ export const metadata: Metadata = {
   },
   alternates: {
     canonical: siteUrl,
+  },
+  category: "technology",
+  classification: "Portfolio",
+  other: {
+    author: "Rameshwar Bhagwat",
+    "geo.region": "IN-MH",
+    "geo.placename": "Yeola",
   },
   icons: {
     icon: [
@@ -123,7 +133,7 @@ export const metadata: Metadata = {
     url: siteUrl,
     siteName: "Rameshwar Bhagwat Portfolio",
     title: "Rameshwar Bhagwat | Full Stack & AI Developer",
-    description: "Rameshwar Bhagwat is a Full Stack and AI Developer building scalable SaaS platforms like Devory and ThinkVerse. Explore innovative AI-powered applications and modern web development projects.",
+    description: "Rameshwar Bhagwat builds AI-powered web applications and full stack products. Featured projects: WebCraft and Safecoast.",
     images: [
       {
         url: `${siteUrl}/og-image.png`,
@@ -136,9 +146,9 @@ export const metadata: Metadata = {
   twitter: {
     card: "summary_large_image",
     title: "Rameshwar Bhagwat | Full Stack & AI Developer",
-    description: "Rameshwar Bhagwat is a Full Stack and AI Developer building AI-powered SaaS platforms like Devory and modern web applications.",
+    description: "Rameshwar Bhagwat - Full Stack & AI Developer. Featured work includes WebCraft and Safecoast.",
     images: [`${siteUrl}/og-image.png`],
-    creator: "@yourtwitterhandle",
+    creator: "@Rameshwarbhagwat",
   },
   robots: {
     index: true,
@@ -169,7 +179,7 @@ export default function RootLayout({
     "url": siteUrl,
     "image": `${siteUrl}/images/profile/profile.jpeg`,
     "jobTitle": "Full Stack & AI Developer",
-    "description": "Rameshwar Bhagwat is a Full Stack and AI Developer building AI-powered SaaS platforms like Devory and ThinkVerse, specializing in modern web applications and machine learning systems.",
+    "description": "Rameshwar Bhagwat is a Full Stack & AI Developer building AI-powered web applications, with featured projects WebCraft and Safecoast.",
     "email": "rameshwarbhagwat019@gmail.com",
     "telephone": "+91-9699245170",
     "address": {
@@ -196,7 +206,19 @@ export default function RootLayout({
     "alumniOf": {
       "@type": "EducationalOrganization",
       "name": "B.Tech IT"
-    }
+    },
+    "subjectOf": [
+      {
+        "@type": "CreativeWork",
+        "name": "WebCraft",
+        "description": "Website builder for modern businesses with SEO-ready architecture and performance-first engineering.",
+      },
+      {
+        "@type": "CreativeWork",
+        "name": "Safecoast",
+        "description": "Coastal hazard intelligence platform focused on real-time monitoring and risk awareness.",
+      }
+    ]
   };
 
   const websiteStructuredData = {
@@ -204,7 +226,7 @@ export default function RootLayout({
     "@type": "WebSite",
     "name": "Rameshwar Bhagwat Portfolio",
     "url": siteUrl,
-    "description": "Portfolio showcasing full stack development and AI projects",
+    "description": "Portfolio of Rameshwar Bhagwat showcasing full stack and AI-powered web projects, including WebCraft and Safecoast.",
     "author": {
       "@type": "Person",
       "name": "Rameshwar Bhagwat"
@@ -226,6 +248,7 @@ export default function RootLayout({
   return (
     <html lang="en" className="dark">
       <head>
+        <title>Rameshwar Bhagwat | Full Stack & AI Developer</title>
         {/* Structured Data - Person Schema */}
         <script
           type="application/ld+json"

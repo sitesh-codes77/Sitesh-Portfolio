@@ -13,20 +13,18 @@ export function generateSEO(
   
   const defaultKeywords = [
     'Rameshwar Bhagwat',
-    'Full Stack Developer',
+    'Rameshwar Bhagwat portfolio',
+    'Full Stack & AI Developer',
+    'AI Developer India',
     'React Developer',
     'Next.js Developer',
     'TypeScript Developer',
-    'Web Developer',
-    'Frontend Developer',
-    'Backend Developer',
-    'JavaScript Developer',
-    'Node.js Developer',
-    'UI/UX Developer',
-    'Portfolio',
-    'Yeola Developer',
-    'Maharashtra Developer',
-    'India Developer',
+    'AI-powered web applications',
+    'Generative AI integration',
+    'WebCraft',
+    'Safecoast',
+    'WebCraft project',
+    'Safecoast project',
   ];
 
   return {

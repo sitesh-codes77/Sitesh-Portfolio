@@ -1,73 +1,29 @@
-export const SITE_NAME = 'Rameshwar Bhagwat - Full Stack Developer & AI Engineer';
+export const SITE_NAME = 'Rameshwar Bhagwat - Full Stack & AI Developer';
 export const SITE_URL = 'https://rameshwarbhagwat.me';
-export const SITE_DESCRIPTION = 'Rameshwar Bhagwat is a Full Stack Developer and AI Engineer specializing in React, Next.js, TypeScript, Node.js, and AI-powered web applications. Building modern, scalable SaaS platforms and innovative web solutions.';
+export const SITE_DESCRIPTION = 'Rameshwar Bhagwat is a Full Stack & AI Developer specializing in React, Next.js, TypeScript, Node.js, and AI-powered web applications. Explore featured projects like WebCraft and Safecoast, focused on modern, scalable, and intelligent digital products.';
 
 // SEO Keywords - Optimized for search ranking
 export const SEO_KEYWORDS = [
-  // Primary Keywords - Name variations
   'Rameshwar Bhagwat',
-  'Rameshwar Bhagwat Developer',
-  'Rameshwar Bhagwat Portfolio',
+  'Rameshwar Bhagwat portfolio',
+  'Rameshwar Bhagwat AI Developer',
   'Rameshwar Bhagwat Full Stack Developer',
-  'Rameshwar Bhagwat AI Engineer',
-  'Rameshwar Bhagwat Web Developer',
-  'Rameshwar Bhagwat React Developer',
-  'Rameshwar Bhagwat Software Engineer',
-
-  // Job Title Keywords
-  'Full Stack Developer',
-  'AI Engineer',
-  'Frontend Developer',
-  'Backend Developer',
-  'Web Developer',
-  'Software Engineer',
-  'React Developer',
-  'Next.js Developer',
+  'Full Stack & AI Developer',
+  'AI Developer India',
+  'AI Engineer portfolio',
+  'React Next.js Developer',
   'TypeScript Developer',
-  'Node.js Developer',
-  'JavaScript Developer',
-  'Python Developer',
+  'AI-powered web applications',
+  'Generative AI integration',
+  'WebCraft',
+  'Safecoast',
+  'WebCraft project',
+  'Safecoast project',
+  'Next.js portfolio',
   'MERN Stack Developer',
-  'UI/UX Developer',
-
-  // Technology Keywords
-  'React.js Expert',
-  'Next.js Expert',
-  'TypeScript Expert',
-  'Node.js Expert',
-  'MongoDB Developer',
-  'PostgreSQL Developer',
-  'Tailwind CSS Developer',
-  'REST API Developer',
-  'GraphQL Developer',
-
-  // Service Keywords
-  'SaaS Developer',
-  'AI-powered Applications',
-  'Web Application Development',
-  'Custom Software Development',
-  'Scalable Web Apps',
-  'Modern Web Applications',
-  'Enterprise Web Solutions',
-  'Startup MVP Development',
-
-  // Location Keywords
-  'Developer in India',
-  'Full Stack Developer India',
-  'Web Developer Maharashtra',
-  'Developer Yeola',
-  'Freelance Developer India',
-  'Remote Developer',
+  'JavaScript Developer India',
+  'Hire AI Developer',
   'Hire Full Stack Developer',
-  'Hire React Developer',
-  'Hire AI Engineer',
-
-  // Long-tail Keywords
-  'Best Full Stack Developer Portfolio',
-  'Top React Developer India',
-  'Expert Next.js Developer',
-  'Professional Web Developer',
-  'Experienced AI Engineer',
 ];
 
 // Personal Information - SEO Optimized
@@ -75,7 +31,7 @@ export const PERSONAL_INFO = {
   name: 'Rameshwar Bhagwat',
   firstName: 'Rameshwar',
   lastName: 'Bhagwat',
-  jobTitle: 'Full Stack Developer & AI Engineer',
+  jobTitle: 'Full Stack & AI Developer',
   alternateJobTitles: [
     'Full Stack Developer',
     'AI Engineer',
@@ -93,8 +49,8 @@ export const PERSONAL_INFO = {
     countryCode: 'IN',
   },
   image: '/images/profile/profile.jpeg',
-  bio: 'Rameshwar Bhagwat is a Full Stack Developer and AI Engineer with expertise in React, Next.js, TypeScript, Node.js, and Python. Specializing in building scalable web applications, SaaS platforms, and AI-powered solutions. Passionate about creating innovative digital experiences that drive business growth.',
-  shortBio: 'Full Stack Developer & AI Engineer specializing in React, Next.js, TypeScript, and AI-powered web applications.',
+  bio: 'Rameshwar Bhagwat is a Full Stack & AI Developer with expertise in React, Next.js, TypeScript, Node.js, and Python. Specializing in building scalable web applications and AI-powered solutions, with featured projects including WebCraft and Safecoast.',
+  shortBio: 'Full Stack & AI Developer specializing in React, Next.js, TypeScript, and AI-powered web applications.',
   expertise: [
     'Full Stack Development',
     'AI & Machine Learning Integration',

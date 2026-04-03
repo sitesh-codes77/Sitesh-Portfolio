@@ -7,7 +7,7 @@ export const CHATBOT_CONTEXT = {
     firstName: "Rameshwar",
     lastName: "Bhagwat",
     nickname: "Ram",
-    jobTitle: "Full Stack Developer & AI Engineer",
+    jobTitle: "Full Stack & AI Developer",
     tagline: "Building the future with code and AI",
     email: "rameshwarbhagwat019@gmail.com",
     phone: "+91-9699245170",
@@ -16,9 +16,9 @@ export const CHATBOT_CONTEXT = {
     languages: ["English", "Hindi", "Marathi"],
     bio: "I'm a Full Stack Developer and AI Engineer with expertise in React, Next.js, TypeScript, Node.js, and Python. I specialize in building scalable web applications, SaaS platforms, and AI-powered solutions. I'm passionate about creating innovative digital experiences that drive business growth.",
     shortBio: "Full Stack Developer specializing in React, Next.js, and AI integration.",
-    currentStatus: "Currently pursuing B.Tech in Information Technology and building innovative products like Devory.",
-    yearsOfExperience: "3+",
-    projectsBuilt: "10+",
+    currentStatus: "Currently pursuing B.Tech in Information Technology and building AI-powered web products like WebCraft, Safecoast, and Devory.",
+    yearsOfExperience: "1+",
+    projectsBuilt: "5+",
     linesOfCode: "100,000+",
     coffeeConsumed: "500+ cups",
     availableForWork: true,
@@ -80,24 +80,18 @@ export const CHATBOT_CONTEXT = {
   // Detailed Projects
   projects: [
     {
-      name: "Devory",
-      type: "SaaS Platform",
-      description: "AI-Powered Student Project Platform that helps students discover, build, and manage real-world technical projects with intelligent idea recommendations. It's designed to bridge the gap between learning and practical implementation.",
-      longDescription: "Devory is my flagship project - an AI-driven platform that solves a real problem I faced as a student: finding meaningful projects to build. It uses machine learning to recommend project ideas based on skill level, interests, and industry trends. Students can track their progress, collaborate with peers, and showcase their work to potential employers.",
-      techStack: ["Next.js 14", "TypeScript", "PostgreSQL", "Prisma", "Tailwind CSS", "OpenAI API", "Vercel"],
+      name: "WebCraft",
+      type: "Agency Website",
+      description: "Website Builder for Modern Businesses - A client-focused web development solution helping businesses establish their digital presence.",
+      techStack: ["React", "Next.js", "Tailwind CSS", "Firebase", "Stripe"],
       features: [
-        "AI-based project idea recommendations",
-        "Structured project workflow management",
-        "Progress tracking and milestones",
-        "Modern SaaS authentication",
-        "Team collaboration features",
-        "Portfolio showcase integration",
+        "Responsive website templates",
+        "Custom UI/UX design",
+        "SEO-ready architecture",
+        "CMS integration",
+        "Analytics dashboard",
       ],
-      challenges: "Building a scalable recommendation engine that provides relevant suggestions based on user preferences and market demand.",
-      learnings: "Advanced state management, AI API integration, and building production-ready SaaS applications.",
-      status: "Currently building",
-      link: "https://devory.io",
-      github: "Private",
+      status: "Completed",
     },
     {
       name: "Safecoast",
@@ -118,6 +112,26 @@ export const CHATBOT_CONTEXT = {
       status: "Completed - Hackathon Winner",
       link: "https://safecoast.vercel.app",
       github: "https://github.com/Rameshwar-bhagwat10/safecoast",
+    },
+    {
+      name: "Devory",
+      type: "SaaS Platform",
+      description: "AI-Powered Student Project Platform that helps students discover, build, and manage real-world technical projects with intelligent idea recommendations. It's designed to bridge the gap between learning and practical implementation.",
+      longDescription: "Devory is my flagship project - an AI-driven platform that solves a real problem I faced as a student: finding meaningful projects to build. It uses machine learning to recommend project ideas based on skill level, interests, and industry trends. Students can track their progress, collaborate with peers, and showcase their work to potential employers.",
+      techStack: ["Next.js 14", "TypeScript", "PostgreSQL", "Prisma", "Tailwind CSS", "OpenAI API", "Vercel"],
+      features: [
+        "AI-based project idea recommendations",
+        "Structured project workflow management",
+        "Progress tracking and milestones",
+        "Modern SaaS authentication",
+        "Team collaboration features",
+        "Portfolio showcase integration",
+      ],
+      challenges: "Building a scalable recommendation engine that provides relevant suggestions based on user preferences and market demand.",
+      learnings: "Advanced state management, AI API integration, and building production-ready SaaS applications.",
+      status: "Currently building",
+      link: "https://devory.io",
+      github: "Private",
     },
     {
       name: "ThinkVerse",
@@ -158,20 +172,6 @@ export const CHATBOT_CONTEXT = {
       github: "https://github.com/Rameshwar-bhagwat10/spam-detection",
     },
     {
-      name: "WebCraft",
-      type: "Agency Website",
-      description: "Website Builder for Modern Businesses - A client-focused web development solution helping businesses establish their digital presence.",
-      techStack: ["React", "Next.js", "Tailwind CSS", "Firebase", "Stripe"],
-      features: [
-        "Responsive website templates",
-        "Custom UI/UX design",
-        "SEO-ready architecture",
-        "CMS integration",
-        "Analytics dashboard",
-      ],
-      status: "Completed",
-    },
-    {
       name: "Moungiri Store",
       type: "E-Commerce",
       description: "Full-featured digital storefront for a local kirana business with complete e-commerce functionality including payments and inventory management.",
@@ -202,6 +202,8 @@ export const CHATBOT_CONTEXT = {
       status: "Live",
     },
   ],
+
+  featuredProjects: ["WebCraft", "Safecoast"],
 
   // Journey/Timeline with more details
   journey: [
@@ -413,6 +415,11 @@ export const QUICK_RESPONSES: Record<string, string> = {
   'good afternoon': "Good afternoon! Welcome! What would you like to know about Rameshwar?",
   'good evening': "Good evening! 🌙 Thanks for visiting. How can I help you?",
 
+  // Identity Questions
+  'name': `My name is **${CHATBOT_CONTEXT.personal.name}**. I'm ${CHATBOT_CONTEXT.personal.name}'s AI assistant.`,
+  'your name': `My name is **${CHATBOT_CONTEXT.personal.name}**. I'm here to help you learn about ${CHATBOT_CONTEXT.personal.name}'s work.`,
+  'what is your name': `I'm **${CHATBOT_CONTEXT.personal.name}'s AI assistant**. ${CHATBOT_CONTEXT.personal.name} is a ${CHATBOT_CONTEXT.personal.jobTitle}.`,
+
   // About Questions
   'who are you': `I'm an AI assistant for **Rameshwar Bhagwat**, a ${CHATBOT_CONTEXT.personal.jobTitle} based in ${CHATBOT_CONTEXT.personal.location}. I can tell you about his skills, projects, experience, and more!`,
   'who is rameshwar': `**Rameshwar Bhagwat** is a ${CHATBOT_CONTEXT.personal.jobTitle} with ${CHATBOT_CONTEXT.personal.yearsOfExperience} years of experience. ${CHATBOT_CONTEXT.personal.bio}`,
@@ -459,11 +466,11 @@ export const QUICK_RESPONSES: Record<string, string> = {
   'what are you best at': "Rameshwar is best at:\n\n🥇 **Full Stack Development** with React/Next.js\n🥈 **AI/ML Integration** for intelligent features\n🥉 **SaaS Platform Development**\n\nHe's shipped 10+ production projects!",
 
   // Project Questions
-  'show me your projects': `**Rameshwar's Projects:**\n\n🚀 **Devory** - AI-Powered Student Project Platform\n🌊 **Safecoast** - Coastal Hazard Intelligence (Hackathon Winner)\n💡 **ThinkVerse** - Idea Management Platform\n🛒 **Moungiri Store** - E-commerce Platform\n📱 **Spam Detection** - ML Classification System\n\n👉 [View All Projects](#projects)`,
-  'what projects have you built': `**Projects Built by Rameshwar:**\n\n1. **Devory** - AI-driven platform for student projects\n2. **Safecoast** - Real-time coastal hazard monitoring\n3. **ThinkVerse** - Structured idea management\n4. **Moungiri Store** - Full e-commerce solution\n5. **This Portfolio** - With AI chatbot!\n\n👉 [View All Projects](#projects)`,
-  'your work': `**Rameshwar's Work:**\n\nHe has built ${CHATBOT_CONTEXT.personal.projectsBuilt} production projects including SaaS platforms, AI applications, and web apps.\n\n**Featured:** Devory, Safecoast, ThinkVerse\n\n👉 [View Projects](#projects)`,
+  'show me your projects': `**Rameshwar's Projects:**\n\n🌐 **WebCraft** - Website Builder for Modern Businesses\n🌊 **Safecoast** - Coastal Hazard Intelligence (Hackathon Winner)\n🚀 **Devory** - AI-Powered Student Project Platform\n🛒 **Moungiri Store** - E-commerce Platform\n📱 **Spam Detection** - ML Classification System\n\n👉 [View All Projects](#projects)`,
+  'what projects have you built': `**Projects Built by Rameshwar:**\n\n1. **WebCraft** - Modern business web solution\n2. **Safecoast** - Real-time coastal hazard monitoring\n3. **Devory** - AI-driven student project platform\n4. **Moungiri Store** - Full e-commerce solution\n5. **Spam Detection** - ML text classification\n\n👉 [View All Projects](#projects)`,
+  'your work': `**Rameshwar's Work:**\n\nHe has built ${CHATBOT_CONTEXT.personal.projectsBuilt} production projects including AI applications and full-stack web products.\n\n**Featured:** WebCraft, Safecoast\n\n👉 [View Projects](#projects)`,
   'portfolio': `**Rameshwar's Portfolio:**\n\nIncludes ${CHATBOT_CONTEXT.personal.projectsBuilt} projects ranging from AI-powered SaaS platforms to e-commerce solutions.\n\n👉 [View All Projects](#projects)`,
-  'what have you built': `**What Rameshwar Has Built:**\n\n🚀 SaaS Platforms (Devory, ThinkVerse)\n🌊 Real-time Monitoring Apps (Safecoast)\n🛒 E-commerce Solutions (Moungiri Store)\n🤖 AI/ML Applications (Spam Detection)\n💼 Client Websites\n\n👉 [View Projects](#projects)`,
+  'what have you built': `**What Rameshwar Has Built:**\n\n🌐 Client-focused websites (WebCraft)\n🌊 Real-time monitoring apps (Safecoast)\n🚀 SaaS platforms (Devory)\n🛒 E-commerce solutions (Moungiri Store)\n🤖 AI/ML applications (Spam Detection)\n\n👉 [View Projects](#projects)`,
 
   // Specific Projects
   'tell me about devory': `**🚀 Devory - AI-Powered Student Project Platform**\n\n${CHATBOT_CONTEXT.projects[0].longDescription}\n\n**Tech:** Next.js, TypeScript, PostgreSQL, OpenAI\n**Status:** Currently building\n\n👉 [View Projects](#projects)`,
@@ -560,7 +567,7 @@ export const RESPONSE_TEMPLATES = {
   ],
 
   capabilities: [
-    "**I can tell you about:**\n\n• 👤 Rameshwar's background & bio\n• 🛠️ Skills and tech stack\n• 🚀 Projects (Devory, Safecoast, etc.)\n• 📅 Experience and journey\n• 💼 Services offered\n• 📧 How to contact or hire\n• 🔗 Social links\n\nWhat would you like to know?",
+    "**I can tell you about:**\n\n• 👤 Rameshwar's background & bio\n• 🛠️ Skills and tech stack\n• 🚀 Projects (WebCraft, Safecoast, Devory)\n• 📅 Experience and journey\n• 💼 Services offered\n• 📧 How to contact or hire\n• 🔗 Social links\n\nWhat would you like to know?",
   ],
 };
 
@@ -580,6 +587,7 @@ export const INTENT_KEYWORDS: Record<string, string[]> = {
 
   // About/Introduction
   about: ["about", "who", "tell me", "yourself", "rameshwar", "introduce", "introduction", "what do you do", "describe", "overview", "summary", "bio", "background"],
+  identity: ["name", "your name", "what is your name", "who am i talking to"],
 
   // Skills
   skills: ["skills", "technologies", "tech stack", "stack", "programming", "languages", "know", "expertise", "proficient", "capable", "abilities", "competencies", "tools", "frameworks"],
@@ -636,12 +644,13 @@ export const SUGGESTION_CHAINS: Record<string, string[]> = {
 
   // After about response
   about: ["What are your skills?", "Show me your projects", "How can I hire you?"],
+  identity: ["Tell me about yourself", "Show me your projects", "How can I contact you?"],
 
   // After skills response
   skills: ["Tell me about frontend", "What databases do you use?", "Show me your projects"],
 
   // After frontend response
-  frontend: ["What about backend?", "Do you work with AI?", "Tell me about Devory"],
+  frontend: ["What about backend?", "Do you work with AI?", "Tell me about WebCraft"],
 
   // After backend response
   backend: ["What databases do you use?", "Show me your projects", "What services do you offer?"],
@@ -650,18 +659,18 @@ export const SUGGESTION_CHAINS: Record<string, string[]> = {
   database: ["What about DevOps?", "Show me your projects", "How can I hire you?"],
 
   // After AI/ML response
-  ai: ["Tell me about Devory", "What is your tech stack?", "How can I hire you?"],
+  ai: ["Tell me about WebCraft", "Tell me about Safecoast", "How can I hire you?"],
 
   // After DevOps response
   devops: ["Show me your projects", "What services do you offer?", "How can I contact you?"],
 
   // After projects response
-  projects: ["Tell me about Devory", "Tell me about Safecoast", "How can I hire you?"],
+  projects: ["Tell me about WebCraft", "Tell me about Safecoast", "How can I hire you?"],
 
   // After specific project responses
   devory: ["What tech did you use?", "Tell me about Safecoast", "How can I hire you?"],
-  safecoast: ["Tell me about Devory", "Tell me about ThinkVerse", "What are your skills?"],
-  thinkverse: ["Tell me about Devory", "Show me your projects", "How can I hire you?"],
+  safecoast: ["Tell me about WebCraft", "Tell me about Devory", "What are your skills?"],
+  thinkverse: ["Tell me about WebCraft", "Show me your projects", "How can I hire you?"],
   spam: ["What other projects?", "Do you work with AI?", "How can I hire you?"],
   ecommerce: ["Show me your projects", "What services do you offer?", "How can I contact you?"],
 

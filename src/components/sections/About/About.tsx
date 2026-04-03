@@ -18,7 +18,7 @@ export default function About() {
     <section 
       id="about" 
       className="relative pt-24 sm:pt-32 md:pt-40 pb-12 px-4 sm:px-6 bg-[#0F0E0E] overflow-x-clip"
-      aria-label="About Rameshwar Bhagwat - Full Stack Developer"
+      aria-label="About Rameshwar Bhagwat - Full Stack & AI Developer"
       itemScope
       itemType="https://schema.org/Person"
     >

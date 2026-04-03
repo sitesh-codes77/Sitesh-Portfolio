@@ -39,8 +39,20 @@ export default function StructuredData() {
         "@type": "City",
         "name": `${PERSONAL_INFO.location.city}, ${PERSONAL_INFO.location.state}, ${PERSONAL_INFO.location.country}`
       },
-      "skills": "React, Next.js, TypeScript, Node.js, JavaScript, HTML, CSS, MongoDB, Express.js"
-    }
+      "skills": "React, Next.js, TypeScript, Node.js, JavaScript, AI Integration, Machine Learning APIs"
+    },
+    "subjectOf": [
+      {
+        "@type": "CreativeWork",
+        "name": "WebCraft",
+        "description": "A modern website solution focused on performance, business growth, and SEO-ready architecture."
+      },
+      {
+        "@type": "CreativeWork",
+        "name": "Safecoast",
+        "description": "A coastal hazard intelligence platform focused on monitoring and risk awareness."
+      }
+    ]
   };
 
   const websiteSchema = {
@@ -58,6 +70,10 @@ export default function StructuredData() {
     "copyrightHolder": {
       "@type": "Person",
       "name": PERSONAL_INFO.name
+    },
+    "about": {
+      "@type": "Person",
+      "name": PERSONAL_INFO.name
     }
   };
 
@@ -65,13 +81,58 @@ export default function StructuredData() {
     "@context": "https://schema.org",
     "@type": "ProfessionalService",
     "name": `${PERSONAL_INFO.name} - Web Development Services`,
-    "description": "Professional web development services specializing in React, Next.js, and full-stack solutions",
+    "description": "Professional full stack and AI-focused web development services specializing in React, Next.js, and intelligent product experiences",
     "provider": {
       "@type": "Person",
       "name": PERSONAL_INFO.name
     },
     "areaServed": "Worldwide",
-    "serviceType": "Web Development"
+    "serviceType": "Full Stack & AI Development",
+    "keywords": "Rameshwar Bhagwat, Full Stack & AI Developer, WebCraft, Safecoast"
+  };
+
+  const webpageSchema = {
+    "@context": "https://schema.org",
+    "@type": "WebPage",
+    "name": `${PERSONAL_INFO.name} Portfolio`,
+    "url": SITE_URL,
+    "description": SITE_DESCRIPTION,
+    "isPartOf": {
+      "@type": "WebSite",
+      "name": SITE_NAME,
+      "url": SITE_URL
+    },
+    "about": {
+      "@type": "Person",
+      "name": PERSONAL_INFO.name
+    },
+    "primaryImageOfPage": `${SITE_URL}/og-image.png`
+  };
+
+  const projectListSchema = {
+    "@context": "https://schema.org",
+    "@type": "ItemList",
+    "name": `${PERSONAL_INFO.name} Featured Projects`,
+    "itemListElement": [
+      {
+        "@type": "ListItem",
+        "position": 1,
+        "item": {
+          "@type": "CreativeWork",
+          "name": "WebCraft",
+          "description": "Modern business website solution with performance and SEO-ready architecture."
+        }
+      },
+      {
+        "@type": "ListItem",
+        "position": 2,
+        "item": {
+          "@type": "CreativeWork",
+          "name": "Safecoast",
+          "description": "Coastal hazard intelligence platform focused on monitoring and risk awareness."
+        }
+      }
+    ]
   };
 
   const breadcrumbSchema = {
@@ -135,6 +196,18 @@ export default function StructuredData() {
         id="breadcrumb-schema"
         type="application/ld+json"
         dangerouslySetInnerHTML={{ __html: JSON.stringify(breadcrumbSchema) }}
+        strategy="afterInteractive"
+      />
+      <Script
+        id="webpage-schema"
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(webpageSchema) }}
+        strategy="afterInteractive"
+      />
+      <Script
+        id="project-list-schema"
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(projectListSchema) }}
         strategy="afterInteractive"
       />
     </>

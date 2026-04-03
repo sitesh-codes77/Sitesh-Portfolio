@@ -14,6 +14,8 @@ const QUICK_RESPONSE_INTENTS: Record<string, string> = {
   'good morning': 'greeting', 'good afternoon': 'greeting', 'good evening': 'greeting',
 
   // About
+  'name': 'identity', 'your name': 'identity', 'what is your name': 'identity',
+  'who am i talking to': 'identity',
   'who are you': 'about', 'who is rameshwar': 'about', 'tell me about yourself': 'about',
   'tell me about rameshwar': 'about', 'introduce yourself': 'about', 'what do you do': 'about',
 
@@ -76,9 +78,46 @@ const QUICK_RESPONSE_INTENTS: Record<string, string> = {
   'do you work remotely': 'location', 'languages you speak': 'about',
 };
 
+function normalizeMessage(message: string): string {
+  return message
+    .toLowerCase()
+    .replace(/[^a-z0-9\s]/g, ' ')
+    .replace(/\s+/g, ' ')
+    .trim();
+}
+
+function detectSingleWordIntent(normalized: string): string | null {
+  const oneWordMap: Record<string, string> = {
+    name: 'identity',
+    email: 'contact',
+    phone: 'contact',
+    contact: 'contact',
+    location: 'location',
+    projects: 'projects',
+    project: 'projects',
+    skills: 'skills',
+    experience: 'experience',
+    github: 'social',
+    linkedin: 'social',
+  };
+
+  return oneWordMap[normalized] || null;
+}
+
 // Check for exact or near-exact matches first (faster responses)
 function getQuickResponse(message: string): { response: string; intent: string } | null {
-  const normalized = message.toLowerCase().trim();
+  const normalized = normalizeMessage(message);
+
+  const singleIntent = detectSingleWordIntent(normalized);
+  if (singleIntent && SUGGESTION_CHAINS[singleIntent]) {
+    const quickKey = normalized;
+    if (QUICK_RESPONSES[quickKey]) {
+      return {
+        response: QUICK_RESPONSES[quickKey],
+        intent: QUICK_RESPONSE_INTENTS[quickKey] || singleIntent,
+      };
+    }
+  }
 
   // Direct match
   if (QUICK_RESPONSES[normalized]) {
@@ -103,7 +142,7 @@ function getQuickResponse(message: string): { response: string; intent: string }
 
 // Detect intents from user message with scoring
 function detectIntent(message: string): string[] {
-  const lowerMessage = message.toLowerCase();
+  const lowerMessage = normalizeMessage(message);
   const words = lowerMessage.split(/\s+/);
   const intentScores: Record<string, number> = {};
 
@@ -137,7 +176,7 @@ function detectIntent(message: string): string[] {
 // Generate response based on intents
 function generateResponse(intents: string[], message: string): string {
   const responses: string[] = [];
-  const lowerMessage = message.toLowerCase();
+  const lowerMessage = normalizeMessage(message);
 
   // Primary intent is the first one (highest score)
   const primaryIntent = intents[0];
@@ -154,6 +193,15 @@ function generateResponse(intents: string[], message: string): string {
 
     case 'capabilities':
       return RESPONSE_TEMPLATES.capabilities[0];
+
+    case 'identity': {
+      const { personal } = CHATBOT_CONTEXT;
+      responses.push(
+        `My name is **${personal.name}**. I'm ${personal.name}'s AI assistant.\n\n` +
+        `${personal.name} is a **${personal.jobTitle}** based in ${personal.location}.`
+      );
+      break;
+    }
 
     case 'about': {
       const { personal, sections } = CHATBOT_CONTEXT;
@@ -257,7 +305,16 @@ function generateResponse(intents: string[], message: string): string {
 
     case 'projects': {
       const { sections } = CHATBOT_CONTEXT;
-      const projectList = CHATBOT_CONTEXT.projects
+      const featuredProjects = (CHATBOT_CONTEXT as typeof CHATBOT_CONTEXT & { featuredProjects?: string[] }).featuredProjects || ['WebCraft', 'Safecoast'];
+      const featuredSet = new Set(featuredProjects);
+      const sortedProjects = [...CHATBOT_CONTEXT.projects].sort((a, b) => {
+        const aFeatured = featuredSet.has(a.name) ? 0 : 1;
+        const bFeatured = featuredSet.has(b.name) ? 0 : 1;
+        if (aFeatured !== bFeatured) return aFeatured - bFeatured;
+        return a.name.localeCompare(b.name);
+      });
+
+      const projectList = sortedProjects
         .map(p => `• **${p.name}** - ${p.type}: ${p.description.slice(0, 80)}...`)
         .join('\n');
 
