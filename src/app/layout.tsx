@@ -55,40 +55,39 @@ const spaceGrotesk = Space_Grotesk({
   preload: true,
 });
 
-const siteUrl = process.env.NEXT_PUBLIC_SITE_URL || 'https://rameshwarbhagwat.me';
+const siteUrl = process.env.NEXT_PUBLIC_SITE_URL || 'https://siteshprusty.dev';
 
 export const metadata: Metadata = {
   metadataBase: new URL(siteUrl),
   title: {
-    default: "Rameshwar Bhagwat | Full Stack & AI Developer",
-    template: "%s | Rameshwar Bhagwat"
+    default: "Sitesh Prusty | Full Stack Developer & Software Engineer",
+    template: "%s | Sitesh Prusty"
   },
-  description: "Rameshwar Bhagwat is a Full Stack & AI Developer from India building high-performance AI-powered web applications with React, Next.js, TypeScript, and Node.js. Explore Rameshwar Bhagwat projects including WebCraft and Safecoast.",
+  description: "Sitesh Prusty is a Full Stack Developer & Software Engineer (B.Tech CS 2nd Year) from Odisha building high-performance web applications with MERN stack, Java, and Python. Selected for Cisco-backed thingqbator incubation.",
   keywords: [
-    "Rameshwar Bhagwat",
-    "Rameshwar Bhagwat portfolio",
-    "Rameshwar Bhagwat developer",
-    "Rameshwar Bhagwat AI Developer",
-    "Rameshwar Bhagwat Full Stack Developer",
-    "Full Stack Developer Rameshwar Bhagwat",
-    "AI Developer Rameshwar Bhagwat",
-    "Rameshwar Bhagwat projects",
-    "Rameshwar Bhagwat WebCraft",
-    "Rameshwar Bhagwat Safecoast",
+    "Sitesh Prusty",
+    "Sitesh Prusty portfolio",
+    "Sitesh Prusty developer",
+    "Sitesh Prusty Software Engineer",
+    "Sitesh Prusty Full Stack Developer",
+    "Full Stack Developer Odisha",
+    "MERN Stack Developer India",
+    "Sitesh Prusty projects",
+    "Sitesh Prusty RoamReserve",
+    "Sitesh Prusty Civil Intel",
+    "thingqbator Sitesh Prusty",
     "Full Stack Developer",
-    "AI Developer",
+    "Software Engineer",
     "Next.js Developer",
-    "React Developer",
-    "TypeScript Developer",
-    "WebCraft",
-    "Safecoast",
-    "Machine Learning Projects",
-    "Web Development Portfolio",
-    "AI-Powered Applications"
+    "Java DSA Developer",
+    "Python Django Developer",
+    "RoamReserve",
+    "Civil Intel",
+    "Web Development Portfolio"
   ],
-  authors: [{ name: "Rameshwar Bhagwat", url: siteUrl }],
-  creator: "Rameshwar Bhagwat",
-  publisher: "Rameshwar Bhagwat",
+  authors: [{ name: "Sitesh Prusty", url: siteUrl }],
+  creator: "Sitesh Prusty",
+  publisher: "Sitesh Prusty",
   formatDetection: {
     email: false,
     address: false,
@@ -100,9 +99,9 @@ export const metadata: Metadata = {
   category: "technology",
   classification: "Portfolio",
   other: {
-    author: "Rameshwar Bhagwat",
-    "geo.region": "IN-MH",
-    "geo.placename": "Yeola",
+    author: "Sitesh Prusty",
+    "geo.region": "IN-OR",
+    "geo.placename": "Daspalla",
   },
   icons: {
     icon: [
@@ -131,24 +130,23 @@ export const metadata: Metadata = {
     type: "website",
     locale: "en_US",
     url: siteUrl,
-    siteName: "Rameshwar Bhagwat Portfolio",
-    title: "Rameshwar Bhagwat | Full Stack & AI Developer",
-    description: "Rameshwar Bhagwat builds AI-powered web applications and full stack products. Featured projects: WebCraft and Safecoast.",
+    siteName: "Sitesh Prusty Portfolio",
+    title: "Sitesh Prusty | Full Stack Developer & Software Engineer",
+    description: "Sitesh Prusty builds high-performance MERN applications and real-world software solutions. Featured projects: RoamReserve and Civil Intel.",
     images: [
       {
         url: `${siteUrl}/og-image.png`,
         width: 1200,
         height: 630,
-        alt: "Rameshwar Bhagwat - Full Stack & AI Developer Portfolio"
+        alt: "Sitesh Prusty - Full Stack Developer & Software Engineer Portfolio"
       }
     ],
   },
   twitter: {
     card: "summary_large_image",
-    title: "Rameshwar Bhagwat | Full Stack & AI Developer",
-    description: "Rameshwar Bhagwat - Full Stack & AI Developer. Featured work includes WebCraft and Safecoast.",
+    title: "Sitesh Prusty | Full Stack Developer & Software Engineer",
+    description: "Sitesh Prusty - Full Stack Developer & Software Engineer. Featured work includes RoamReserve and Civil Intel.",
     images: [`${siteUrl}/og-image.png`],
-    creator: "@Rameshwarbhagwat",
   },
   robots: {
     index: true,
@@ -175,22 +173,22 @@ export default function RootLayout({
   const structuredData = {
     "@context": "https://schema.org",
     "@type": "Person",
-    "name": "Rameshwar Bhagwat",
+    "name": "Sitesh Prusty",
     "url": siteUrl,
-    "image": `${siteUrl}/images/profile/profile.jpeg`,
-    "jobTitle": "Full Stack & AI Developer",
-    "description": "Rameshwar Bhagwat is a Full Stack & AI Developer building AI-powered web applications, with featured projects WebCraft and Safecoast.",
-    "email": "rameshwarbhagwat019@gmail.com",
-    "telephone": "+91-9699245170",
+    "image": `${siteUrl}/image/profile/profile.jpeg`,
+    "jobTitle": "Full Stack Developer & Software Engineer",
+    "description": "Sitesh Prusty is a Full Stack Developer & Software Engineer building high-performance web applications, with featured projects RoamReserve and Civil Intel.",
+    "email": "siteshprusty@gmail.com",
+    "telephone": "+91-933764XXXX",
     "address": {
       "@type": "PostalAddress",
-      "addressLocality": "Yeola",
-      "addressRegion": "Maharashtra",
+      "addressLocality": "Daspalla",
+      "addressRegion": "Odisha",
       "addressCountry": "IN"
     },
     "sameAs": [
-      "https://github.com/Rameshwar-bhagwat10",
-      "https://linkedin.com/in/rameshwar-bhagwat"
+      "https://github.com/sitesh-codes77",
+      "https://www.linkedin.com/in/sitesh-prusty-22a8752a1/"
     ],
     "knowsAbout": [
       "Full Stack Development",
@@ -205,18 +203,18 @@ export default function RootLayout({
     ],
     "alumniOf": {
       "@type": "EducationalOrganization",
-      "name": "B.Tech IT"
+      "name": "B.Tech CSE"
     },
     "subjectOf": [
       {
         "@type": "CreativeWork",
-        "name": "WebCraft",
-        "description": "Website builder for modern businesses with SEO-ready architecture and performance-first engineering.",
+        "name": "RoamReserve",
+        "description": "Full-scale Airbnb clone built with MERN stack featuring production-ready booking architecture.",
       },
       {
         "@type": "CreativeWork",
-        "name": "Safecoast",
-        "description": "Coastal hazard intelligence platform focused on real-time monitoring and risk awareness.",
+        "name": "Civil Intel",
+        "description": "Startup platform incubated at thingqbator, focusing on civic urban intelligence and problem solving.",
       }
     ]
   };
@@ -224,12 +222,12 @@ export default function RootLayout({
   const websiteStructuredData = {
     "@context": "https://schema.org",
     "@type": "WebSite",
-    "name": "Rameshwar Bhagwat Portfolio",
+    "name": "Sitesh Prusty Portfolio",
     "url": siteUrl,
-    "description": "Portfolio of Rameshwar Bhagwat showcasing full stack and AI-powered web projects, including WebCraft and Safecoast.",
+    "description": "Portfolio of Sitesh Prusty showcasing full stack and software engineering projects, including RoamReserve and Civil Intel.",
     "author": {
       "@type": "Person",
-      "name": "Rameshwar Bhagwat"
+      "name": "Sitesh Prusty"
     },
     "potentialAction": {
       "@type": "SearchAction",
@@ -248,7 +246,7 @@ export default function RootLayout({
   return (
     <html lang="en" className="dark">
       <head>
-        <title>Rameshwar Bhagwat | Full Stack & AI Developer</title>
+        <title>Sitesh Prusty | Full Stack Developer & Software Engineer</title>
         {/* Structured Data - Person Schema */}
         <script
           type="application/ld+json"

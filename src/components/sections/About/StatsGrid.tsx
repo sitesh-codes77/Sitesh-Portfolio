@@ -15,9 +15,9 @@ interface StatItem {
 }
 
 const stats: StatItem[] = [
-  { value: 5, label: 'Projects Built', suffix: '+', max: 10, icon: CheckCircle2, color: '#FF6B35' },
-  { value: 1, label: 'Years Experience', suffix: '+', max: 5, icon: Briefcase, color: '#3B82F6' },
-  { value: 20, label: 'Technologies', suffix: '+', max: 30, icon: TrendingUp, color: '#10B981' },
+  { value: 3, label: 'Notable Projects', suffix: '+', max: 10, icon: CheckCircle2, color: '#FF6B35' },
+  { value: 2, label: 'Years Coding', suffix: '+', max: 5, icon: Briefcase, color: '#3B82F6' },
+  { value: 15, label: 'Technologies', suffix: '+', max: 30, icon: TrendingUp, color: '#10B981' },
 ];
 
 const AnimatedNumber = memo(function AnimatedNumber({ 

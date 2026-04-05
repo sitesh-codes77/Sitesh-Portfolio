@@ -2,11 +2,11 @@
 
 import Image from 'next/image';
 import { motion } from 'framer-motion';
-import { Mail, Linkedin, Github, Twitter, MapPin, Sparkles, LucideIcon } from 'lucide-react';
+import { Mail, Linkedin, Github, MapPin, Sparkles, LucideIcon } from 'lucide-react';
 import { PERSONAL_INFO, SOCIAL_LINKS } from '@/lib/constants';
 import {
-  SiReact, SiNextdotjs, SiTypescript, SiNodedotjs,
-  SiPython, SiAmazon, SiTensorflow, SiDocker
+  SiReact, SiMongodb, SiExpress, SiNodedotjs,
+  SiPython, SiOpenjdk, SiDocker, SiGit
 } from 'react-icons/si';
 import { Layers } from 'lucide-react';
 import GlowCard from '@/components/ui/GlowCard';
@@ -21,20 +21,19 @@ interface ExpertiseItem {
 
 const expertise: ExpertiseItem[] = [
   { name: 'React', icon: SiReact, color: '#61DAFB' },
-  { name: 'Next.js', icon: SiNextdotjs, color: '#FFFFFF' },
-  { name: 'TypeScript', icon: SiTypescript, color: '#3178C6' },
+  { name: 'MongoDB', icon: SiMongodb, color: '#47A248' },
+  { name: 'Express.js', icon: SiExpress, color: '#FFFFFF' },
   { name: 'Node.js', icon: SiNodedotjs, color: '#339933' },
   { name: 'Python', icon: SiPython, color: '#3776AB' },
-  { name: 'AWS', icon: SiAmazon, color: '#FF9900' },
+  { name: 'Java (DSA)', icon: SiOpenjdk, color: '#F89820' },
   { name: 'Docker', icon: SiDocker, color: '#2496ED' },
-  { name: 'AI/ML', icon: SiTensorflow, color: '#FF6F00' },
+  { name: 'Git', icon: SiGit, color: '#F05032' },
   { name: 'System Design', icon: Layers, color: '#8B5CF6' },
 ];
 
 // Pre-compute social links to avoid lookup on each render
 const linkedInUrl = SOCIAL_LINKS.find(l => l.name === 'LinkedIn')?.url || '#';
-const gitHubUrl = SOCIAL_LINKS.find(l => l.name === 'GitHub')?.url || '#';
-const twitterUrl = SOCIAL_LINKS.find(l => l.name === 'Twitter')?.url || '#';
+const gitHubUrl = SOCIAL_LINKS.find(l => l.name === 'Github')?.url || '#';
 
 interface SocialLinkItem {
   name: string;
@@ -45,10 +44,9 @@ interface SocialLinkItem {
 }
 
 const socialLinks: SocialLinkItem[] = [
-  { name: 'Email', icon: Mail, href: `mailto:${PERSONAL_INFO.email}`, label: 'Email Rameshwar Bhagwat', isExternal: false },
+  { name: 'Email', icon: Mail, href: `mailto:${PERSONAL_INFO.email}`, label: 'Email Sitesh Prusty', isExternal: false },
   { name: 'LinkedIn', icon: Linkedin, href: linkedInUrl, label: 'LinkedIn Profile', isExternal: true },
   { name: 'GitHub', icon: Github, href: gitHubUrl, label: 'GitHub Profile', isExternal: true },
-  { name: 'Twitter', icon: Twitter, href: twitterUrl, label: 'Twitter Profile', isExternal: true },
 ];
 
 const ProfileCard = memo(function ProfileCard() {
@@ -95,11 +93,11 @@ const ProfileCard = memo(function ProfileCard() {
           {/* Profile picture */}
           <div className="absolute inset-[2px] xs:inset-[3px] rounded-full overflow-hidden">
             <Image
-              src="/images/profile/profile.jpeg"
+              src="/images/profile/sitesh-profile.jpg"
               alt={profileAlt}
               width={256}
               height={256}
-              className="w-full h-full object-cover"
+              className="w-full h-full object-cover scale-125"
               priority
             />
           </div>

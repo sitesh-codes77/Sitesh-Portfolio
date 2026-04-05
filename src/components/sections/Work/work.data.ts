@@ -15,87 +15,53 @@ export interface Project {
 export const projects: Project[] = [
   {
     id: 1,
-    title: "WebCraft",
-    tagline: "Website Builder for Modern Businesses",
-    description: "WebCraft is a client-focused web development solution that helps businesses establish a strong digital presence with fast, responsive, and SEO-ready websites.",
+    title: "RoamReserve",
+    tagline: "Full-Scale Airbnb Clone — MERN Stack",
+    description: "RoamReserve is a production-quality Airbnb clone built with the MERN Stack. It covers end-to-end functionality including user authentication, property listings, booking system, interactive maps, and image uploads.",
     features: [
-      "Responsive and performance-optimized websites",
-      "Custom UI/UX design implementation",
-      "SEO-ready architecture and fast loading speed"
+      "User authentication with JWT & session management",
+      "Property listings with search, filter, and map integration",
+      "Full booking system with review and rating functionality"
     ],
-    techStack: ["React", "Next.js", "Tailwind CSS", "Firebase"],
-    image: "/images/projects/project4.png",
-    hoverImage: "/images/projects/project4-hover.png",
-    liveUrl: "https://webcraft-demo.com",
-    githubUrl: "https://github.com/yourusername/webcraft",
+    techStack: ["MongoDB", "Express.js", "React", "Node.js", "Mapbox", "Cloudinary"],
+    image: "/images/projects/project1.png",
+    hoverImage: "/images/projects/project1-hover.png",
+    liveUrl: "https://roamreserve-demo.com",
+    githubUrl: "https://github.com/sitesh-codes77/roamreserve",
     color: "99, 102, 241"
   },
   {
     id: 2,
-    title: "Safecoast",
-    tagline: "Coastal Hazard Intelligence Platform",
-    description: "Safecoast is a coastal hazard intelligence system designed to monitor environmental risk factors and support faster preparedness with real-time alerting insights.",
+    title: "Civil Intel",
+    tagline: "Startup — Selected for College Innovation Mela",
+    description: "Civil Intel is a startup project focused on solving real civic and urban challenges. Selected for the college Innovation Mela, it involved defining a business model, identifying target users, and architecting a technical solution for social impact.",
     features: [
-      "Real-time hazard monitoring and alert system",
-      "Interactive data visualization dashboard",
-      "Predictive analysis for coastal risk assessment"
+      "Business model definition and market research",
+      "Technical architecture for civic data intelligence",
+      "Presentation and validation at Innovation Mela"
     ],
-    techStack: ["Next.js", "TypeScript", "Node.js", "Tailwind CSS", "OpenWeather API"],
+    techStack: ["React", "Node.js", "MongoDB", "Express.js", "Python"],
     image: "/images/projects/project2.png",
     hoverImage: "/images/projects/project2-hover.png",
-    liveUrl: "https://safecoast-demo.com",
-    githubUrl: "https://github.com/yourusername/safecoast",
+    liveUrl: "https://civilintel-demo.com",
+    githubUrl: "https://github.com/sitesh-codes77/civil-intel",
     color: "0, 119, 182"
   },
   {
     id: 3,
     title: "Spam Message Detection",
     tagline: "Machine Learning-Based Text Classification System",
-    description: "Developed a machine learning-based spam message detection system using Python to classify SMS and text messages as spam or legitimate.",
+    description: "Developed a machine learning-based spam message detection system using Python to classify SMS and text messages as spam or legitimate using NLP techniques.",
     features: [
-      "Text preprocessing using NLP techniques",
-      "Trained and evaluated ML models for spam classification",
+      "Text preprocessing using NLP techniques (tokenization, stemming)",
+      "Trained and evaluated ML models (Naive Bayes, SVM) for spam classification",
       "Real-time message prediction with probability scoring"
     ],
     techStack: ["Python", "Scikit-learn", "Pandas", "NumPy", "NLTK", "Matplotlib"],
     image: "/images/projects/project3.png",
     hoverImage: "/images/projects/project3-hover.png",
     liveUrl: "https://your-demo-link.com",
-    githubUrl: "https://github.com/yourusername/spam-message-detection",
+    githubUrl: "https://github.com/sitesh-codes77/spam-message-detection",
     color: "220, 53, 69"
-  },
-  {
-    id: 4,
-    title: "Moungiri Store E-Commerce",
-    tagline: "Digital Storefront for Local Kirana Business",
-    description: "Developed a complete e-commerce platform for a local kirana store with product management, cart functionality, and order processing.",
-    features: [
-      "Product catalog and cart management",
-      "Order tracking and checkout system",
-      "Admin dashboard for inventory management"
-    ],
-    techStack: ["Next.js", "MongoDB", "Node.js", "Stripe", "Tailwind CSS"],
-    image: "/images/projects/project5.png",
-    hoverImage: "/images/projects/project5-hover.png",
-    liveUrl: "https://localmart-demo.com",
-    githubUrl: "https://github.com/yourusername/localmart",
-    color: "16, 185, 129"
-  },
-  {
-    id: 5,
-    title: "Devory",
-    tagline: "AI-Powered Student Project Platform",
-    description: "Devory is an AI-driven platform designed to help students discover, build, and manage real-world technical projects with intelligent recommendations and structured workflows.",
-    features: [
-      "AI-based project idea recommendations",
-      "Structured project workflow management",
-      "Progress tracking and portfolio-ready output"
-    ],
-    techStack: ["Next.js", "TypeScript", "PostgreSQL", "Prisma", "Tailwind CSS", "OpenAI API"],
-    image: "/images/projects/project1.png",
-    hoverImage: "/images/projects/project1-hover.png",
-    liveUrl: "https://devory-app.com",
-    githubUrl: "https://github.com/yourusername/devory",
-    color: "138, 43, 226"
   },
 ];

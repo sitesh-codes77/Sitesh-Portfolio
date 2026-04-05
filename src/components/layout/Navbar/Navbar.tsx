@@ -28,14 +28,43 @@ export default function Navbar() {
               window.scrollTo({ top: 0, behavior: 'smooth' });
             }}
           >
-            <Image 
-              src="/icons/logo.svg" 
-              alt="Rameshwar Bhagwat - Full Stack & AI Developer Logo" 
-              width={80}
-              height={80}
-              className="hover:scale-110 transition-transform duration-300"
-              priority
-            />
+            <div className="relative group overflow-visible">
+              <motion.div
+                className="w-14 h-14 rounded-2xl flex items-center justify-center bg-gradient-to-br from-[#0A84FF]/20 to-[#409CFF]/5 border border-white/10 backdrop-blur-md relative overflow-hidden"
+                whileHover={{ scale: 1.05, borderColor: 'rgba(255, 255, 255, 0.2)' }}
+                transition={{ duration: 0.3, ease: 'easeOut' }}
+              >
+                {/* Logo Gradient Glow */}
+                <div className="absolute inset-0 bg-gradient-to-tr from-[#0A84FF]/20 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
+                
+                {/* Custom Stylish SVG S Logo */}
+                <svg
+                  viewBox="0 0 100 100"
+                  className="w-8 h-8 drop-shadow-[0_0_8px_rgba(255,255,255,0.3)]"
+                  fill="none"
+                  xmlns="http://www.w3.org/2000/svg"
+                >
+                  <circle cx="50" cy="50" r="48" stroke="url(#logo-grad)" strokeWidth="0.5" strokeDasharray="4 4" className="opacity-20" />
+                  <path
+                    d="M35 30C35 24.4772 39.4772 20 45 20H60C65.5228 20 70 24.4772 70 30V35C70 40.5228 65.5228 45 60 45H45C39.4772 45 35 49.4772 35 55V60C35 65.5228 39.4772 70 45 70H60C65.5228 70 70 65.5228 70 60"
+                    stroke="url(#logo-grad)"
+                    strokeWidth="8"
+                    strokeLinecap="round"
+                    strokeLinejoin="round"
+                  />
+                  <defs>
+                    <linearGradient id="logo-grad" x1="0" y1="0" x2="100" y2="100" gradientUnits="userSpaceOnUse">
+                      <stop stopColor="white" />
+                      <stop offset="0.5" stopColor="#0A84FF" />
+                      <stop offset="1" stopColor="white" stopOpacity="0.8" />
+                    </linearGradient>
+                  </defs>
+                </svg>
+                
+                {/* Accent Detail */}
+                <div className="absolute bottom-1 right-1 w-1.5 h-1.5 rounded-full bg-[#30D158]" />
+              </motion.div>
+            </div>
           </motion.div>
 
           {/* Center Glass Pill Navigation - Perfectly Centered */}
@@ -70,13 +99,23 @@ export default function Navbar() {
               window.scrollTo({ top: 0, behavior: 'smooth' });
             }}
           >
-            <Image 
-              src="/icons/logo.svg" 
-              alt="Rameshwar Bhagwat Logo" 
-              width={40}
-              height={40}
-              priority
-            />
+            <div className="w-10 h-10 rounded-xl flex items-center justify-center bg-gradient-to-br from-[#0A84FF]/10 to-[#409CFF]/5 border border-white/10 backdrop-blur-md">
+              <svg
+                viewBox="0 0 100 100"
+                className="w-6 h-6"
+                fill="none"
+                xmlns="http://www.w3.org/2000/svg"
+              >
+                <path
+                  d="M35 30C35 24.4772 39.4772 20 45 20H60C65.5228 20 70 24.4772 70 30V35C70 40.5228 65.5228 45 60 45H45C39.4772 45 35 49.4772 35 55V60C35 65.5228 39.4772 70 45 70H60C65.5228 70 70 65.5228 70 60"
+                  stroke="currentColor"
+                  strokeWidth="8"
+                  strokeLinecap="round"
+                  strokeLinejoin="round"
+                  className="text-white"
+                />
+              </svg>
+            </div>
           </div>
 
           {/* Mobile Menu Toggle */}

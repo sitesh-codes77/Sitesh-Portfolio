@@ -1,6 +1,6 @@
 import { NextResponse } from 'next/server';
 
-const GITHUB_USERNAME = 'Rameshwar-bhagwat10';
+const GITHUB_USERNAME = 'sitesh-codes77';
 const GITHUB_TOKEN = process.env.GITHUB_TOKEN;
 
 interface ContributionDay {

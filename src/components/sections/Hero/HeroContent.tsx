@@ -112,7 +112,7 @@ export default function HeroContent() {
               className="sr-only"
               itemProp="name"
             >
-              Rameshwar Bhagwat - Full Stack Developer & AI Engineer | React, Next.js, TypeScript Expert
+              Sitesh Prusty - Full Stack Developer & Software Engineer | MERN Stack, DSA, Python Expert
             </h1>
 
             <div
@@ -120,7 +120,7 @@ export default function HeroContent() {
                 fontFamily: 'var(--font-jakarta), "Plus Jakarta Sans", sans-serif',
                 fontWeight: 800,
               }}
-              aria-label="Rameshwar Bhagwat - Full Stack Developer"
+              aria-label="Sitesh Prusty - Full Stack Developer & Software Engineer"
             >
               {/* Greeting line */}
               <div
@@ -140,7 +140,7 @@ export default function HeroContent() {
                 itemProp="name"
               >
                 <AnimatedLetters
-                  text="Rameshwar"
+                  text="Sitesh"
                   baseDelay={0.3}
                   isActive={isIntroComplete}
                   letterStyle={{
@@ -152,7 +152,7 @@ export default function HeroContent() {
                 />
                 <span className="text-white">
                   <AnimatedLetters
-                    text=" Bhagwat"
+                    text=" Prusty"
                     baseDelay={0.6}
                     isActive={isIntroComplete}
                   />
@@ -187,7 +187,7 @@ export default function HeroContent() {
                 }}
                 itemProp="jobTitle"
               >
-                Full Stack & AI Developer
+                Full Stack Developer & Software Engineer
               </motion.span>
             </motion.div>
 
@@ -224,7 +224,7 @@ export default function HeroContent() {
             }}
             itemProp="description"
           >
-            Crafting{' '}
+            Building{' '}
             <em
               className="not-italic font-medium"
               style={{
@@ -234,9 +234,9 @@ export default function HeroContent() {
                 backgroundClip: 'text',
               }}
             >
-              AI-Powered
+              real-world products
             </em>{' '}
-            platforms that elevate{' '}
+            with the{' '}
             <em
               className="not-italic font-medium"
               style={{
@@ -246,7 +246,7 @@ export default function HeroContent() {
                 backgroundClip: 'text',
               }}
             >
-              SaaS &amp; Web Innovators
+              MERN Stack & beyond
             </em>
           </motion.p>
 
@@ -254,13 +254,13 @@ export default function HeroContent() {
           <motion.nav
             variants={fadeUpItem}
             className="flex flex-col sm:flex-row gap-3 sm:gap-4 justify-center px-4 sm:px-0"
-            aria-label="Primary navigation - View portfolio or contact Rameshwar Bhagwat"
+            aria-label="Primary navigation - View portfolio or contact Sitesh Prusty"
           >
             <Button
               variant="primary"
               size="lg"
               onClick={() => scrollToSection('work')}
-              aria-label="View Rameshwar Bhagwat's portfolio projects and work samples"
+              aria-label="View Sitesh Prusty's portfolio projects and work samples"
               className="w-full sm:w-auto sm:min-w-[180px] text-sm sm:text-base"
             >
               View My Work
@@ -270,7 +270,7 @@ export default function HeroContent() {
               size="lg"
               shimmer={true}
               onClick={() => scrollToSection('contact')}
-              aria-label="Contact Rameshwar Bhagwat for Full Stack Development and AI Engineering projects"
+              aria-label="Contact Sitesh Prusty for Full Stack Development and Software Engineering projects"
               className="w-full sm:w-auto sm:min-w-[180px] text-sm sm:text-base"
             >
               Get In Touch

@@ -2,34 +2,34 @@
 
 import { 
   SiReact, 
-  SiNextdotjs, 
-  SiTypescript, 
+  SiMongodb,
+  SiExpress,
   SiNodedotjs, 
   SiPython, 
-  SiAmazon,
-  SiTensorflow,
-  SiDocker
+  SiOpenjdk,
+  SiDocker,
+  SiGit
 } from 'react-icons/si';
 import { Layers } from 'lucide-react';
 
 const expertise = [
-  // Row 1 - 4 items (top of inverted triangle)
+  // Row 1 - 4 items
   [
     { name: 'React', icon: SiReact, color: '#61DAFB' },
-    { name: 'Next.js', icon: SiNextdotjs, color: '#FFFFFF' },
-    { name: 'TypeScript', icon: SiTypescript, color: '#3178C6' },
+    { name: 'MongoDB', icon: SiMongodb, color: '#47A248' },
+    { name: 'Express.js', icon: SiExpress, color: '#FFFFFF' },
     { name: 'Node.js', icon: SiNodedotjs, color: '#339933' },
   ],
-  // Row 2 - 3 items (middle of inverted triangle)
+  // Row 2 - 3 items
   [
     { name: 'Python', icon: SiPython, color: '#3776AB' },
-    { name: 'AWS', icon: SiAmazon, color: '#FF9900' },
+    { name: 'Java (DSA)', icon: SiOpenjdk, color: '#F89820' },
     { name: 'Docker', icon: SiDocker, color: '#2496ED' },
   ],
-  // Row 3 - 2 items (bottom of inverted triangle)
+  // Row 3 - 2 items
   [
-    { name: 'AI/ML', icon: SiTensorflow, color: '#FF6F00' },
-    { name: 'System Design', icon: Layers, color: '#8B5CF6' },
+    { name: 'Git', icon: SiGit, color: '#F05032' },
+    { name: 'Flask/SQL', icon: SiPython, color: '#8B5CF6' },
   ],
 ];
 

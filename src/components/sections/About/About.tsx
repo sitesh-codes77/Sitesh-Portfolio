@@ -18,7 +18,7 @@ export default function About() {
     <section 
       id="about" 
       className="relative pt-24 sm:pt-32 md:pt-40 pb-12 px-4 sm:px-6 bg-[#0F0E0E] overflow-x-clip"
-      aria-label="About Rameshwar Bhagwat - Full Stack & AI Developer"
+      aria-label="About Sitesh Prusty - Full Stack & AI Developer"
       itemScope
       itemType="https://schema.org/Person"
     >
@@ -26,10 +26,10 @@ export default function About() {
       <meta itemProp="name" content={PERSONAL_INFO.name} />
       <meta itemProp="jobTitle" content={PERSONAL_INFO.jobTitle} />
       <meta itemProp="description" content={PERSONAL_INFO.bio} />
-      <meta itemProp="url" content="https://rameshwarbhagwat.me" />
+      <meta itemProp="url" content="https://siteshprusty.dev" />
       <meta itemProp="email" content={PERSONAL_INFO.email} />
       <meta itemProp="telephone" content={PERSONAL_INFO.phone} />
-      <meta itemProp="image" content={`https://rameshwarbhagwat.me${PERSONAL_INFO.image}`} />
+      <meta itemProp="image" content={`https://siteshprusty.dev${PERSONAL_INFO.image}`} />
       
       {/* Address Schema */}
       <div itemProp="address" itemScope itemType="https://schema.org/PostalAddress" className="hidden">
@@ -52,10 +52,10 @@ export default function About() {
       
       {/* Occupation Schema */}
       <div itemProp="hasOccupation" itemScope itemType="https://schema.org/Occupation" className="hidden">
-        <meta itemProp="name" content="Full Stack Developer" />
-        <meta itemProp="occupationLocation" content="Yeola, Maharashtra, India" />
-        <meta itemProp="skills" content="React, Next.js, TypeScript, Node.js, JavaScript, MongoDB, Express.js" />
-        <meta itemProp="experienceRequirements" content="5+ years" />
+        <meta itemProp="name" content="Full Stack Developer & Software Engineer" />
+        <meta itemProp="occupationLocation" content="Daspalla, Nayagarh, Odisha, India" />
+        <meta itemProp="skills" content="MERN Stack, Java DSA, Django, Flask, Node.js, MongoDB, Docker" />
+        <meta itemProp="experienceRequirements" content="B.Tech 2nd Year (Sophomore)" />
       </div>
       
       {/* Educational Background */}
@@ -93,49 +93,44 @@ export default function About() {
 
         {/* Hidden SEO Content */}
           <div className="sr-only">
-            <h2>About Rameshwar Bhagwat - Full Stack & AI Developer</h2>
+            <h2>About Sitesh Prusty - Full Stack Developer & Software Engineer</h2>
             <p>
-              Rameshwar Bhagwat is a Full Stack & AI Developer based in Yeola, Maharashtra, India, 
-              specializing in React, Next.js, TypeScript, and modern web technologies. 
-              With 5+ years of experience, Rameshwar Bhagwat builds scalable web applications and AI-driven products 
-              like Devory and ThinkVerse. The Rameshwar Bhagwat portfolio showcases expertise in full-stack development, 
-              machine learning integration, and SaaS platform development.
+              Sitesh Prusty is a B.Tech Computer Science student in his 2nd year (4th semester) based in Daspalla, Nayagarh, Odisha, India. 
+              Aiming to become an elite Full Stack Developer and Software Engineer, Sitesh is proficient in the MERN Stack (MongoDB, Express.js, React, Node.js), 
+              Java for Data Structures and Algorithms (DSA), and Python with Django and Flask.
+              Selected for the Cisco-backed 'thingqbator' incubation program, Sitesh is a key contributor to the startup and innovation ecosystem. 
+              His featured projects include RoamReserve (an Airbnb clone) and Civil Intel (selected for Innovation Mela).
             </p>
-            <h3>Rameshwar Bhagwat - Core Skills and Expertise</h3>
+            <h3>Sitesh Prusty - Core Skills and Expertise</h3>
             <ul>
               <li>Full Stack Development with MERN Stack (MongoDB, Express.js, React, Node.js)</li>
-              <li>Frontend Development: React, Next.js, TypeScript, JavaScript, HTML5, CSS3</li>
-              <li>Backend Development: Node.js, Express.js, RESTful API Design</li>
-              <li>Database: MongoDB, PostgreSQL, MySQL, Database Optimization</li>
-              <li>Cloud Services: AWS, Azure, Google Cloud Platform</li>
-              <li>DevOps: Docker, CI/CD, Git, GitHub Actions</li>
-              <li>AI/ML Integration: TensorFlow, Python, Machine Learning APIs</li>
-              <li>System Design and Architecture</li>
+              <li>Backend frameworks: Django, Flask, Express.js</li>
+              <li>Data Structures & Algorithms: Java focus for top-tier problem solving</li>
+              <li>DevOps & Tools: Docker, CI/CD, Git, GitHub</li>
+              <li>Frontend Development: React, JavaScript, Tailwind CSS, HTML5, CSS3</li>
+              <li>Databases: MongoDB, SQL</li>
+              <li>Product Architecture & System Design</li>
             </ul>
-            <h3>Rameshwar Bhagwat - Professional Experience</h3>
+            <h3>Sitesh Prusty - Achievements and Journey</h3>
             <p>
-              Rameshwar Bhagwat has 5+ years of professional experience in web development, having worked on 50+ projects 
-              with 15+ happy clients. Achieved a 98% success rate in project delivery. Notable projects by Rameshwar Bhagwat 
-              include Devory (AI-powered SaaS platform) and ThinkVerse (collaborative platform).
+              Sitesh Prusty is self-driven and disciplined, prioritizing real-world value over certificates. 
+              Selected for the thingqbator incubation program at his college. 
+              Developed RoamReserve, a full-scale Airbnb clone. 
+              Launched Civil Intel, a startup project selected for the college Innovation Mela. 
+              Transitioned from an Odia medium background to a global professional standard by building his portfolio and communication in English.
             </p>
-            <h3>Achievements</h3>
-            <ul>
-              <li>Built scalable web applications serving thousands of users</li>
-              <li>Contributed to open-source projects</li>
-              <li>Technical blog writer sharing knowledge with the developer community</li>
-              <li>Mentored junior developers</li>
-            </ul>
-            <h3>Education and Continuous Learning</h3>
+            <h3>Education and Vision</h3>
             <p>
-              Rameshwar Bhagwat has an IT Engineering background with continuous skill development through online certifications, 
-              courses, and active participation in the tech community.
+              Currently pursuing B.Tech in Computer Science (2nd year). 
+              Actively learning DevOps (Docker/CI-CD) and exploring Blockchain and AI integration. 
+              Ultimate motivation: providing a better life for parents through career excellence and technical innovation.
             </p>
-            <h3>Contact Rameshwar Bhagwat</h3>
+            <h3>Contact Sitesh Prusty</h3>
             <address>
-              <p>Location: Yeola, Maharashtra, India</p>
-              <p>Email: rameshwarbhagwat019@gmail.com</p>
-              <p>Phone: +91 9699245170</p>
-              <p>Rameshwar Bhagwat is open to remote opportunities worldwide</p>
+              <p>Location: Daspalla, Nayagarh, Odisha, India</p>
+              <p>Email: siteshprusty@gmail.com</p>
+              <p>Phone: +91 933764XXXX (to be added)</p>
+              <p>Sitesh Prusty is building for the AI era and open to high-level technical challenges.</p>
             </address>
           </div>
 
@@ -173,13 +168,13 @@ export default function About() {
                         className="text-sm xs:text-base sm:text-lg md:text-xl lg:text-2xl leading-[1.5] xs:leading-[1.6] sm:leading-[1.7] font-normal text-white/90"
                         style={{ fontFamily: 'var(--font-playfair), "Playfair Display", Georgia, serif' }}
                       >
-                        Rameshwar Bhagwat crafts high-performance web applications with clean architecture and exceptional user experiences.
+                        Sitesh Prusty build high-performance web applications with clean architecture and real-world value.
                       </p>
                       <p
                         className="text-xs xs:text-sm sm:text-base md:text-lg leading-[1.5] xs:leading-[1.6] sm:leading-[1.7] font-normal text-white/50"
                         style={{ fontFamily: 'var(--font-playfair), "Playfair Display", Georgia, serif' }}
                       >
-                        Specializing in scalable AI-powered applications that blend cutting-edge technology with intuitive design.
+                        Specializing in the MERN stack, Java DSA, and DevOps, I blend technical discipline with innovative startup thinking.
                       </p>
                     </div>
                   </motion.div>

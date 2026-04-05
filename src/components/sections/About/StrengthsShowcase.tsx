@@ -5,39 +5,39 @@ import { Zap, Target, Rocket, Code2, Lightbulb, Users } from 'lucide-react';
 
 const strengths = [
   {
-    icon: Zap,
-    title: 'Fast Development',
-    description: 'Rapid prototyping and iteration',
+    icon: Code2,
+    title: 'MERN Stack',
+    description: 'End-to-end full-stack development',
     color: 'from-red-500 via-pink-500 to-orange-500',
   },
   {
     icon: Target,
-    title: 'User-Centric',
-    description: 'Designing with users in mind',
+    title: 'DSA & Problem Solving',
+    description: 'Java-powered algorithmic thinking',
     color: 'from-pink-500 via-orange-500 to-red-500',
   },
   {
     icon: Rocket,
-    title: 'Scalable Solutions',
-    description: 'Building for growth',
+    title: 'Startup Mindset',
+    description: 'thingqbator & Civil Intel builder',
     color: 'from-red-500 via-pink-500 to-orange-500',
   },
   {
-    icon: Code2,
-    title: 'Clean Code',
-    description: 'Maintainable architecture',
+    icon: Zap,
+    title: 'Fast Learner',
+    description: 'DevOps, Blockchain & AI exploring',
     color: 'from-orange-500 via-pink-500 to-red-500',
   },
   {
     icon: Lightbulb,
-    title: 'Innovation',
-    description: 'Creative problem solving',
+    title: 'Silent Hard Work',
+    description: 'Discipline over hype, always',
     color: 'from-red-500 via-pink-500 to-orange-500',
   },
   {
     icon: Users,
-    title: 'Team Player',
-    description: 'Collaborative mindset',
+    title: 'Global Ambition',
+    description: 'English-first, world-class standards',
     color: 'from-orange-500 via-pink-500 to-red-500',
   },
 ];

@@ -15,34 +15,34 @@ interface Milestone {
 
 const milestones: Milestone[] = [
   {
-    year: '2022',
-    title: 'The Curiosity Phase',
-    description: 'Discovered the world of web development. Started with HTML, CSS, and JavaScript fundamentals. Built my first static websites and fell in love with creating things for the web.',
+    year: '2021',
+    title: 'The Spark',
+    description: 'Growing up through an Odia medium school, discovered a passion for computers and technology. This planted the seed of a dream — to build a global career in software engineering through relentless self-learning.',
     icon: Code2,
   },
   {
-    year: '2024',
-    title: 'Engineering Foundation',
-    description: 'Started B.Tech in Information Technology. Diving deep into data structures, algorithms, and software engineering principles. Building full-stack applications with React, Node.js, and databases.',
+    year: '2023',
+    title: 'Engineering Begins',
+    description: 'Started B.Tech in Computer Science. Dove into core fundamentals — Data Structures & Algorithms using Java, web development basics, and the discipline of writing clean, logical code.',
     icon: GraduationCap,
   },
   {
-    year: '2025',
-    title: 'Product Builder',
-    description: 'Launched ThinkVerse - a SaaS platform for structured idea management. Learned product development, user experience design, and the importance of shipping real products to real users.',
+    year: '2024',
+    title: 'MERN Stack Mastery',
+    description: 'Deepened full-stack skills with the MERN Stack. Built RoamReserve — a full-scale Airbnb clone — as a production-level project. Also explored Python (Flask) and SQL.',
     icon: Briefcase,
   },
   {
     year: '2026',
-    title: 'AI Development',
-    description: 'Currently building Devory, an AI-driven platform helping students showcase and manage their projects. Exploring machine learning, natural language processing, and intelligent automation.',
+    title: 'thingqbator Student Body',
+    description: 'Selected for the thingqbator student-body as a Web Developer & Debugger — a Cisco-backed incubation program. Responsible for prototype maintenance and platform debugging.',
     icon: Award,
     isCurrent: true,
   },
   {
-    year: '2027',
-    title: 'Scaling Vision',
-    description: 'Aiming to master advanced AI/ML systems and production-grade engineering. Goal: Build technology that impacts millions and contribute to open-source communities.',
+    year: 'Future',
+    title: 'DevOps & AWS Mastery',
+    description: 'Actively learning DevOps (Docker, CI/CD) and AWS Cloud services (EC2, S3, IAM). Goal: become an elite Full Stack Software Engineer building high-impact, global products.',
     icon: Rocket,
   },
 ];
