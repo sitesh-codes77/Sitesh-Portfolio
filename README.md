@@ -2,7 +2,7 @@
 
 Modern, high-performance portfolio website built with Next.js 16, TypeScript, and Tailwind CSS.
 
-**Live Site**: [https://rameshwarbhagwat.me](https://rameshwarbhagwat.me)
+**Live Site**: https://sitesh-portfolio-xw1n.vercel.app/
 
 ---
 
