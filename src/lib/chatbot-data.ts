@@ -1,6 +1,79 @@
-// Chatbot Knowledge Base - Comprehensive information about Rameshwar Bhagwat
+// Chatbot Knowledge Base - Comprehensive information about Sitesh Prusty
 
-export const CHATBOT_CONTEXT = {
+export interface Project {
+  name: string;
+  type: string;
+  description: string;
+  longDescription?: string;
+  techStack: string[];
+  features: string[];
+  status: string;
+  github?: string;
+}
+
+export interface SocialLinks {
+  github: string;
+  linkedin: string;
+  twitter?: string;
+  portfolio: string;
+  email: string;
+}
+
+export interface SectionLink {
+  name: string;
+  link: string;
+  description: string;
+}
+
+export interface ChatbotContext {
+  personal: {
+    name: string;
+    firstName: string;
+    lastName: string;
+    nickname: string;
+    jobTitle: string;
+    tagline: string;
+    email: string;
+    phone: string;
+    location: string;
+    timezone: string;
+    languages: string[];
+    bio: string;
+    shortBio: string;
+    currentStatus: string;
+    yearsOfExperience: string;
+    projectsBuilt: string;
+    linesOfCode: string;
+    coffeeConsumed: string;
+    availableForWork: boolean;
+    workPreference: string[];
+    responseTime: string;
+  };
+  skills: {
+    frontend: any;
+    backend: any;
+    databases: any;
+    ai_ml: any;
+    devops: any;
+    mobile: any;
+    tools: any;
+    other: string[];
+  };
+  projects: Project[];
+  featuredProjects: string[];
+  journey: any[];
+  services: any[];
+  social: SocialLinks;
+  funFacts: string[];
+  interests: string[];
+  achievements: string[];
+  faq: any[];
+  pricing: any;
+  workProcess: any[];
+  sections: Record<string, SectionLink>;
+}
+
+export const CHATBOT_CONTEXT: ChatbotContext = {
   // Personal Information
   personal: {
     name: "Sitesh Prusty",
@@ -92,6 +165,7 @@ export const CHATBOT_CONTEXT = {
       ],
       status: "Completed",
       github: "https://github.com/sitesh-codes77/roamreserve",
+      longDescription: "RoamReserve is a comprehensive, production-grade Airbnb clone built with the MERN stack. It features a robust booking architecture, Mapbox integration for interactive property locations, and Cloudinary for high-performance image management. The project demonstrates advanced state management and secure authentication flows.",
     },
     {
       name: "Civil Intel",
@@ -105,6 +179,7 @@ export const CHATBOT_CONTEXT = {
       ],
       status: "In Development / Incubated",
       github: "https://github.com/sitesh-codes77/civil-intel",
+      longDescription: "Civil Intel is an innovative startup project selected for the prestigious 'thingqbator' program backed by Cisco. It leverages data intelligence to address critical urban and civic challenges. The platform uses React and Node.js for a seamless user experience, while Python-based modules handle complex data processing to provide actionable insights for urban planners and citizens alike.",
     },
     {
       name: "Spam Message Detection",
@@ -237,6 +312,7 @@ export const CHATBOT_CONTEXT = {
   social: {
     github: "https://github.com/sitesh-codes77",
     linkedin: "https://www.linkedin.com/in/sitesh-prusty-22a8752a1/",
+    twitter: "https://twitter.com/sitesh_codes", // Example placeholder as requested
     portfolio: "https://siteshprusty.dev",
     email: "siteshprusty@gmail.com",
   },
