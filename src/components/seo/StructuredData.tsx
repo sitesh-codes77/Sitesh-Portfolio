@@ -88,7 +88,7 @@ export default function StructuredData() {
     },
     "areaServed": "Worldwide",
     "serviceType": "Full Stack & AI Development",
-    "keywords": "Rameshwar Bhagwat, Full Stack & AI Developer, WebCraft, Safecoast"
+    "keywords": "Sitesh Prusty, Full Stack & AI Developer, WebCraft, Safecoast"
   };
 
   const webpageSchema = {

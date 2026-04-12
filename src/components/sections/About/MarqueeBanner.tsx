@@ -104,6 +104,7 @@ export default function MarqueeBanner() {
     <section
       ref={containerRef}
       className="relative h-screen flex items-center justify-center overflow-hidden select-none"
+      suppressHydrationWarning
       style={{
         backgroundColor: PORTFOLIO_BACKGROUND,
         contain: 'layout style paint',

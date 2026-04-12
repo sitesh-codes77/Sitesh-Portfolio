@@ -3,7 +3,7 @@
 import { motion, useInView } from 'framer-motion';
 import Image from 'next/image';
 import Button from '@/components/ui/Button';
-import { ExternalLink, Github } from 'lucide-react';
+import { ExternalLink, Github, Cloud } from 'lucide-react';
 import { Project } from './work.data';
 import { useState, useRef, memo, useCallback, useMemo } from 'react';
 import { 
@@ -15,7 +15,6 @@ import {
   SiMongodb, 
   SiPostgresql, 
   SiRedis,
-  SiAmazon,
   SiDocker,
   SiStripe,
   SiGraphql,
@@ -57,7 +56,7 @@ const techConfig: Record<string, { icon: React.ComponentType<{ size?: number; st
   'Firebase Auth': { icon: SiFirebase, color: '#FFCA28' },
   'Stripe': { icon: SiStripe, color: '#635BFF' },
   'Tailwind CSS': { icon: SiTailwindcss, color: '#06B6D4' },
-  'AWS': { icon: SiAmazon, color: '#FF9900' },
+  'AWS': { icon: Cloud, color: '#FF9900' },
   'Docker': { icon: SiDocker, color: '#2496ED' },
   'Kafka': { icon: SiApachekafka, color: '#FFFFFF' },
   'WebRTC': { icon: SiWebrtc, color: '#FFFFFF' },
@@ -109,10 +108,10 @@ const ProjectCard = memo(function ProjectCard({ project, index }: ProjectCardPro
     "description": `${project.tagline}. ${project.description}`,
     "author": {
       "@type": "Person",
-      "name": "Rameshwar Bhagwat",
-      "url": "https://rameshwarbhagwat.me"
+      "name": "Sitesh Prusty",
+      "url": "https://siteshprusty.dev"
     },
-    "image": `https://rameshwarbhagwat.me${project.image}`,
+    "image": `https://siteshprusty.dev${project.image}`,
     "applicationCategory": "WebApplication",
     "operatingSystem": "Web Browser",
     "offers": {
@@ -158,7 +157,7 @@ const ProjectCard = memo(function ProjectCard({ project, index }: ProjectCardPro
       {/* SEO Microdata */}
       <meta itemProp="name" content={project.title} />
       <meta itemProp="description" content={`${project.tagline}. ${project.description}`} />
-      <meta itemProp="author" content="Rameshwar Bhagwat" />
+      <meta itemProp="author" content="Sitesh Prusty" />
       <meta itemProp="image" content={project.image} />
       <meta itemProp="keywords" content={project.techStack.join(', ')} />
       {project.liveUrl && <meta itemProp="url" content={project.liveUrl} />}
@@ -211,7 +210,7 @@ const ProjectCard = memo(function ProjectCard({ project, index }: ProjectCardPro
               <div className="absolute inset-0 m-[3px] rounded-[9px] md:rounded-[13px] overflow-hidden bg-[#171616] z-[1]">
                 <Image
                   src={project.image}
-                  alt={`${project.title} - Rameshwar Bhagwat Project Screenshot`}
+                  alt={`${project.title} - Sitesh Prusty Project Screenshot`}
                   fill
                   sizes="(max-width: 768px) 100vw, 50vw"
                   className="object-contain md:object-cover"
@@ -248,7 +247,7 @@ const ProjectCard = memo(function ProjectCard({ project, index }: ProjectCardPro
               <div className="absolute inset-0 m-[3px] rounded-[9px] md:rounded-[13px] overflow-hidden bg-[#171616] z-[1]">
                 <Image
                   src={project.hoverImage}
-                  alt={`${project.title} - Rameshwar Bhagwat Project Interface`}
+                  alt={`${project.title} - Sitesh Prusty Project Interface`}
                   fill
                   sizes="(max-width: 768px) 100vw, 50vw"
                   className="object-contain md:object-cover"

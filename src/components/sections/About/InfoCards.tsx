@@ -101,12 +101,11 @@ const InfoCards = memo(function InfoCards() {
           <div className="flex justify-center mb-1 xs:mb-1.5 sm:mb-2">
             <div className="relative">
               <Image
-                src="/icons/logo.svg"
-                alt="Sitesh Prusty Portfolio Logo"
+                src="/Codeveda2.png"
+                alt="Codeveda Logo"
                 width={50}
                 height={50}
                 className="hover:scale-110 transition-transform duration-300 w-[32px] xs:w-[40px] sm:w-[50px] md:w-[60px] h-[32px] xs:h-[40px] sm:h-[50px] md:h-[60px]"
-                style={{ filter: 'brightness(0) saturate(100%) invert(13%) sepia(98%) saturate(7471%) hue-rotate(0deg) brightness(98%) contrast(118%)' }}
               />
             </div>
           </div>

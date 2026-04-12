@@ -31,7 +31,7 @@ export default function Hero() {
       >
         {/* ─── Primary Schema.org Person Microdata ─── */}
         <meta itemProp="name" content={PERSONAL_INFO.name} />
-        <meta itemProp="givenName" content="Rameshwar" />
+        <meta itemProp="givenName" content="Sitesh" />
         <meta itemProp="familyName" content="Bhagwat" />
         <meta itemProp="jobTitle" content="Full Stack & AI Developer" />
         <meta itemProp="description" content={`${PERSONAL_INFO.name} is a Full Stack & AI Developer specializing in React, Next.js, TypeScript, Node.js, Python, and AI-powered product engineering. Featured projects include WebCraft and Safecoast.`} />
@@ -56,17 +56,17 @@ export default function Hero() {
 
         {/* ─── Hidden SEO Content for Search Engines ─── */}
         <div className="sr-only">
-          <h1>Rameshwar Bhagwat - Full Stack & AI Developer</h1>
+          <h1>Sitesh Prusty - Full Stack & AI Developer</h1>
 
-          <h2>About Rameshwar Bhagwat</h2>
+          <h2>About Sitesh Prusty</h2>
           <p>
-            Rameshwar Bhagwat is a highly skilled Full Stack & AI Developer based in {PERSONAL_INFO.location.city}, {PERSONAL_INFO.location.state}, {PERSONAL_INFO.location.country}.
-            With expertise in modern web technologies, Rameshwar Bhagwat specializes in building scalable, high-performance web applications and AI-powered platforms.
+            Sitesh Prusty is a highly skilled Full Stack & AI Developer based in {PERSONAL_INFO.location.city}, {PERSONAL_INFO.location.state}, {PERSONAL_INFO.location.country}.
+            With expertise in modern web technologies, Sitesh Prusty specializes in building scalable, high-performance web applications and AI-powered platforms.
           </p>
 
-          <h2>Rameshwar Bhagwat - Professional Skills</h2>
+          <h2>Sitesh Prusty - Professional Skills</h2>
           <p>
-            As a Full Stack Developer, Rameshwar Bhagwat is proficient in:
+            As a Full Stack Developer, Sitesh Prusty is proficient in:
           </p>
           <ul>
             <li>Frontend Development: React.js, Next.js, TypeScript, JavaScript, HTML5, CSS3, Tailwind CSS</li>
@@ -77,46 +77,46 @@ export default function Hero() {
             <li>SaaS and AI Product Development: scalable architecture, performance optimization, and intelligent features</li>
           </ul>
 
-          <h2>Featured Projects by Rameshwar Bhagwat</h2>
+          <h2>Featured Projects by Sitesh Prusty</h2>
           <ul>
             <li>WebCraft - Modern website solution designed for business growth and technical SEO readiness</li>
             <li>Safecoast - Coastal hazard intelligence platform focused on monitoring and risk awareness</li>
           </ul>
 
-          <h2>Rameshwar Bhagwat - Services</h2>
+          <h2>Sitesh Prusty - Services</h2>
           <p>
-            Rameshwar Bhagwat offers professional services including:
+            Sitesh Prusty offers professional services including:
           </p>
           <ul>
-            <li>Full Stack Web Development by Rameshwar Bhagwat</li>
-            <li>AI-Powered Application Development by Rameshwar Bhagwat</li>
-            <li>SaaS Platform Development by Rameshwar Bhagwat</li>
-            <li>React & Next.js Development by Rameshwar Bhagwat</li>
-            <li>Custom Web Application Development by Rameshwar Bhagwat</li>
-            <li>API Development & Integration by Rameshwar Bhagwat</li>
-            <li>E-commerce Solutions by Rameshwar Bhagwat</li>
-            <li>Performance Optimization by Rameshwar Bhagwat</li>
+            <li>Full Stack Web Development by Sitesh Prusty</li>
+            <li>AI-Powered Application Development by Sitesh Prusty</li>
+            <li>SaaS Platform Development by Sitesh Prusty</li>
+            <li>React & Next.js Development by Sitesh Prusty</li>
+            <li>Custom Web Application Development by Sitesh Prusty</li>
+            <li>API Development & Integration by Sitesh Prusty</li>
+            <li>E-commerce Solutions by Sitesh Prusty</li>
+            <li>Performance Optimization by Sitesh Prusty</li>
           </ul>
 
-          <h2>Why Choose Rameshwar Bhagwat?</h2>
+          <h2>Why Choose Sitesh Prusty?</h2>
           <p>
-            Rameshwar Bhagwat combines technical expertise with creative problem-solving to deliver exceptional digital solutions.
+            Sitesh Prusty combines technical expertise with creative problem-solving to deliver exceptional digital solutions.
             Whether you need a Full Stack Developer for your startup, an AI Engineer to integrate machine learning capabilities,
-            or a Web Developer to build your next big project, Rameshwar Bhagwat has the skills and experience to bring your vision to life.
+            or a Web Developer to build your next big project, Sitesh Prusty has the skills and experience to bring your vision to life.
           </p>
 
-          <h2>Contact Rameshwar Bhagwat</h2>
+          <h2>Contact Sitesh Prusty</h2>
           <p>
-            Looking to hire a Full Stack Developer? Contact Rameshwar Bhagwat at {PERSONAL_INFO.email} or {PERSONAL_INFO.phone}.
-            Rameshwar Bhagwat is available for freelance projects, full-time opportunities, and consulting work.
+            Looking to hire a Full Stack Developer? Contact Sitesh Prusty at {PERSONAL_INFO.email} or {PERSONAL_INFO.phone}.
+            Sitesh Prusty is available for freelance projects, full-time opportunities, and consulting work.
           </p>
 
           <h3>Keywords</h3>
-          <p>{SEO_KEYWORDS.join(', ')}, Rameshwar Bhagwat Portfolio, Rameshwar Bhagwat Developer, Rameshwar Bhagwat Full Stack,
-          Rameshwar Bhagwat AI Developer, Rameshwar Bhagwat React Developer, Rameshwar Bhagwat Next.js Expert,
-          Hire Rameshwar Bhagwat, Rameshwar Bhagwat Web Developer, Rameshwar Bhagwat Software Engineer,
+          <p>{SEO_KEYWORDS.join(', ')}, Sitesh Prusty Portfolio, Sitesh Prusty Developer, Sitesh Prusty Full Stack,
+          Sitesh Prusty AI Developer, Sitesh Prusty React Developer, Sitesh Prusty Next.js Expert,
+          Hire Sitesh Prusty, Sitesh Prusty Web Developer, Sitesh Prusty Software Engineer,
           Best Full Stack Developer India, Top React Developer Maharashtra, AI Developer Yeola,
-          Rameshwar Bhagwat TypeScript, Rameshwar Bhagwat Node.js, Rameshwar Bhagwat Python Developer, WebCraft, Safecoast</p>
+          Sitesh Prusty TypeScript, Sitesh Prusty Node.js, Sitesh Prusty Python Developer, WebCraft, Safecoast</p>
         </div>
 
         {/* ─── WebSite Schema for Search Appearance ─── */}
@@ -126,13 +126,13 @@ export default function Hero() {
             __html: JSON.stringify({
               "@context": "https://schema.org",
               "@type": "WebSite",
-              "name": "Rameshwar Bhagwat - Full Stack & AI Developer Portfolio",
-              "alternateName": ["Rameshwar Bhagwat", "Rameshwar Bhagwat Developer", "Rameshwar Bhagwat Portfolio"],
+              "name": "Sitesh Prusty - Full Stack & AI Developer Portfolio",
+              "alternateName": ["Sitesh Prusty", "Sitesh Prusty Developer", "Sitesh Prusty Portfolio"],
               "url": SITE_URL,
-              "description": "Official portfolio of Rameshwar Bhagwat, a Full Stack & AI Developer specializing in React, Next.js, TypeScript, and AI-powered web applications.",
+              "description": "Official portfolio of Sitesh Prusty, a Full Stack & AI Developer specializing in React, Next.js, TypeScript, and AI-powered web applications.",
               "author": {
                 "@type": "Person",
-                "name": "Rameshwar Bhagwat",
+                "name": "Sitesh Prusty",
                 "jobTitle": "Full Stack & AI Developer",
                 "url": SITE_URL
               },
@@ -152,11 +152,11 @@ export default function Hero() {
             __html: JSON.stringify({
               "@context": "https://schema.org",
               "@type": "ProfessionalService",
-              "name": "Rameshwar Bhagwat - Full Stack & AI Development Services",
-              "description": "Professional Full Stack Development, AI Engineering, and Web Development services by Rameshwar Bhagwat",
+              "name": "Sitesh Prusty - Full Stack & AI Development Services",
+              "description": "Professional Full Stack Development, AI Engineering, and Web Development services by Sitesh Prusty",
               "provider": {
                 "@type": "Person",
-                "name": "Rameshwar Bhagwat",
+                "name": "Sitesh Prusty",
                 "jobTitle": "Full Stack & AI Developer"
               },
               "serviceType": ["Full Stack Development", "AI Engineering", "Web Development", "SaaS Development", "React Development", "Next.js Development"],

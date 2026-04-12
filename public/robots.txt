@@ -8,8 +8,8 @@ Disallow: /api/
 # Disallow: /api/
 
 # Sitemap location
-Sitemap: https://rameshwarbhagwat.me/sitemap.xml
-Host: https://rameshwarbhagwat.me
+Sitemap: https://siteshprusty.dev/sitemap.xml
+Host: https://siteshprusty.dev
 
 # Crawl-delay (optional, helps prevent server overload)
 Crawl-delay: 1

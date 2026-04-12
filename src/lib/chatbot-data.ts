@@ -311,7 +311,7 @@ export const CHATBOT_CONTEXT: ChatbotContext = {
   // Social Links
   social: {
     github: "https://github.com/sitesh-codes77",
-    linkedin: "https://www.linkedin.com/in/sitesh-prusty-22a8752a1/",
+    linkedin: "https://www.linkedin.com/in/sitesh-prusty-1a00b1336/",
     twitter: "https://twitter.com/sitesh_codes", // Example placeholder as requested
     portfolio: "https://siteshprusty.dev",
     email: "siteshprusty@gmail.com",
@@ -434,41 +434,41 @@ export const QUICK_RESPONSES: Record<string, string> = {
   'what do you do': `Sitesh is a **${CHATBOT_CONTEXT.personal.jobTitle}** who builds:\n\n• High-performance web apps (MERN)\n• Real-world startups (Civil Intel)\n• Scalable clones (RoamReserve)\n• ML models (Spam Detection)\n\nHe's driven by silent hard work and technical discipline!`,
 
   // Contact Questions
-  'email': `📧 You can reach Rameshwar at: **${CHATBOT_CONTEXT.personal.email}**`,
-  'phone': `📱 Rameshwar's phone number is: **${CHATBOT_CONTEXT.personal.phone}**`,
-  'phone number': `📱 Rameshwar's phone number is: **${CHATBOT_CONTEXT.personal.phone}**`,
+  'email': `📧 You can reach Sitesh at: **${CHATBOT_CONTEXT.personal.email}**`,
+  'phone': `📱 Sitesh's phone number is: **${CHATBOT_CONTEXT.personal.phone}**`,
+  'phone number': `📱 Sitesh's phone number is: **${CHATBOT_CONTEXT.personal.phone}**`,
   'contact': `**Get in Touch:**\n\n📧 Email: ${CHATBOT_CONTEXT.personal.email}\n📱 Phone: ${CHATBOT_CONTEXT.personal.phone}\n\n👉 [Go to Contact Section](#contact)`,
-  'how can i contact you': `**Contact Rameshwar:**\n\n📧 Email: ${CHATBOT_CONTEXT.personal.email}\n📱 Phone: ${CHATBOT_CONTEXT.personal.phone}\n💼 LinkedIn: ${CHATBOT_CONTEXT.social.linkedin}\n\n👉 [Go to Contact Section](#contact)`,
-  'how to reach you': `**Reach out to Rameshwar:**\n\n📧 Email: ${CHATBOT_CONTEXT.personal.email}\n📱 Phone: ${CHATBOT_CONTEXT.personal.phone}\n\nHe typically responds within ${CHATBOT_CONTEXT.personal.responseTime}!`,
+  'how can i contact you': `**Contact Sitesh:**\n\n📧 Email: ${CHATBOT_CONTEXT.personal.email}\n📱 Phone: ${CHATBOT_CONTEXT.personal.phone}\n💼 LinkedIn: ${CHATBOT_CONTEXT.social.linkedin}\n\n👉 [Go to Contact Section](#contact)`,
+  'how to reach you': `**Reach out to Sitesh:**\n\n📧 Email: ${CHATBOT_CONTEXT.personal.email}\n📱 Phone: ${CHATBOT_CONTEXT.personal.phone}\n\nHe typically responds within ${CHATBOT_CONTEXT.personal.responseTime}!`,
 
   // Location Questions
-  'location': `📍 Rameshwar is based in **${CHATBOT_CONTEXT.personal.location}**, but works remotely with clients worldwide!`,
-  'where are you from': `📍 Rameshwar is from **${CHATBOT_CONTEXT.personal.location}**. He's available for remote work globally!`,
-  'where do you live': `📍 Rameshwar lives in **${CHATBOT_CONTEXT.personal.location}**. He works remotely with clients from all over the world!`,
-  'where are you located': `📍 Rameshwar is located in **${CHATBOT_CONTEXT.personal.location}**.\n\n🌍 Timezone: ${CHATBOT_CONTEXT.personal.timezone}\n🏠 Work Style: Remote-first`,
-  'which country': `🇮🇳 Rameshwar is based in **India**, specifically in ${CHATBOT_CONTEXT.personal.location}. He works with clients worldwide!`,
+  'location': `📍 Sitesh is based in **${CHATBOT_CONTEXT.personal.location}**, but works remotely with clients worldwide!`,
+  'where are you from': `📍 Sitesh is from **${CHATBOT_CONTEXT.personal.location}**. He's available for remote work globally!`,
+  'where do you live': `📍 Sitesh lives in **${CHATBOT_CONTEXT.personal.location}**. He works remotely with clients from all over the world!`,
+  'where are you located': `📍 Sitesh is located in **${CHATBOT_CONTEXT.personal.location}**\n\n🌍 Timezone: ${CHATBOT_CONTEXT.personal.timezone}\n🏠 Work Style: Remote-first`,
+  'which country': `🇮🇳 Sitesh is based in **India**, specifically in ${CHATBOT_CONTEXT.personal.location}. He works with clients worldwide!`,
 
   // Availability & Hiring
   'available': CHATBOT_CONTEXT.personal.availableForWork
-    ? "✅ **Yes!** Rameshwar is currently available for freelance, contract, and full-time opportunities. Reach out to discuss your project!"
-    : "⏳ Rameshwar is currently busy with existing commitments, but feel free to reach out for future projects.",
+    ? "✅ **Yes!** Sitesh is currently available for freelance, contract, and full-time opportunities. Reach out to discuss your project!"
+    : "⏳ Sitesh is currently busy with existing commitments, but feel free to reach out for future projects.",
   'are you available': CHATBOT_CONTEXT.personal.availableForWork
-    ? "✅ **Yes!** Rameshwar is currently available for new projects and opportunities!"
+    ? "✅ **Yes!** Sitesh is currently available for new projects and opportunities!"
     : "⏳ Currently busy, but open to discussing future opportunities.",
-  'can i hire you': `Yes! Rameshwar is ${CHATBOT_CONTEXT.personal.availableForWork ? '**currently available**' : 'open to opportunities'}.\n\n**To hire:**\n1. Go to the Contact Section\n2. Send a message describing your project\n3. He'll respond within ${CHATBOT_CONTEXT.personal.responseTime}\n\n👉 [Go to Contact Section](#contact)`,
-  'how can i hire you': `**How to Hire Rameshwar:**\n\n1. 📝 Visit the Contact Section\n2. 💬 Describe your project requirements\n3. 📧 Or email directly: ${CHATBOT_CONTEXT.personal.email}\n\nHe responds within ${CHATBOT_CONTEXT.personal.responseTime}!\n\n👉 [Go to Contact Section](#contact)`,
-  'hire': `**Hire Rameshwar:**\n\n✅ Currently available for:\n${CHATBOT_CONTEXT.personal.workPreference.map(w => `• ${w}`).join('\n')}\n\n📧 Email: ${CHATBOT_CONTEXT.personal.email}\n👉 [Go to Contact Section](#contact)`,
-  'looking for developer': `**Great!** Rameshwar is a ${CHATBOT_CONTEXT.personal.jobTitle} available for hire!\n\n**Services:**\n• Full Stack Development\n• AI/ML Integration\n• SaaS Development\n• API Development\n\n👉 [Go to Contact Section](#contact)`,
-  'need a developer': "**Rameshwar can help!** He's an experienced Full Stack & AI Developer.\n\n👉 [Go to Contact Section](#contact) to discuss your project!",
+  'can i hire you': `Yes! Sitesh is ${CHATBOT_CONTEXT.personal.availableForWork ? '**currently available**' : 'open to opportunities'}\n\n**To hire:**\n1. Go to the Contact Section\n2. Send a message describing your project\n3. He'll respond within ${CHATBOT_CONTEXT.personal.responseTime}\n\n👉 [Go to Contact Section](#contact)`,
+  'how can i hire you': `**How to Hire Sitesh:**\n\n1. 📝 Visit the Contact Section\n2. 💬 Describe your project requirements\n3. 📧 Or email directly: ${CHATBOT_CONTEXT.personal.email}\n\nHe responds within ${CHATBOT_CONTEXT.personal.responseTime}!\n\n👉 [Go to Contact Section](#contact)`,
+  'hire': `**Hire Sitesh:**\n\n✅ Currently available for:\n${CHATBOT_CONTEXT.personal.workPreference.map(w => `• ${w}`).join('\n')}\n\n📧 Email: ${CHATBOT_CONTEXT.personal.email}\n👉 [Go to Contact Section](#contact)`,
+  'looking for developer': `**Great!** Sitesh is a ${CHATBOT_CONTEXT.personal.jobTitle} available for hire!\n\n**Services:**\n• Full Stack Development\n• AI/ML Integration\n• SaaS Development\n• API Development\n\n👉 [Go to Contact Section](#contact)`,
+  'need a developer': "**Sitesh can help!** He's an experienced Full Stack & AI Developer.\n\n👉 [Go to Contact Section](#contact) to discuss your project!",
 
   // Skills Questions
-  'what are your skills': `**Rameshwar's Key Skills:**\n\n🎨 **Frontend:** React, Next.js, TypeScript, Tailwind CSS\n⚙️ **Backend:** Node.js, Python, Express, FastAPI\n🗄️ **Database:** PostgreSQL, MongoDB, Prisma\n🤖 **AI/ML:** OpenAI, LangChain, TensorFlow\n☁️ **Cloud:** Vercel, AWS, Docker\n\n👉 [View All Skills](#skills)`,
-  'tech stack': `**Rameshwar's Tech Stack:**\n\n🎨 **Frontend:** React, Next.js, TypeScript, Tailwind CSS, Framer Motion\n⚙️ **Backend:** Node.js, Python, Express.js, FastAPI\n🗄️ **Databases:** PostgreSQL, MongoDB, Supabase\n🤖 **AI/ML:** OpenAI API, LangChain, TensorFlow\n☁️ **DevOps:** Vercel, AWS, Docker, GitHub Actions\n\n**Favorite Stack:** Next.js + TypeScript + Tailwind + PostgreSQL`,
-  'what technologies do you use': `**Technologies Rameshwar Uses:**\n\n• **Languages:** JavaScript, TypeScript, Python\n• **Frontend:** React, Next.js, Tailwind CSS\n• **Backend:** Node.js, Express, FastAPI\n• **Databases:** PostgreSQL, MongoDB\n• **AI/ML:** OpenAI, LangChain, TensorFlow\n\n👉 [View All Skills](#skills)`,
-  'favorite stack': "🛠️ Rameshwar's favorite stack is **Next.js + TypeScript + Tailwind CSS + PostgreSQL**. He loves the developer experience and performance this combination provides!",
-  'what is your favorite technology': "🛠️ Rameshwar's favorite technologies are **Next.js** for frontend, **Node.js/Python** for backend, and **PostgreSQL** for database. For AI projects, he loves using **OpenAI API** and **LangChain**!",
-  'best at': "Rameshwar excels at **Full Stack Development** (React/Next.js) and **AI/ML Integration**. He's built production applications used by real users!",
-  'what are you best at': "Rameshwar is best at:\n\n🥇 **Full Stack Development** with React/Next.js\n🥈 **AI/ML Integration** for intelligent features\n🥉 **SaaS Platform Development**\n\nHe's shipped 10+ production projects!",
+  'what are your skills': `**Sitesh's Key Skills:**\n\n🎨 **Frontend:** React, Next.js, TypeScript, Tailwind CSS\n⚙️ **Backend:** Node.js, Python, Express, FastAPI\n🗄️ **Database:** PostgreSQL, MongoDB, Prisma\n🤖 **AI/ML:** OpenAI, LangChain, TensorFlow\n☁️ **Cloud:** Vercel, AWS, Docker\n\n👉 [View All Skills](#skills)`,
+  'tech stack': `**Sitesh's Tech Stack:**\n\n🎨 **Frontend:** React, Next.js, TypeScript, Tailwind CSS, Framer Motion\n⚙️ **Backend:** Node.js, Python, Express.js, FastAPI\n🗄️ **Databases:** PostgreSQL, MongoDB, Supabase\n🤖 **AI/ML:** OpenAI API, LangChain, TensorFlow\n☁️ **DevOps:** Vercel, AWS, Docker, GitHub Actions\n\n**Favorite Stack:** Next.js + TypeScript + Tailwind + PostgreSQL`,
+  'what technologies do you use': `**Technologies Sitesh Uses:**\n\n• **Languages:** JavaScript, TypeScript, Python\n• **Frontend:** React, Next.js, Tailwind CSS\n• **Backend:** Node.js, Express, FastAPI\n• **Databases:** PostgreSQL, MongoDB\n• **AI/ML:** OpenAI, LangChain, TensorFlow\n\n👉 [View All Skills](#skills)`,
+  'favorite stack': "🛠️ Sitesh's favorite stack is **Next.js + TypeScript + Tailwind CSS + PostgreSQL**. He loves the developer experience and performance this combination provides!",
+  'what is your favorite technology': "🛠️ Sitesh's favorite technologies are **Next.js** for frontend, **Node.js/Python** for backend, and **PostgreSQL** for database. For AI projects, he loves using **OpenAI API** and **LangChain**!",
+  'best at': "Sitesh excels at **Full Stack Development** (React/Next.js) and **AI/ML Integration**. He's built production applications used by real users!",
+  'what are you best at': "Sitesh is best at:\n\n🥇 **Full Stack Development** with React/Next.js\n🥈 **AI/ML Integration** for intelligent features\n🥉 **SaaS Platform Development**\n\nHe's shipped 10+ production projects!",
 
   // Project Questions
   'show me your projects': `**Sitesh's Projects:**\n\n🏠 **RoamReserve** - Full-scale Airbnb Clone (MERN)\n🏢 **Civil Intel** - Startup for Civic Intelligence\n📱 **Spam Detection** - ML Text Classification\n\n👉 [View All Projects](#projects)`,
@@ -483,30 +483,30 @@ export const QUICK_RESPONSES: Record<string, string> = {
   'tell me about civil intel': `**🏢 Civil Intel - Civic Intelligence Startup**\n\nSelected for thingqbator incubation and Innovation Mela, focused on solving urban challenges.\n\n**Tech:** MERN Stack, Python\n**Status:** Incubated / In Development\n\n👉 [View Projects](#projects)`,
 
   // Services Questions
-  'what services do you offer': `**Services Rameshwar Offers:**\n\n🌐 Full Stack Web Development\n🤖 AI/ML Integration\n📦 SaaS Platform Development\n🔗 API Design & Development\n🗄️ Database Design\n⚡ Performance Optimization\n🎨 UI/UX Development\n💬 Technical Consultation\n\n👉 [View Services](#services)`,
-  'services': `**Rameshwar's Services:**\n\n• Full Stack Web Development\n• AI/ML Integration\n• SaaS Development\n• API Development\n• Database Design\n• UI/UX Development\n\n👉 [View Services](#services)`,
-  'what can you do for me': `**How Rameshwar Can Help:**\n\n✅ Build custom web applications\n✅ Integrate AI features into your app\n✅ Design scalable databases\n✅ Create beautiful, responsive UIs\n✅ Optimize your application performance\n\n👉 [Contact for details](#contact)`,
-  'can you build a website': "**Yes!** Rameshwar builds modern, responsive websites with:\n\n• React/Next.js\n• Custom designs\n• SEO optimization\n• Fast performance\n\n👉 [Go to Contact Section](#contact) to discuss your project!",
-  'can you build an app': "**Absolutely!** Rameshwar can build:\n\n• Web applications (React/Next.js)\n• Full-stack apps with databases\n• AI-powered applications\n• SaaS platforms\n\n👉 [Go to Contact Section](#contact)",
-  'do you do freelance': `**Yes!** Rameshwar is available for freelance work.\n\n**Work Types:**\n${CHATBOT_CONTEXT.personal.workPreference.map(w => `• ${w}`).join('\n')}\n\n👉 [Contact to discuss](#contact)`,
+  'what services do you offer': `**Services Sitesh Offers:**\n\n🌐 Full Stack Web Development\n🤖 AI/ML Integration\n📦 SaaS Platform Development\n🔗 API Design & Development\n🗄️ Database Design\n⚡ Performance Optimization\n🎨 UI/UX Development\n💬 Technical Consultation\n\n👉 [View Services](#services)`,
+  'services': `**Sitesh's Services:**\n\n• Full Stack Web Development\n• AI/ML Integration\n• SaaS Development\n• API Development\n• Database Design\n• UI/UX Development\n\n👉 [View Services](#services)`,
+  'what can you do for me': `**How Sitesh Can Help:**\n\n✅ Build custom web applications\n✅ Integrate AI features into your app\n✅ Design scalable databases\n✅ Create beautiful, responsive UIs\n✅ Optimize your application performance\n\n👉 [Contact for details](#contact)`,
+  'can you build a website': "**Yes!** Sitesh builds modern, responsive websites with:\n\n• React/Next.js\n• Custom designs\n• SEO optimization\n• Fast performance\n\n👉 [Go to Contact Section](#contact) to discuss your project!",
+  'can you build an app': "**Absolutely!** Sitesh can build:\n\n• Web applications (React/Next.js)\n• Full-stack apps with databases\n• AI-powered applications\n• SaaS platforms\n\n👉 [Go to Contact Section](#contact)",
+  'do you do freelance': `**Yes!** Sitesh is available for freelance work.\n\n**Work Types:**\n${CHATBOT_CONTEXT.personal.workPreference.map(w => `• ${w}`).join('\n')}\n\n👉 [Contact to discuss](#contact)`,
 
   // Experience Questions
-  'experience': `**Rameshwar's Experience:**\n\n📅 ${CHATBOT_CONTEXT.personal.yearsOfExperience} years in software development\n🚀 ${CHATBOT_CONTEXT.personal.projectsBuilt} projects shipped\n🏆 Hackathon winner\n🎓 B.Tech in IT (Pursuing)\n\n👉 [View Journey](#journey)`,
-  'how much experience': `Rameshwar has **${CHATBOT_CONTEXT.personal.yearsOfExperience} years** of hands-on experience in full-stack development and AI/ML.\n\nHe has built ${CHATBOT_CONTEXT.personal.projectsBuilt} production projects!`,
-  'years of experience': `📅 **${CHATBOT_CONTEXT.personal.yearsOfExperience} Years** of development experience.\n\nRameshwar started coding in 2022 and has been building production applications ever since!`,
-  'your journey': `**Rameshwar's Journey:**\n\n2022 - Started web development\n2023 - Learned React & Backend\n2024 - Started B.Tech, built production apps\n2025 - Launched ThinkVerse SaaS\n2026 - Building Devory (AI-powered)\n\n👉 [View Full Journey](#journey)`,
-  'how did you start coding': "Rameshwar started coding in **2022** with HTML, CSS, and JavaScript. His curiosity led him to React, then full-stack development, and now AI/ML integration. He believes in learning by building real projects!",
+  'experience': `**Sitesh's Experience:**\n\n📅 ${CHATBOT_CONTEXT.personal.yearsOfExperience} years in software development\n🚀 ${CHATBOT_CONTEXT.personal.projectsBuilt} projects shipped\n🏆 Hackathon winner\n🎓 B.Tech in IT (Pursuing)\n\n👉 [View Journey](#journey)`,
+  'how much experience': `Sitesh has **${CHATBOT_CONTEXT.personal.yearsOfExperience} years** of hands-on experience in full-stack development and AI/ML.\n\nHe has built ${CHATBOT_CONTEXT.personal.projectsBuilt} production projects!`,
+  'years of experience': `📅 **${CHATBOT_CONTEXT.personal.yearsOfExperience} Years** of development experience.\n\nSitesh started coding in 2022 and has been building production applications ever since!`,
+  'your journey': `**Sitesh's Journey:**\n\n2022 - Started web development\n2023 - Learned React & Backend\n2024 - Started B.Tech, built production apps\n2025 - Launched ThinkVerse SaaS\n2026 - Building Devory (AI-powered)\n\n👉 [View Full Journey](#journey)`,
+  'how did you start coding': "Sitesh started coding in **2022** with HTML, CSS, and JavaScript. His curiosity led him to React, then full-stack development, and now AI/ML integration. He believes in learning by building real projects!",
 
   // Education
-  'education': `**Education:**\n\n🎓 B.Tech in Information Technology (Pursuing)\n📚 Self-taught developer since 2022\n🌐 Continuous learning through building projects\n\nRameshwar believes in learning by doing!`,
-  'where did you study': `🎓 Rameshwar is pursuing **B.Tech in Information Technology**.\n\nHe's also self-taught through online resources, documentation, and building real projects!`,
+  'education': `**Education:**\n\n🎓 B.Tech in Information Technology (Pursuing)\n📚 Self-taught developer since 2022\n🌐 Continuous learning through building projects\n\nSitesh believes in learning by doing!`,
+  'where did you study': `🎓 Sitesh is pursuing **B.Tech in Information Technology**.\n\nHe's also self-taught through online resources, documentation, and building real projects!`,
   'your qualification': `**Qualifications:**\n\n🎓 B.Tech in Information Technology (Pursuing)\n💻 ${CHATBOT_CONTEXT.personal.yearsOfExperience}+ years practical experience\n🚀 ${CHATBOT_CONTEXT.personal.projectsBuilt} production projects\n🏆 Hackathon winner`,
 
   // Pricing
   'pricing': `**Pricing Information:**\n\n💬 Consultation: Free initial consultation\n⏰ Hourly: $30-80 based on complexity\n📦 Projects: Custom quotes\n🔄 Retainer: Monthly packages available\n\n👉 [Contact for quote](#contact)`,
-  'how much do you charge': `**Rameshwar's Rates:**\n\n• **Hourly:** $30-80 (based on complexity)\n• **Projects:** Custom quotes\n• **Consultation:** Free initial call\n\nReach out with your requirements for a specific quote!\n\n👉 [Contact](#contact)`,
+  'how much do you charge': `**Sitesh's Rates:**\n\n• **Hourly:** $30-80 (based on complexity)\n• **Projects:** Custom quotes\n• **Consultation:** Free initial call\n\nReach out with your requirements for a specific quote!\n\n👉 [Contact](#contact)`,
   'rates': `**Rates:**\n\nHourly: $30-80 depending on project complexity\nProjects: Custom quotes based on scope\n\n👉 [Get a Quote](#contact)`,
-  'your rate': `Rameshwar's hourly rate ranges from **$30-80** depending on project complexity. For fixed-price projects, he provides custom quotes.\n\n👉 [Contact for Quote](#contact)`,
+  'your rate': `Sitesh's hourly rate ranges from **$30-80** depending on project complexity. For fixed-price projects, he provides custom quotes.\n\n👉 [Contact for Quote](#contact)`,
 
   // Social Links
   'github': `🐙 **GitHub:** ${CHATBOT_CONTEXT.social.github}\n\nCheck out Sitesh's open source projects and code!`,
@@ -514,7 +514,7 @@ export const QUICK_RESPONSES: Record<string, string> = {
   'social links': `**Connect with Sitesh:**\n\n🐙 GitHub: ${CHATBOT_CONTEXT.social.github}\n💼 LinkedIn: ${CHATBOT_CONTEXT.social.linkedin}\n🌐 Portfolio: ${CHATBOT_CONTEXT.social.portfolio}`,
 
   // Navigation
-  'show all sections': `**📍 Portfolio Sections:**\n\n• [🏠 Home](#hero) - Welcome section\n• [👤 About Me](#about) - Learn about Rameshwar\n• [🛠️ Skills](#skills) - Technologies & expertise\n• [🚀 Projects](#projects) - Portfolio of work\n• [📅 My Journey](#journey) - Career timeline\n• [💼 Services](#services) - What he offers\n• [📧 Contact](#contact) - Get in touch`,
+  'show all sections': `**📍 Portfolio Sections:**\n\n• [🏠 Home](#hero) - Welcome section\n• [👤 About Me](#about) - Learn about Sitesh\n• [🛠️ Skills](#skills) - Technologies & expertise\n• [🚀 Projects](#projects) - Portfolio of work\n• [📅 My Journey](#journey) - Career timeline\n• [💼 Services](#services) - What he offers\n• [📧 Contact](#contact) - Get in touch`,
   'sections': `**Portfolio Sections:**\n\n• [Home](#hero)\n• [About](#about)\n• [Skills](#skills)\n• [Projects](#projects)\n• [Journey](#journey)\n• [Services](#services)\n• [Contact](#contact)`,
   'navigate': `**Navigate the Portfolio:**\n\n👉 [About Me](#about)\n👉 [Skills](#skills)\n👉 [Projects](#projects)\n👉 [Services](#services)\n👉 [Contact](#contact)`,
   'go to projects': `👉 Click here to view projects: [View Projects](#projects)`,
@@ -523,30 +523,30 @@ export const QUICK_RESPONSES: Record<string, string> = {
   'go to about': `👉 Click here to learn more: [About Me](#about)`,
 
   // Work Process
-  'how do you work': `**Rameshwar's Work Process:**\n\n1️⃣ **Discovery** - Understanding requirements\n2️⃣ **Planning** - Creating roadmap\n3️⃣ **Development** - Building with updates\n4️⃣ **Testing** - Ensuring quality\n5️⃣ **Launch** - Deploying to production\n6️⃣ **Support** - Ongoing maintenance`,
-  'your process': `**How Rameshwar Works:**\n\n1. Free consultation to understand needs\n2. Detailed proposal & timeline\n3. Development with regular updates\n4. Testing & quality assurance\n5. Launch & deployment\n6. Post-launch support`,
+  'how do you work': `**Sitesh's Work Process:**\n\n1️⃣ **Discovery** - Understanding requirements\n2️⃣ **Planning** - Creating roadmap\n3️⃣ **Development** - Building with updates\n4️⃣ **Testing** - Ensuring quality\n5️⃣ **Launch** - Deploying to production\n6️⃣ **Support** - Ongoing maintenance`,
+  'your process': `**How Sitesh Works:**\n\n1. Free consultation to understand needs\n2. Detailed proposal & timeline\n3. Development with regular updates\n4. Testing & quality assurance\n5. Launch & deployment\n6. Post-launch support`,
   'work process': `**Development Process:**\n\n• Discovery: Understanding your vision\n• Planning: Technical specifications\n• Development: Iterative building\n• Testing: Quality assurance\n• Launch: Production deployment\n• Support: Ongoing maintenance`,
 
   // Fun Facts
   'fun fact': CHATBOT_CONTEXT.funFacts[Math.floor(Math.random() * CHATBOT_CONTEXT.funFacts.length)],
-  'tell me something interesting': `**Fun Fact:** ${CHATBOT_CONTEXT.funFacts[Math.floor(Math.random() * CHATBOT_CONTEXT.funFacts.length)]}\n\nWant to know more about Rameshwar?`,
-  'hobbies': `**Rameshwar's Interests:**\n\n• Building SaaS products\n• AI/ML exploration\n• Open source contribution\n• Learning new technologies\n• System design\n\nCoding is both his work and passion!`,
+  'tell me something interesting': `**Fun Fact:** ${CHATBOT_CONTEXT.funFacts[Math.floor(Math.random() * CHATBOT_CONTEXT.funFacts.length)]}\n\nWant to know more about Sitesh?`,
+  'hobbies': `**Sitesh's Interests:**\n\n• Building SaaS products\n• AI/ML exploration\n• Open source contribution\n• Learning new technologies\n• System design\n\nCoding is both his work and passion!`,
 
   // Common Questions
-  'why should i hire you': `**Why Hire Rameshwar?**\n\n✅ ${CHATBOT_CONTEXT.personal.yearsOfExperience}+ years of experience\n✅ ${CHATBOT_CONTEXT.personal.projectsBuilt}+ production projects\n✅ Full-stack + AI expertise\n✅ Quick response time\n✅ Quality-focused approach\n✅ Clear communication\n\n👉 [Let's Discuss](#contact)`,
-  'what makes you different': `**What Sets Rameshwar Apart:**\n\n🎯 Full-stack + AI/ML skills\n🚀 Focus on shipping real products\n💡 Modern tech stack expertise\n📈 Performance-oriented development\n🤝 Clear communication & reliability\n\nHe builds things that work and scale!`,
-  'do you work remotely': `**Yes!** Rameshwar works remotely with clients worldwide.\n\n🌍 Available for global projects\n⏰ Flexible with timezones\n💬 Clear async communication\n\n👉 [Start a Project](#contact)`,
-  'timezone': `🕐 Rameshwar's Timezone: **${CHATBOT_CONTEXT.personal.timezone}**\n\nHe's flexible and works with clients across different timezones!`,
-  'languages you speak': `**Languages Rameshwar Speaks:**\n\n• English (Professional)\n• Hindi (Native)\n• Marathi (Native)`,
+  'why should i hire you': `**Why Hire Sitesh?**\n\n✅ ${CHATBOT_CONTEXT.personal.yearsOfExperience}+ years of experience\n✅ ${CHATBOT_CONTEXT.personal.projectsBuilt}+ production projects\n✅ Full-stack + AI expertise\n✅ Quick response time\n✅ Quality-focused approach\n✅ Clear communication\n\n👉 [Let's Discuss](#contact)`,
+  'what makes you different': `**What Sets Sitesh Apart:**\n\n🎯 Full-stack + AI/ML skills\n🚀 Focus on shipping real products\n💡 Modern tech stack expertise\n📈 Performance-oriented development\n🤝 Clear communication & reliability\n\nHe builds things that work and scale!`,
+  'do you work remotely': `**Yes!** Sitesh works remotely with clients worldwide.\n\n🌍 Available for global projects\n⏰ Flexible with timezones\n💬 Clear async communication\n\n👉 [Start a Project](#contact)`,
+  'timezone': `🕐 Sitesh's Timezone: **${CHATBOT_CONTEXT.personal.timezone}**\n\nHe's flexible and works with clients across different timezones!`,
+  'languages you speak': `**Languages Sitesh Speaks:**\n\n• English (Professional)\n• Hindi (Native)\n• Marathi (Native)`,
 };
 
 // Response templates for common intents
 export const RESPONSE_TEMPLATES = {
   greeting: [
-    "Hey there! 👋 I'm Rameshwar's AI assistant. How can I help you learn more about him today?",
-    "Hello! Welcome to Rameshwar's portfolio. What would you like to know?",
-    "Hi! I'm here to tell you all about Rameshwar. Ask me anything!",
-    "Hey! Great to meet you. I can tell you about Rameshwar's skills, projects, experience, and more. What interests you?",
+    "Hey there! 👋 I'm Sitesh's AI assistant. How can I help you learn more about him today?",
+    "Hello! Welcome to Sitesh's portfolio. What would you like to know?",
+    "Hi! I'm here to tell you all about Sitesh. Ask me anything!",
+    "Hey! Great to meet you. I can tell you about Sitesh's skills, projects, experience, and more. What interests you?",
   ],
 
   farewell: [
@@ -557,20 +557,20 @@ export const RESPONSE_TEMPLATES = {
   ],
 
   unknown: [
-    "I'm not sure about that specific question. Try asking about:\n\n• Skills & tech stack\n• Projects\n• Services\n• Contact info\n• How to hire\n\nOr reach out to Rameshwar at rameshwarbhagwat019@gmail.com!",
-    "That's an interesting question! I can help with questions about Rameshwar's:\n\n• Skills & expertise\n• Projects & portfolio\n• Services & pricing\n• Contact & hiring\n\nWhat would you like to know?",
-    "I don't have specific info on that, but try asking about skills, projects, or services! Or contact Rameshwar directly.",
+    "I'm not sure about that specific question. Try asking about:\n\n• Skills & tech stack\n• Projects\n• Services\n• Contact info\n• How to hire\n\nOr reach out to Sitesh at siteshprusty@gmail.com!",
+    "That's an interesting question! I can help with questions about Sitesh's:\n\n• Skills & expertise\n• Projects & portfolio\n• Services & pricing\n• Contact & hiring\n\nWhat would you like to know?",
+    "I don't have specific info on that, but try asking about skills, projects, or services! Or contact Sitesh directly.",
   ],
 
   thanks: [
-    "You're welcome! 😊 Let me know if you have any other questions about Rameshwar.",
-    "Happy to help! Feel free to explore more or reach out to Rameshwar directly.",
+    "You're welcome! 😊 Let me know if you have any other questions about Sitesh.",
+    "Happy to help! Feel free to explore more or reach out to Sitesh directly.",
     "Glad I could help! Is there anything else you'd like to know?",
     "Anytime! 🙌 Feel free to ask more questions or visit the Contact section.",
   ],
 
   capabilities: [
-    "**I can tell you about:**\n\n• 👤 Rameshwar's background & bio\n• 🛠️ Skills and tech stack\n• 🚀 Projects (WebCraft, Safecoast, Devory)\n• 📅 Experience and journey\n• 💼 Services offered\n• 📧 How to contact or hire\n• 🔗 Social links\n\nWhat would you like to know?",
+    "**I can tell you about:**\n\n• 👤 Sitesh's background & bio\n• 🛠️ Skills and tech stack\n• 🚀 Projects (WebCraft, Safecoast, Devory)\n• 📅 Experience and journey\n• 💼 Services offered\n• 📧 How to contact or hire\n• 🔗 Social links\n\nWhat would you like to know?",
   ],
 };
 
@@ -589,7 +589,7 @@ export const INTENT_KEYWORDS: Record<string, string[]> = {
   capabilities: ["what can you do", "help me", "what do you know", "what can i ask", "how can you help", "capabilities", "what are you"],
 
   // About/Introduction
-  about: ["about", "who", "tell me", "yourself", "rameshwar", "introduce", "introduction", "what do you do", "describe", "overview", "summary", "bio", "background"],
+  about: ["about", "who", "tell me", "yourself", "sitesh", "introduce", "introduction", "what do you do", "describe", "overview", "summary", "bio", "background"],
   identity: ["name", "your name", "what is your name", "who am i talking to"],
 
   // Skills

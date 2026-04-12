@@ -20,7 +20,7 @@ export const journeyMilestones: JourneyMilestone[] = [
   },
   {
     id: '2',
-    year: '2025',
+    year: '2026',
     title: 'DevOps & Advanced Engineering',
     organization: 'Self-Driven / Academic',
     description: 'Actively learning DevOps methodologies, focusing on AWS, Docker, and CI/CD pipelines to build scalable, production-ready software.',
@@ -29,7 +29,7 @@ export const journeyMilestones: JourneyMilestone[] = [
   },
   {
     id: '3',
-    year: '2024',
+    year: '2025',
     title: 'Full Stack Development (MERN)',
     organization: 'B.Tech CS Student',
     description: 'Mastered the MERN stack and built RoamReserve (Airbnb clone). Deepened focus on Data Structures and Algorithms (DSA) in Java.',
@@ -38,11 +38,20 @@ export const journeyMilestones: JourneyMilestone[] = [
   },
   {
     id: '4',
-    year: '2023',
-    title: 'Started B.Tech CSE',
-    organization: 'Engineering College',
-    description: 'Began academic journey in Computer Science. Reached milestone of consistent coding practice and fundamental logic building.',
+    year: '2024',
+    title: 'Engineering Begins',
+    organization: 'B.Tech Computer Science',
+    description: 'Started academic journey in Computer Science. Dove into core fundamentals — Data Structures & Algorithms using Java, web development basics, and the discipline of writing clean, logical code.',
     type: 'education',
-    skills: ['C/C++', 'Logic Design', 'Mathematics for CS'],
+    skills: ['C/C++', 'Java (DSA)', 'Logic Design', 'Web Development Basics'],
+  },
+  {
+    id: '5',
+    year: '2022',
+    title: 'The Spark',
+    organization: 'Self-Learning',
+    description: 'Growing up through an Odia medium school, discovered a passion for computers and technology. This planted the seed of a dream — to build a global career in software engineering through relentless self-learning.',
+    type: 'achievement',
+    skills: ['Self-Learning', 'Problem Solving', 'Passion for Tech'],
   },
 ];

@@ -303,7 +303,7 @@ function ServiceCardItem({
         <div className="absolute inset-0">
           <Image
             src={card.image}
-            alt={`${card.title} - Rameshwar Bhagwat's expertise`}
+            alt={`${card.title} - Sitesh Prusty's expertise`}
             fill
             className="object-cover opacity-30"
             sizes="(max-width: 640px) 260px, (max-width: 1024px) 220px, 260px"

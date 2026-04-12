@@ -9,9 +9,10 @@ interface ContactCardProps {
 }
 
 const socialIcons: Record<string, typeof Github> = {
-  GitHub: Github,
+  Github: Github,
   LinkedIn: Linkedin,
   Twitter: Twitter,
+  Email: Mail,
 };
 
 export default function ContactCard({ onClose }: ContactCardProps) {
@@ -126,12 +127,12 @@ export default function ContactCard({ onClose }: ContactCardProps) {
             <div className="flex gap-1 xs:gap-1.5 sm:gap-2">
               {SOCIAL_LINKS.map((social) => {
                 const Icon = socialIcons[social.name] || Github;
+                const isEmail = social.name === 'Email';
                 return (
                   <a
                     key={social.name}
                     href={social.url}
-                    target="_blank"
-                    rel="noopener noreferrer"
+                    {...(isEmail ? {} : { target: '_blank', rel: 'noopener noreferrer' })}
                     className="w-7 h-7 xs:w-8 xs:h-8 sm:w-9 sm:h-9 rounded-md xs:rounded-lg bg-white/[0.04] border border-white/[0.08] flex items-center justify-center hover:bg-white/[0.08] hover:border-white/[0.12] transition-all group"
                     aria-label={social.name}
                   >

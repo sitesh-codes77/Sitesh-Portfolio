@@ -1,6 +1,6 @@
 import { MetadataRoute } from "next";
 
-const DEFAULT_SITE_URL = "https://rameshwarbhagwat.me";
+const DEFAULT_SITE_URL = "https://siteshprusty.dev";
 
 function resolveSiteUrl(): string {
   const envUrl = process.env.NEXT_PUBLIC_SITE_URL?.trim();

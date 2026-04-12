@@ -105,24 +105,25 @@ export const metadata: Metadata = {
   },
   icons: {
     icon: [
-      { url: '/favicon.ico', sizes: '32x32' },
+      { url: '/Codeveda2.png', sizes: '192x192', type: 'image/png' },
+      { url: '/Codeveda.png', sizes: '512x512', type: 'image/png' },
     ],
-    shortcut: '/favicon.ico',
+    shortcut: '/Codeveda2.png',
     apple: [
-      { url: '/apple-touch-icon.png', sizes: '180x180', type: 'image/png' },
+      { url: '/Codeveda.png', sizes: '180x180', type: 'image/png' },
     ],
     other: [
       {
         rel: 'icon',
         type: 'image/png',
         sizes: '192x192',
-        url: '/android-chrome-192x192.png',
+        url: '/Codeveda2.png',
       },
       {
         rel: 'icon',
         type: 'image/png',
         sizes: '512x512',
-        url: '/android-chrome-512x512.png',
+        url: '/Codeveda.png',
       },
     ],
   },
@@ -188,7 +189,7 @@ export default function RootLayout({
     },
     "sameAs": [
       "https://github.com/sitesh-codes77",
-      "https://www.linkedin.com/in/sitesh-prusty-22a8752a1/"
+      "https://www.linkedin.com/in/sitesh-prusty-1a00b1336/"
     ],
     "knowsAbout": [
       "Full Stack Development",

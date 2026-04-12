@@ -79,7 +79,7 @@ export const SOCIAL_LINKS = [
   },
   {
     name: 'LinkedIn',
-    url: 'https://www.linkedin.com/in/sitesh-prusty-22a8752a1/',
+    url: 'https://www.linkedin.com/in/sitesh-prusty-1a00b1336/',
     icon: 'Linkedin',
   },
   {

@@ -15,19 +15,19 @@ interface Milestone {
 
 const milestones: Milestone[] = [
   {
-    year: '2021',
+    year: '2022',
     title: 'The Spark',
     description: 'Growing up through an Odia medium school, discovered a passion for computers and technology. This planted the seed of a dream — to build a global career in software engineering through relentless self-learning.',
     icon: Code2,
   },
   {
-    year: '2023',
+    year: '2024',
     title: 'Engineering Begins',
     description: 'Started B.Tech in Computer Science. Dove into core fundamentals — Data Structures & Algorithms using Java, web development basics, and the discipline of writing clean, logical code.',
     icon: GraduationCap,
   },
   {
-    year: '2024',
+    year: '2025',
     title: 'MERN Stack Mastery',
     description: 'Deepened full-stack skills with the MERN Stack. Built RoamReserve — a full-scale Airbnb clone — as a production-level project. Also explored Python (Flask) and SQL.',
     icon: Briefcase,

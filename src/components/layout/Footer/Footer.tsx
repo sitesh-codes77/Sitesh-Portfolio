@@ -5,7 +5,7 @@ import { motion } from 'framer-motion';
 
 const socialLinks = [
   { name: 'GitHub', url: 'https://github.com/sitesh-codes77', icon: Github, color: '#FFFFFF' },
-  { name: 'LinkedIn', url: 'https://www.linkedin.com/in/sitesh-prusty-22a8752a1/', icon: Linkedin, color: '#0A66C2' },
+  { name: 'LinkedIn', url: 'https://www.linkedin.com/in/sitesh-prusty-1a00b1336', icon: Linkedin, color: '#0A66C2' },
   { name: 'Email', url: 'mailto:siteshprusty@gmail.com', icon: Mail, color: '#30D158' },
 ];
 

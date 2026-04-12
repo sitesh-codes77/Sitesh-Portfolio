@@ -1,7 +1,7 @@
 {
-  "name": "Rameshwar Bhagwat - Full Stack & AI Developer",
-  "short_name": "RB Portfolio",
-  "description": "Portfolio of Rameshwar Bhagwat - Full Stack Developer specializing in AI-powered SaaS platforms",
+  "name": "Sitesh Prusty - Full Stack & AI Developer",
+  "short_name": "SP Portfolio",
+  "description": "Portfolio of Sitesh Prusty - Full Stack Developer specializing in AI-powered SaaS platforms",
   "start_url": "/",
   "display": "standalone",
   "background_color": "#0F0E0E",
@@ -13,13 +13,13 @@
       "type": "image/x-icon"
     },
     {
-      "src": "/android-chrome-192x192.png",
+      "src": "/Codeveda2.png",
       "sizes": "192x192",
       "type": "image/png",
       "purpose": "any maskable"
     },
     {
-      "src": "/android-chrome-512x512.png",
+      "src": "/Codeveda.png",
       "sizes": "512x512",
       "type": "image/png",
       "purpose": "any maskable"

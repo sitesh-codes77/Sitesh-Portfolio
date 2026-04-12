@@ -20,15 +20,15 @@ export default function Skills() {
       itemType="https://schema.org/ItemList"
     >
       {/* SEO Microdata */}
-      <meta itemProp="name" content="Technical Skills - Rameshwar Bhagwat" />
-      <meta itemProp="description" content="Comprehensive list of programming languages, frameworks, and technologies mastered by Rameshwar Bhagwat including React, Next.js, TypeScript, Node.js, Python, and modern web development tools." />
+      <meta itemProp="name" content="Technical Skills - Sitesh Prusty" />
+      <meta itemProp="description" content="Comprehensive list of programming languages, frameworks, and technologies mastered by Sitesh Prusty including React, Next.js, TypeScript, Node.js, Python, and modern web development tools." />
       <meta itemProp="numberOfItems" content={skills.length.toString()} />
 
       {/* Hidden SEO Content */}
       <div className="sr-only">
         <h2>Technical Skills and Expertise</h2>
         <p>
-          Rameshwar Bhagwat is proficient in a wide range of modern web development technologies,
+          Sitesh Prusty is proficient in a wide range of modern web development technologies,
           frameworks, and tools. With expertise spanning frontend, backend, databases, cloud services,
           and DevOps, he delivers comprehensive full-stack solutions.
         </p>

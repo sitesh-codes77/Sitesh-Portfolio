@@ -87,8 +87,7 @@ export default function GitHubContributions() {
         setStats(data);
         setLoading(false);
       } catch (err) {
-        console.error('Error fetching GitHub contributions:', err);
-        // Fallback to mock data if API fails
+        // Fallback to mock data if API fails silently (useful if token not configured)
         const mockData: GitHubStats = generateMockData();
         setStats(mockData);
         setLoading(false);

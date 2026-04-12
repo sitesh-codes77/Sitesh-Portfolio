@@ -83,20 +83,12 @@ export default function Work() {
       itemType="https://schema.org/CreativeWork"
       style={{ contain: 'layout style' }}
     >
-      {/* SEO Microdata */}
-      <meta itemProp="name" content="Featured Projects - Rameshwar Bhagwat Portfolio" />
-      <meta
-        itemProp="description"
-         content="Showcase of full-stack and AI-focused web development projects including WebCraft and Safecoast, built with React, Next.js, TypeScript, and modern scalable architecture."
-      />
-      <meta itemProp="author" content="Rameshwar Bhagwat" />
-
       {/* Hidden SEO Content */}
       <div className="sr-only">
         <h2>Featured Projects Portfolio - Full Stack & AI Web Development</h2>
         <p>
-          Explore a curated collection of production-ready applications built by Rameshwar
-          Bhagwat, highlighting modern full stack engineering and AI-focused product development.
+          Explore a curated collection of production-ready applications built by Sitesh
+          Prusty, highlighting modern full stack engineering and AI-focused product development.
         </p>
         <h3>Project Highlights</h3>
         <ul>

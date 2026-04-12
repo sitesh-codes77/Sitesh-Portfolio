@@ -73,8 +73,8 @@ export default function CommandPalette() {
   const downloadResume = useCallback(() => {
     // Create a link to download resume
     const link = document.createElement('a');
-    link.href = '/resume/Rameshwar_Bhagwat_Resume.pdf';
-    link.download = 'Rameshwar_Bhagwat_Resume.pdf';
+    link.href = '/resume/Sitesh_Prusty_Resume.pdf';
+    link.download = 'Sitesh_Prusty_Resume.pdf';
     link.click();
     setIsOpen(false);
   }, []);
